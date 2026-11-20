@@ -45,3 +45,4 @@ This starter deliberately does not invent:
 - healthcare claims beyond the broad program framing already established
 
 Those should be inserted from verified SUDF source material.
+Deployment verification test – November 2026.
