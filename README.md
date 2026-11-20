@@ -46,3 +46,4 @@ This starter deliberately does not invent:
 
 Those should be inserted from verified SUDF source material.
 Deployment verification test – November 2026.
+Deployment verification test – November 2026.
