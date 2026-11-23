@@ -24,6 +24,11 @@ const programs = [
   },
 ];
 
+// Add each approved outreach photo here after placing its file in /public/images/gallery/.
+const galleryPhotos: { src: string; alt: string; caption?: string }[] = [
+  // { src: "/images/gallery/community-screening-01.jpg", alt: "SUDF team conducting a community diabetes screening", caption: "Community diabetes screening" },
+];
+
 const objectives = [
   {
     number: "01",
@@ -173,9 +178,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="legacy section">
-        <div className="legacy-image">LEGACY<br />PORTRAIT</div>
-        <div>
+      <section className="legacy section sudf-gallery-section">
+        <div className="sudf-gallery-panel">
+          <div className="sudf-gallery-heading">
+            <p className="eyebrow">SUDF GALLERY</p>
+            <h2>Our work. Our communities. Our impact.</h2>
+            <p>Moments from the Foundation's community outreach, diabetes screening, health education and other activities.</p>
+          </div>
+          <div className="sudf-gallery-grid">
+            {galleryPhotos.map((photo) => (
+              <figure className="sudf-gallery-item" key={photo.src}>
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+                {photo.caption ? <figcaption>{photo.caption}</figcaption> : null}
+              </figure>
+            ))}
+            {galleryPhotos.length === 0 ? (
+              <div className="sudf-gallery-empty">
+                <span className="sudf-gallery-empty-mark" aria-hidden="true">SUDF</span>
+                <strong>Our outreach stories will appear here.</strong>
+                <p>Photos from SUDF activities will be added to this gallery as the Foundation's work continues.</p>
+              </div>
+            ) : null}
+          </div>
+        </div>
+        <div className="sudf-gallery-legacy-copy">
           <p className="eyebrow">OUR LEGACY, OUR RESPONSIBILITY</p>
           <h2>A living legacy of service.</h2>
           <p>
