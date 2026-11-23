@@ -973,3 +973,116 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   .support-more .support-options-grid { grid-template-columns:1fr; }
   .support-more .support-option-card { padding:23px; }
 }
+
+
+/* SUDF sponsor page: reference card proportions with the Foundation's own palette */
+.support-more-reference {
+  position: relative;
+  overflow: hidden;
+  grid-template-columns: .78fr 1.22fr;
+  align-items: start;
+  gap: 52px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(201,162,39,.16), transparent 24rem),
+    linear-gradient(140deg, #0b3b2e 0%, #12523f 58%, #1b6a50 100%);
+}
+.support-more-reference .support-more-heading .eyebrow { color: #e2c75b; }
+.support-more-reference .support-more-heading h2 { color: #fff; }
+.support-more-reference .support-more-heading > p:last-child {
+  color: #e0e9e3;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.support-more-reference .support-options-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.support-more-reference .support-option-card-reference {
+  position: relative;
+  display: flex;
+  min-height: 310px;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid rgba(201,162,39,.26);
+  border-top: 5px solid #c9a227;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #fffdf6 0%, #f4f1e6 100%);
+  box-shadow: 0 14px 34px rgba(0,0,0,.13);
+}
+.support-more-reference .support-option-card-reference::after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  right: -100px;
+  bottom: -112px;
+  border: 1px solid rgba(49,91,72,.13);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.support-more-reference .support-option-icon {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  flex: 0 0 76px;
+  place-items: center;
+  border: 1px solid rgba(201,162,39,.38);
+  border-radius: 22px;
+  color: #315b48;
+  background: #f5ebc9;
+}
+.support-more-reference .support-option-card-reference h3 {
+  position: relative;
+  z-index: 1;
+  margin: 28px 0 12px;
+  color: #172a22;
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.22;
+}
+.support-more-reference .support-option-card-reference > p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #596960;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.support-enquiry-reference {
+  color: #fff;
+  background: linear-gradient(145deg, #0b3b2e 0%, #12523f 100%);
+}
+.support-enquiry-reference .support-enquiry-copy h2 { color: #fff; }
+.support-enquiry-reference .support-enquiry-copy > p:not(.eyebrow) { color: #e0e9e3; }
+.support-enquiry-reference .support-enquiry-copy .eyebrow { color: #e2c75b; }
+.support-enquiry-reference .support-trust-note {
+  border-color: rgba(226,199,91,.28);
+  background: rgba(255,255,255,.08);
+}
+.support-enquiry-reference .support-trust-note p { color: #e0e9e3; }
+.support-enquiry-reference .support-trust-note strong { color: #fff; }
+.support-enquiry-reference .support-form {
+  border: 1px solid rgba(201,162,39,.38);
+  border-radius: 28px;
+  background: #fffdf6;
+  box-shadow: 0 20px 48px rgba(0,0,0,.16);
+}
+.support-footer { background: #082c23; }
+@media(max-width:1000px) {
+  .support-more-reference { grid-template-columns: 1fr; gap: 34px; }
+}
+@media(max-width:760px) {
+  .support-more-reference { padding: 66px 5vw; }
+  .support-more-reference .support-options-grid { grid-template-columns: 1fr; gap: 16px; }
+  .support-more-reference .support-option-card-reference {
+    min-height: 0;
+    padding: 28px;
+    border-radius: 26px;
+  }
+  .support-more-reference .support-option-icon { width: 76px; height: 76px; }
+  .support-more-reference .support-option-card-reference h3 { margin-top: 26px; font-size: 23px; }
+  .support-more-reference .support-option-card-reference > p { font-size: 16px; line-height: 1.7; }
+  .support-enquiry-reference { padding: 66px 5vw; }
+}
