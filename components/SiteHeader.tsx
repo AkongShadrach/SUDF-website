@@ -8,7 +8,7 @@ const links = [
   ["Events", "/events"],
   ["Resources", "/#resources"],
   ["Meet Our Team", "/team"],
-  ["Partners", "/#partners"],
+  ["Become a Volunteer", "/volunteer"],
   ["Contact", "/contact"],
 ];
 
