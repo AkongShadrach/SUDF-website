@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import BackToTop from "../components/BackToTop";
 
 export const metadata: Metadata = {
   title: "Sylvester Ujong Diabetes Foundation",
@@ -12,7 +13,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>{children}<BackToTop /></body>
     </html>
   );
 }
