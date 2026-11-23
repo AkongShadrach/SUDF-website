@@ -1,11 +1,12 @@
 import SiteHeader from "../../components/SiteHeader.tsx";
 import SupportForm from "./SupportForm";
+import { Activity, HandHeart, BookOpen, UsersRound } from "lucide-react";
 
 const supportOptions = [
-  { number: "01", title: "Community diabetes screening", description: "Help SUDF bring diabetes screening closer to individuals and families, supporting earlier awareness and access to appropriate guidance." },
-  { number: "02", title: "Care and patient support", description: "Support guidance, basic care assistance and referral pathways for people living with diabetes, particularly vulnerable communities." },
-  { number: "03", title: "Health education", description: "Help share practical knowledge about diabetes prevention, risk factors, healthy lifestyles and disease management." },
-  { number: "04", title: "Medical outreach", description: "Contribute to outreach activities and the collaboration needed to extend diabetes services within communities." },
+  { number: "01", title: "Community diabetes screening", description: "Help SUDF bring diabetes screening closer to individuals and families, supporting earlier awareness and access to appropriate guidance.", Icon: Activity },
+  { number: "02", title: "Care and patient support", description: "Support guidance, basic care assistance and referral pathways for people living with diabetes, particularly vulnerable communities.", Icon: HandHeart },
+  { number: "03", title: "Health education", description: "Help share practical knowledge about diabetes prevention, risk factors, healthy lifestyles and disease management.", Icon: BookOpen },
+  { number: "04", title: "Medical outreach", description: "Contribute to outreach activities and the collaboration needed to extend diabetes services within communities.", Icon: UsersRound },
 ];
 
 export default function DonateSupportPage() {
@@ -28,18 +29,18 @@ export default function DonateSupportPage() {
           <div className="support-art-caption"><strong>Awareness</strong><span>Prevention · Early detection · Support</span></div>
         </div>
       </section>
-      <section className="support-more section">
+      <section className="support-more support-more-reference section">
         <div className="support-more-heading">
           <p className="eyebrow">MORE THAN FUNDING</p>
           <h2>Support the work. Expand the reach.</h2>
           <p>Support for SUDF can take different forms. You may wish to contribute towards community screening, help strengthen health education, support people living with diabetes or provide practical resources for outreach. Tell us what you have in mind and we can discuss a useful way forward.</p>
         </div>
         <div className="support-options-grid">
-          {supportOptions.map((option) => (
-            <article className="support-option-card" key={option.number}>
-              <span className="support-option-number">{option.number}</span>
-              <h3>{option.title}</h3>
-              <p>{option.description}</p>
+          {supportOptions.map(({ number, title, description, Icon }) => (
+            <article className="support-option-card support-option-card-reference" key={number}>
+              <span className="support-option-icon" aria-hidden="true"><Icon size={30} strokeWidth={2.1} /></span>
+              <h3>{title}</h3>
+              <p>{description}</p>
             </article>
           ))}
         </div>
