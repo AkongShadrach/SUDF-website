@@ -15,7 +15,7 @@ export default function SiteFooter() {
         <a href="/#mission">Our Mission</a>
         <a href="/#objectives">Objectives</a>
         <a href="/#programmes">Programmes</a>
-        <a href="/volunteer">Become a Volunteer</a>
+        <a href="/#partners">Partners</a>
       </nav>
       <SocialLinks />
       <div className="footer-legal">
