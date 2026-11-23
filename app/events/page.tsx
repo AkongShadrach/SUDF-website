@@ -1,4 +1,4 @@
-import SocialLinks from "../../components/SocialLinks";
+import SocialLinks from "../components/SocialLinks";
 import Link from "next/link";
 import SiteHeader from "../../components/SiteHeader";
 
@@ -40,7 +40,7 @@ export default function EventsPage() {
         <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
         <nav aria-label="Footer navigation"><Link href="/#about">About</Link><Link href="/#programmes">Programmes</Link><Link href="/events">Events</Link><Link href="/donate-support">Donate / Support</Link><Link href="/contact">Contact</Link></nav>
         <SocialLinks />
-        <span>© SUDF. All rights reserved.</span>
+        <span>© 2026 Sylvester Ujong Diabetes Foundation. All rights reserved.</span>
       </footer>
     </main>
   );
