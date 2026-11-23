@@ -1086,3 +1086,28 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   .support-more-reference .support-option-card-reference > p { font-size: 16px; line-height: 1.7; }
   .support-enquiry-reference { padding: 66px 5vw; }
 }
+
+
+/* Mobile menu button: squared-off gold-outline treatment from the reference */
+@media (max-width:768px) {
+  .mobile-menu-toggle {
+    width: 76px;
+    height: 76px;
+    flex: 0 0 76px;
+    border: 1px solid rgba(226,199,91,.82);
+    border-radius: 14px;
+    background: transparent;
+    color: var(--gold-soft);
+  }
+  .menu-icon { width: 36px; gap: 8px; }
+  .menu-icon span { height: 3px; }
+}
+@media (max-width:420px) {
+  .mobile-menu-toggle {
+    width: 68px;
+    height: 68px;
+    flex-basis: 68px;
+    border-radius: 13px;
+  }
+  .menu-icon { width: 32px; gap: 7px; }
+}
