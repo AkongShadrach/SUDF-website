@@ -1280,3 +1280,13 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
 @media (max-width:340px) {
   .sudf-gallery-grid { grid-template-columns: 1fr; }
 }
+
+
+/* Functional public enquiry forms */
+.contact-form label { display:grid; gap:7px; color:var(--ink); font-size:14px; font-weight:600; }
+.contact-form input, .contact-form textarea { border-radius:8px; background:#fff; }
+.contact-form button:disabled { opacity:.65; cursor:wait; }
+.contact-feedback { margin:4px 0 0; font-size:14px; line-height:1.6; }
+.contact-feedback.success { color:#176b45; }
+.contact-feedback.error { color:#a12c2c; }
+.contact-honeypot, .support-honeypot { position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important; }
