@@ -2090,3 +2090,39 @@ body:has(main > .footer) {
   background: #082c23;
 }
 .footer { margin-bottom: 0; }
+
+
+/* Improve contrast in the Partners & Collaboration section */
+.partners {
+  background: #0b3b2e;
+  color: #fff;
+}
+.partners > .eyebrow {
+  color: var(--gold-soft);
+}
+.partners > h2 {
+  color: #fff;
+}
+.partners .wide {
+  color: #e0e9e4;
+}
+
+/* Compact the bottom of the homepage footer and centre its copyright */
+.footer {
+  padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+}
+.footer-legal {
+  width: 100%;
+  text-align: center;
+}
+@media(max-width:620px) {
+  .footer {
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    row-gap: 26px;
+  }
+  .footer-legal {
+    margin-top: 0;
+    padding: 0 4px;
+    text-align: center;
+  }
+}
