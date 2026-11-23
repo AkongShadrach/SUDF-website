@@ -8,7 +8,7 @@ const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS = 5;
 
 function clean(value: unknown, max: number): string {
-  return typeof value === "string" ? value.trim().replace(/[\\u0000-\\u001F\\u007F]/g, "").slice(0, max) : "";
+  return typeof value === "string" ? value.trim().replace(/[\u0000-\u001F\u007F]/g, "").slice(0, max) : "";
 }
 
 export async function POST(request: NextRequest) {
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const name = clean(body.name, 120);
     const email = clean(body.email, 254).toLowerCase();
     const message = clean(body.message, 3000);
-    if (!name || !message || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+    if (!name || !message || !/^[^\s@]+@[^\s@]+\\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Please provide your name, a valid email address and a message." }, { status: 400 });
     }
 
