@@ -47,3 +47,18 @@ This starter deliberately does not invent:
 Those should be inserted from verified SUDF source material.
 Deployment verification test – November 2026.
 Deployment verification test – November 2026.
+
+
+## Donate & Support enquiries
+
+The dedicated support page is available at `/donate-support`. The first release collects donation, sponsorship, in-kind contribution, volunteering and partnership enquiries; it does not process payments or display unverified bank/payment details.
+
+Before enabling the enquiry form:
+
+1. Run `supabase/support-enquiries.sql` in the Supabase SQL Editor.
+2. Configure these Vercel environment variables for the deployment:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY` (server-side only; never expose it with a `NEXT_PUBLIC_` prefix)
+3. Redeploy the working branch.
+
+Submissions are stored in the restricted `support_enquiries` table using the server-side service role. The endpoint validates fields, uses a honeypot and includes a basic in-memory rate limit; configure a durable edge/WAF rate limit before high-volume public use. No patient health information should be submitted through this form.
