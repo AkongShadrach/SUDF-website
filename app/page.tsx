@@ -219,26 +219,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="events" className="section">
+      <section id="programmes" className="section sudf-programmes-section">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">EVENTS & COMMUNITY ACTIVITIES</p>
-            <h2>Community activities and opportunities to participate.</h2>
+            <p className="eyebrow">OUR PROGRAMMES</p>
+            <h2>Explore how SUDF works with communities.</h2>
           </div>
-          <p>Updates about SUDF events and outreach activities can be shared here as official details become available.</p>
+          <p>Learn about the Foundation's areas of work, the purpose of each programme and ways to enquire about participation.</p>
         </div>
-        <div className="event-grid">
-          {["Community Diabetes Screening", "Health Education & Outreach", "Medical Outreach & Partnerships"].map((title, i) => (
-            <article className="event-card" key={title}>
-              <span className="date-box">SUDF</span>
-              <div>
-                <p className="event-no">0{i + 1}</p>
-                <h3>{title}</h3>
-                <p>Learn more about SUDF's community-based work and opportunities to participate.</p>
-                <a href="#contact">Contact the Foundation →</a>
-              </div>
-            </article>
-          ))}
+        <div className="event-grid sudf-programme-cards">
+          <article className="event-card sudf-programme-card">
+            <span className="date-box">01</span>
+            <div>
+              <p className="event-no">SCREENING & EARLY DETECTION</p>
+              <h3>Community Diabetes Screening</h3>
+              <p>Early detection can help people understand their blood glucose status and identify potential risks.</p>
+              <a href="/programmes/community-diabetes-screening">Explore programme →</a>
+            </div>
+          </article>
+          <article className="event-card sudf-programme-card">
+            <span className="date-box">02</span>
+            <div>
+              <p className="event-no">AWARENESS & PREVENTION</p>
+              <h3>Health Education & Outreach</h3>
+              <p>Practical information about nutrition, physical activity, healthy lifestyles, diabetes risk factors and disease management.</p>
+              <a href="/programmes/health-education-outreach">Explore programme →</a>
+            </div>
+          </article>
+          <article className="event-card sudf-programme-card">
+            <span className="date-box">03</span>
+            <div>
+              <p className="event-no">COLLABORATION & ACCESS</p>
+              <h3>Medical Outreach & Partnerships</h3>
+              <p>Working with healthcare professionals and community partners to expand access to diabetes services.</p>
+              <a href="/programmes/medical-outreach-partnerships">Explore programme →</a>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -283,7 +299,7 @@ export default function Home() {
         </div>
         <div className="footer-links">
           <a href="#about">About</a><a href="#mission">Our Mission</a><a href="#objectives">Objectives</a>
-          <a href="#programs">Our Work</a><a href="#events">Events</a><a href="#resources">Resources</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a>
+          <a href="#programs">Our Work</a><a href="#programmes">Programmes</a><a href="#resources">Resources</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a>
         </div>
         <div className="footer-legal">
           Contact SUDF • Privacy • Safeguarding • Transparency<br />
