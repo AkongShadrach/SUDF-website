@@ -1987,3 +1987,28 @@ img, video, iframe, svg { max-width: 100%; }
     margin-bottom: 21px;
   }
 }
+
+
+/* Match each impact card's top accent to its own icon colour */
+.sudf-impact-card {
+  border-top: 4px solid #c9a227;
+}
+.sudf-impact-card:nth-child(1) {
+  border-top-color: #c9a227;
+}
+.sudf-impact-card:nth-child(2) {
+  border-top-color: #376b51;
+}
+.sudf-impact-card:nth-child(3) {
+  border-top-color: #356c8c;
+}
+
+/* Carry the footer background through the mobile safe-area at the bottom */
+.footer {
+  padding-bottom: calc(55px + env(safe-area-inset-bottom, 0px));
+}
+@media (max-width:620px) {
+  .footer {
+    padding-bottom: calc(55px + env(safe-area-inset-bottom, 0px));
+  }
+}
