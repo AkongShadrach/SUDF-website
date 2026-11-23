@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
-import SocialLinks from "../../components/SocialLinks";
 import SiteHeader from "../../components/SiteHeader";
 import VolunteerForm from "./VolunteerForm";
+import SiteFooter from "../../components/SiteFooter";
 
 const areas = [
   { title: "Medical and clinical services", description: "For appropriately qualified healthcare professionals supporting clinical activities within their scope of practice.", accent: "#c9a227" },
@@ -62,12 +62,7 @@ export default function VolunteerPage() {
         </div>
         <VolunteerForm />
       </section>
-      <footer className="volunteer-footer">
-        <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
-        <nav aria-label="Footer navigation"><a href="/#about">About</a><a href="/#programs">Our Work</a><a href="/team">Meet Our Team</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a></nav>
-        <SocialLinks />
-        <span>© 2026 Sylvester Ujong Diabetes Foundation. All rights reserved.</span>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
