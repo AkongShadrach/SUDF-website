@@ -1902,3 +1902,88 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   letter-spacing:.045em;
   box-shadow:0 5px 14px rgba(0,0,0,.1);
 }
+
+
+/* Prevent horizontal page overflow across mobile, tablet and desktop */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+body { position: relative; }
+main, .site-header, .hero, .section, .footer {
+  max-width: 100%;
+  min-width: 0;
+}
+img, video, iframe, svg { max-width: 100%; }
+.hero, .hero-copy, .hero-image, .section-heading,
+.program-grid, .program-card, .sudf-impact-cards,
+.sudf-gallery-panel, .sudf-gallery-grid {
+  min-width: 0;
+}
+@supports not (overflow: clip) {
+  html, body { overflow-x: hidden; }
+}
+
+/* Mission-in-action cards: replace sequence numbers with distinct programme icons */
+#programs .program-card {
+  position: relative;
+  min-width: 0;
+  padding: 30px;
+  border: 1px solid rgba(201,162,39,.24);
+  border-top: 6px solid var(--gold);
+  border-radius: 26px;
+  background: linear-gradient(150deg,#fffdf6 0%,#f7f3e8 100%);
+  color: var(--ink);
+  box-shadow: 0 12px 30px rgba(3,29,21,.12);
+}
+#programs .program-icon {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  margin: 0 0 24px;
+  border: 1px solid currentColor;
+  border-radius: 22px;
+  background: var(--icon-bg);
+  color: var(--icon-color);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+}
+#programs .program-icon-01 {
+  --icon-bg:#f8edcf;
+  --icon-color:#9b7620;
+  border-color:#e8d59b;
+}
+#programs .program-icon-02 {
+  --icon-bg:#e7f0e9;
+  --icon-color:#2e7657;
+  border-color:#c9dfd0;
+}
+#programs .program-icon-03 {
+  --icon-bg:#e8eff8;
+  --icon-color:#426b9a;
+  border-color:#c9d9ed;
+}
+#programs .program-icon-04 {
+  --icon-bg:#f4e9e3;
+  --icon-color:#a65d3d;
+  border-color:#e8cfc1;
+}
+#programs .program-card h3 {
+  margin: 0 0 14px;
+  color: #17372b;
+}
+#programs .program-card p {
+  margin: 0;
+  color: #65736c;
+  line-height: 1.75;
+}
+@media (max-width:760px) {
+  #programs .program-card { padding: 26px 24px; }
+  #programs .program-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 20px;
+    margin-bottom: 21px;
+  }
+}
