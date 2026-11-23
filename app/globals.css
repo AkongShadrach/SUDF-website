@@ -1767,3 +1767,71 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
 @media(prefers-reduced-motion:reduce) {
   .sudf-impact-card, .sudf-impact-icon, .impact .metrics > div { transition:none; }
 }
+
+
+/* SUDF team page */
+.sudf-team-page { min-height:100vh; background:var(--cream); }
+.sudf-team-hero {
+  position:relative;
+  display:flex;
+  min-height:390px;
+  align-items:center;
+  justify-content:space-between;
+  overflow:hidden;
+  padding:clamp(64px,9vw,112px) 6vw;
+  background:linear-gradient(125deg,#0b3b2e 0%,#174d3c 68%,#235c48 100%);
+  color:#fff;
+}
+.sudf-team-hero::before,
+.sudf-team-hero::after {
+  content:"";
+  position:absolute;
+  width:390px;
+  height:390px;
+  border:1px solid rgba(216,190,92,.22);
+  border-radius:50%;
+  pointer-events:none;
+}
+.sudf-team-hero::before { right:-110px; top:-230px; }
+.sudf-team-hero::after { right:70px; bottom:-320px; width:500px; height:500px; }
+.sudf-team-hero-inner { position:relative; z-index:1; max-width:780px; }
+.sudf-team-hero .eyebrow { color:#e1c65f; }
+.sudf-team-hero h1 { margin:0; color:#fff; font-size:clamp(44px,7vw,78px); line-height:1.02; letter-spacing:-.045em; }
+.sudf-team-hero-inner > p:not(.eyebrow) { max-width:680px; margin:24px 0 0; color:rgba(255,255,255,.82); font-size:clamp(17px,2vw,21px); line-height:1.75; }
+.sudf-team-hero-rule { display:block; width:74px; height:4px; margin-top:30px; border-radius:4px; background:var(--gold); }
+.sudf-team-hero-mark { position:relative; z-index:1; display:grid; width:176px; height:176px; flex:0 0 176px; place-items:center; margin-right:5vw; border:1px solid rgba(224,198,95,.55); border-radius:50%; background:rgba(255,255,255,.045); color:#e1c65f; }
+.sudf-team-intro { display:grid; grid-template-columns: .9fr 1.1fr; gap:clamp(30px,7vw,100px); }
+.sudf-team-intro h2,.sudf-team-section-heading h2 { margin:0; color:var(--green); font-size:clamp(29px,4vw,44px); line-height:1.13; }
+.sudf-team-intro > div:last-child p { margin:0 0 16px; color:var(--muted); font-size:17px; line-height:1.8; }
+.sudf-team-section-heading { max-width:720px; margin-bottom:34px; }
+.sudf-team-section-heading > p:last-child { color:var(--muted); font-size:17px; line-height:1.7; }
+.sudf-team-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+.sudf-team-card { overflow:hidden; border:1px solid rgba(201,162,39,.28); border-top:3px solid var(--gold); border-radius:22px; background:linear-gradient(150deg,#fffefa,#f5f2e7); box-shadow:0 9px 26px rgba(11,59,46,.055); }
+.sudf-team-photo-placeholder { display:flex; min-height:245px; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:radial-gradient(circle at 50% 35%,#f7edce 0%,#eee8d3 48%,#e7ebdf 100%); color:var(--green); }
+.sudf-team-photo-placeholder span { color:#7b795e; font-size:10px; font-weight:800; letter-spacing:.16em; }
+.sudf-team-card-copy { padding:24px; }
+.sudf-team-card-copy .eyebrow { margin-bottom:10px; color:#927b32; font-size:10px; }
+.sudf-team-card-copy h3 { margin:0 0 10px; color:var(--green); font-size:24px; }
+.sudf-team-card-copy > p:not(.eyebrow) { min-height:104px; margin:0 0 18px; color:var(--muted); line-height:1.7; }
+.sudf-team-profile-note { display:inline-block; padding:8px 11px; border:1px solid rgba(201,162,39,.28); border-radius:999px; background:#f7edce; color:var(--green); font-size:12px; font-weight:700; }
+.sudf-team-connect { display:flex; align-items:center; justify-content:space-between; gap:32px; padding:clamp(36px,6vw,68px) 6vw; background:var(--green); color:#fff; }
+.sudf-team-connect > div { max-width:720px; }
+.sudf-team-connect .eyebrow { color:#e1c65f; }
+.sudf-team-connect h2 { margin:0 0 14px; color:#fff; font-size:clamp(28px,4vw,42px); }
+.sudf-team-connect p:not(.eyebrow) { color:rgba(255,255,255,.8); line-height:1.7; }
+@media(max-width:850px) {
+ .sudf-team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .sudf-team-card:last-child { grid-column:1/-1; }
+ .sudf-team-card:last-child .sudf-team-photo-placeholder { min-height:200px; }
+ .sudf-team-hero-mark { width:130px; height:130px; flex-basis:130px; margin-right:0; }
+}
+@media(max-width:620px) {
+ .sudf-team-hero { min-height:340px; padding:58px 6vw; }
+ .sudf-team-hero-mark { position:absolute; right:-42px; bottom:-42px; width:128px; height:128px; opacity:.55; }
+ .sudf-team-intro { grid-template-columns:1fr; gap:18px; }
+ .sudf-team-grid { grid-template-columns:1fr; }
+ .sudf-team-card:last-child { grid-column:auto; }
+ .sudf-team-card-copy > p:not(.eyebrow) { min-height:0; }
+ .sudf-team-photo-placeholder { min-height:220px; }
+ .sudf-team-connect { align-items:flex-start; flex-direction:column; }
+}
