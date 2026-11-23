@@ -26,7 +26,15 @@ export default function SiteHeader() {
       </a>
 
       <nav className="desktop-nav" aria-label="Main navigation">
-        {links.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+        {links.map(([label, href]) => (
+          <a
+            key={href}
+            href={href}
+            className={label === "Become a Volunteer" ? "button button-volunteer nav-volunteer" : undefined}
+          >
+            {label}
+          </a>
+        ))}
         <a className="nav-donate" href="/donate-support">Donate / Support</a>
       </nav>
 
@@ -50,7 +58,14 @@ export default function SiteHeader() {
         hidden={!open}
       >
         {links.map(([label, href]) => (
-          <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
+          <a
+            key={href}
+            href={href}
+            className={label === "Become a Volunteer" ? "button button-volunteer mobile-volunteer-link" : undefined}
+            onClick={() => setOpen(false)}
+          >
+            {label}
+          </a>
         ))}
         <a className="mobile-donate-link button button-gold" href="/donate-support" onClick={() => setOpen(false)}>Donate / Support</a>
       </nav>
