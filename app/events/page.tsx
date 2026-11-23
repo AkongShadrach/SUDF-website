@@ -1,4 +1,4 @@
-import SocialLinks from "../components/SocialLinks";
+import SocialLinks from "../../components/SocialLinks";
 import Link from "next/link";
 import SiteHeader from "../../components/SiteHeader";
 
