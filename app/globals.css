@@ -1444,3 +1444,45 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   .sudf-programme-content { padding:60px 5vw; }
   .sudf-programme-next { padding:56px 5vw; }
 }
+
+
+/* Floating back-to-top control, styled in SUDF forest green and gold */
+.sudf-back-to-top {
+  position: fixed;
+  right: clamp(18px, 4vw, 34px);
+  bottom: clamp(22px, 4vh, 36px);
+  z-index: 1100;
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  padding: 0;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  background: rgba(11,59,46,.94);
+  color: var(--gold-soft);
+  box-shadow: 0 5px 18px rgba(0,0,0,.16);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.sudf-back-to-top:hover {
+  transform: translateY(-3px);
+  background: var(--gold);
+  color: var(--green);
+  box-shadow: 0 9px 24px rgba(0,0,0,.2);
+}
+.sudf-back-to-top:focus-visible {
+  outline: 3px solid var(--gold-soft);
+  outline-offset: 4px;
+}
+@media(max-width:620px) {
+  .sudf-back-to-top {
+    right: 16px;
+    bottom: 20px;
+    width: 58px;
+    height: 58px;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .sudf-back-to-top { transition: none; }
+}
