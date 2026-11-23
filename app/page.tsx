@@ -1,6 +1,5 @@
 import ObjectiveReveal from "../components/ObjectiveReveal";
 import SiteHeader from "../components/SiteHeader";
-import ContactForm from "./contact/ContactForm";
 
 const programs = [
   {
@@ -277,17 +276,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="contact section">
-        <div>
-          <p className="eyebrow">CONTACT SUDF</p>
-          <h2>Connect with the foundation.</h2>
-          <p>
-            Contact details and official organizational information can be added here from verified SUDF records.
-          </p>
-        </div>
-        <ContactForm />
-      </section>
-
       <footer className="footer">
         <div>
           <strong>SYLVESTER UJONG DIABETES FOUNDATION</strong>
@@ -295,7 +283,7 @@ export default function Home() {
         </div>
         <div className="footer-links">
           <a href="#about">About</a><a href="#mission">Our Mission</a><a href="#objectives">Objectives</a>
-          <a href="#programs">Our Work</a><a href="#events">Events</a><a href="#resources">Resources</a><a href="/donate-support">Donate / Support</a>
+          <a href="#programs">Our Work</a><a href="#events">Events</a><a href="#resources">Resources</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a>
         </div>
         <div className="footer-legal">
           Contact SUDF • Privacy • Safeguarding • Transparency<br />
