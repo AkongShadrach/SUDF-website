@@ -944,3 +944,32 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
  .support-footer { grid-template-columns:1fr;gap:18px;padding:34px 5vw; }
  .support-footer nav { gap:14px 20px; }
 }
+
+
+/* Consent row in the supporter enquiry form */
+.support-consent {
+  display:flex !important;
+  grid-template-columns:20px 1fr;
+  align-items:flex-start;
+  gap:12px !important;
+  margin-top:20px;
+  color:#53635b !important;
+  font-size:12px !important;
+  font-weight:500 !important;
+  line-height:1.6;
+}
+.support-consent input {
+  appearance:auto;
+  width:18px !important;
+  height:18px;
+  flex:0 0 18px;
+  margin:1px 0 0;
+  padding:0;
+  accent-color:#315b48;
+  box-shadow:none !important;
+}
+.support-consent span { color:#53635b !important;font-size:12px !important; }
+@media(max-width:760px) {
+  .support-more .support-options-grid { grid-template-columns:1fr; }
+  .support-more .support-option-card { padding:23px; }
+}
