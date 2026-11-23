@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const name = clean(body.name, 120);
     const email = clean(body.email, 254).toLowerCase();
     const message = clean(body.message, 3000);
-    if (!name || !message || !/^[^\s@]+@[^\s@]+\\.[^\s@]+$/.test(email)) {
+    if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Please provide your name, a valid email address and a message." }, { status: 400 });
     }
 
