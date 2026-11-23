@@ -314,7 +314,7 @@ export default function Home() {
         </div>
         <div className="footer-links">
           <a href="#about">About</a><a href="#mission">Our Mission</a><a href="#objectives">Objectives</a>
-          <a href="#programs">Our Work</a><a href="#programmes">Programmes</a><a href="#resources">Resources</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a>
+          <a href="#programs">Our Work</a><a href="#programmes">Programmes</a><a href="#resources">Resources</a><a href="/team">Meet Our Team</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a>
         </div>
         <div className="footer-legal">
           Contact SUDF • Privacy • Safeguarding • Transparency<br />
