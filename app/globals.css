@@ -1620,3 +1620,16 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
 @media(prefers-reduced-motion:reduce) {
   .program-card { transition:none; }
 }
+
+
+/* Transparent SUDF back-to-top control: retain only the gold outline and arrow */
+.sudf-back-to-top {
+  background: transparent !important;
+  box-shadow: none;
+}
+.sudf-back-to-top:hover {
+  background: transparent !important;
+  color: var(--gold-soft);
+  box-shadow: none;
+  transform: translateY(-3px);
+}
