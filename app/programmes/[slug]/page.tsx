@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SiteHeader from "../../../components/SiteHeader";
 
 const programmes = {
@@ -58,7 +57,6 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
       <SiteHeader />
       <section className="sudf-programme-hero">
         <div className="sudf-programme-hero-inner">
-          <Link className="sudf-programme-back" href="/#programmes">← Back to all programmes</Link>
           <p className="eyebrow light">{programme.category}</p>
           <span className="sudf-programme-number">{programme.number}</span>
           <h1>{programme.title}</h1>
