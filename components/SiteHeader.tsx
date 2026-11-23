@@ -8,7 +8,7 @@ const links = [
   ["Objectives", "/#objectives"],
   ["Our Work", "/#programs"],
   ["Impact", "/#impact"],
-  ["Events", "/#events"],
+  ["Events", "/events"],
   ["Resources", "/#resources"],
   ["Partners", "/#partners"],
   ["Contact", "/contact"],
