@@ -69,6 +69,7 @@ export default function Home() {
           <div className="actions">
             <a className="button button-gold" href="#programs">Explore Our Work</a>
             <a className="button button-outline" href="/donate-support">Support Our Mission</a>
+            <a className="button button-volunteer" href="/volunteer">Become a Volunteer <span aria-hidden="true">→</span></a>
           </div>
         </div>
         <div className="hero-image" aria-label="SUDF hero image placeholder">
@@ -320,7 +321,7 @@ export default function Home() {
         </div>
         <div className="footer-links">
           <a href="#about">About</a><a href="#mission">Our Mission</a><a href="#objectives">Objectives</a>
-          <a href="#programs">Our Work</a><a href="#programmes">Programmes</a><a href="#resources">Resources</a><a href="/team">Meet Our Team</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a>
+          <a href="#programs">Our Work</a><a href="#programmes">Programmes</a><a href="#resources">Resources</a><a href="/team">Meet Our Team</a><a href="/volunteer">Become a Volunteer</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a>
         </div>
         <SocialLinks />
         <div className="footer-legal">

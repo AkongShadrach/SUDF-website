@@ -60,7 +60,7 @@ export default function SupportForm() {
         <label>Phone number <span>(optional)</span><input type="tel" maxLength={40} value={values.phone} onChange={(e) => update("phone", e.target.value)} placeholder="Your phone number" autoComplete="tel" /></label>
         <label className="support-form-full">How would you like to support us?
           <select value={values.supportType} onChange={(e) => update("supportType", e.target.value)}>
-            <option>Financial donation</option><option>Programme sponsorship</option><option>In-kind contribution</option><option>Volunteering</option><option>Partnership</option><option>Other practical support</option>
+            <option>Financial donation</option><option>Programme sponsorship</option><option>In-kind contribution</option><option>Partnership</option><option>Other practical support</option>
           </select>
         </label>
         <label className="support-form-full">Amount / budget <span>(optional, for financial support)</span><input maxLength={80} value={values.amount} onChange={(e) => update("amount", e.target.value)} placeholder="e.g. ₦500,000 or open to discussion" /></label>

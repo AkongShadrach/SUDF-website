@@ -7,7 +7,6 @@ const allowedSupportTypes = new Set([
   "Financial donation",
   "Programme sponsorship",
   "In-kind contribution",
-  "Volunteering",
   "Partnership",
   "Other practical support",
 ]);
