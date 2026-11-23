@@ -246,7 +246,7 @@ export default function Home() {
             <p className="eyebrow">OUR PROGRAMMES</p>
             <h2>Explore how SUDF works with communities.</h2>
           </div>
-          <p>Learn about the Foundation's areas of work, the purpose of each programme and ways to enquire about participation.</p>
+          <p>Discover how SUDF advances diabetes awareness, early detection, education and support. Explore each programme to understand its purpose and the work it is designed to deliver with communities.</p>
         </div>
         <div className="event-grid sudf-programme-cards">
           <article className="event-card sudf-programme-card">
