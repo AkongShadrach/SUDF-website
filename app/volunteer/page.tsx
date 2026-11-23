@@ -21,7 +21,6 @@ export default function VolunteerPage() {
           <p className="eyebrow light">VOLUNTEER WITH SUDF</p>
           <h1>Give your time.<br /><span>Strengthen healthier communities.</span></h1>
           <p className="volunteer-hero-copy">Join a community of people who want to support diabetes awareness, prevention, education and outreach. Tell us about your skills, experience and the ways you may be able to contribute.</p>
-          <a className="button button-gold" href="#volunteer-application">APPLY TO VOLUNTEER <span aria-hidden="true">→</span></a>
         </div>
         <div className="volunteer-hero-art" aria-hidden="true">
           <div className="volunteer-orbit" />
