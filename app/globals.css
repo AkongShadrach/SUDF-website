@@ -2381,3 +2381,25 @@ body:has(main > .footer) {
     color: #fff4c9;
   }
 }
+
+/* Mobile footer alignment and compact finish */
+@media (max-width: 760px) {
+  .mobile-nav .mobile-volunteer-link {
+    border-radius: 999px !important;
+  }
+  .footer {
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    row-gap: 22px;
+  }
+  .footer > .sudf-footer-social {
+    width: 100%;
+    justify-content: center;
+    justify-self: center;
+  }
+  .footer-legal {
+    width: 100%;
+    margin: 0;
+    padding: 14px 0 0;
+    text-align: center;
+  }
+}
