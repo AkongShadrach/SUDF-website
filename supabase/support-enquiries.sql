@@ -23,3 +23,7 @@ alter table public.support_enquiries enable row level security;
 -- Restrict table access to trusted server/admin roles.
 revoke all on table public.support_enquiries from anon, authenticated;
 grant select, insert, update on table public.support_enquiries to service_role;
+
+
+alter table public.support_enquiries
+  add column if not exists contact_consent boolean not null default false;
