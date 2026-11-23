@@ -1,4 +1,5 @@
 import ObjectiveReveal from "../components/ObjectiveReveal";
+import { Activity, HeartHandshake, UsersRound } from "lucide-react";
 import SiteHeader from "../components/SiteHeader";
 
 const programs = [
@@ -164,12 +165,26 @@ export default function Home() {
             Diabetes can progress for years without obvious symptoms. For many people, the first serious warning may come only after complications have developed.
           </p>
         </div>
-        <p className="impact-copy">
-          We want more people to know their risk, know their numbers, understand diabetes, receive support early, and take informed steps towards healthier lives.
-        </p>
-        <p className="impact-copy">
-          Every person screened, every family educated, every patient supported, and every community reached brings us closer to a future where preventable diabetes-related suffering and deaths are significantly reduced.
-        </p>
+        <div className="sudf-impact-cards">
+          <article className="sudf-impact-card">
+            <span className="sudf-impact-icon"><Activity size={27} strokeWidth={1.8} aria-hidden="true" /></span>
+            <span className="sudf-impact-step">01 · AWARENESS</span>
+            <h3>Know the risk. Understand the numbers.</h3>
+            <p>We want more people to know their risk, know their numbers, understand diabetes, receive support early, and take informed steps towards healthier lives.</p>
+          </article>
+          <article className="sudf-impact-card">
+            <span className="sudf-impact-icon"><HeartHandshake size={27} strokeWidth={1.8} aria-hidden="true" /></span>
+            <span className="sudf-impact-step">02 · EARLY SUPPORT</span>
+            <h3>Make support easier to reach.</h3>
+            <p>Every person screened and every patient supported brings us closer to a future where preventable diabetes-related suffering and deaths are significantly reduced.</p>
+          </article>
+          <article className="sudf-impact-card">
+            <span className="sudf-impact-icon"><UsersRound size={27} strokeWidth={1.8} aria-hidden="true" /></span>
+            <span className="sudf-impact-step">03 · COMMUNITY</span>
+            <h3>Strengthen healthier communities.</h3>
+            <p>Every family educated and every community reached brings us closer to a future where preventable diabetes-related suffering and deaths are significantly reduced.</p>
+          </article>
+        </div>
         <div className="metrics">
           <div><strong>—</strong><span>People reached</span></div>
           <div><strong>—</strong><span>People screened</span></div>
