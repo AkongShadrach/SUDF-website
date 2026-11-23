@@ -1,3 +1,4 @@
+import ObjectiveReveal from "../components/ObjectiveReveal";
 import SiteHeader from "../components/SiteHeader";
 
 const programs = [
@@ -123,12 +124,8 @@ export default function Home() {
           <p>SUDF is committed to:</p>
         </div>
         <div className="program-grid objective-grid">
-          {objectives.map((objective) => (
-            <article className="program-card objective-card" key={objective.number}>
-              <span>{objective.number}</span>
-              <h3>{objective.title}</h3>
-              <p>{objective.text}</p>
-            </article>
+          {objectives.map((objective, index) => (
+            <ObjectiveReveal key={objective.number} objective={objective} index={index} />
           ))}
         </div>
       </section>
