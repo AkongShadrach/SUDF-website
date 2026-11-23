@@ -47,26 +47,7 @@ const objectives = [
 export default function Home() {
   return (
     <main>
-      <header className="site-header">
-        <a className="brand" href="#home" aria-label="SUDF home">
-          <span className="brand-mark">SUDF</span>
-          <span>
-            <strong>SYLVESTER UJONG</strong>
-            <small>DIABETES FOUNDATION</small>
-          </span>
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="#about">About</a>
-          <a href="#mission">Our Mission</a>
-          <a href="#objectives">Objectives</a>
-          <a href="#programs">Our Work</a>
-          <a href="#impact">Impact</a>
-          <a href="#events">Events</a>
-          <a href="#resources">Resources</a>
-          <a href="#partners">Partners</a>
-          <a className="nav-donate" href="#support">Donate</a>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <section id="home" className="hero">
         <div className="hero-copy">
@@ -244,7 +225,7 @@ export default function Home() {
             Support diabetes awareness, prevention, education, screening activities and community programmes.
           </p>
         </div>
-        <a className="button button-gold" href="#contact">Support SUDF</a>
+        <a className="button button-gold" href="#contact">Donate / Support SUDF</a>
       </section>
 
       <section id="partners" className="section partners">
