@@ -79,7 +79,7 @@ nav a { opacity:.9; }
 .hero-image p { margin:8px 0 0; color:white; }
 
 .section { padding:90px 7vw; }
-.intro { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; background:var(--cream); }
+.intro { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; background:var(--cream); }
 h2 { font-size:clamp(32px,4vw,54px); line-height:1.05; margin:0; letter-spacing:-.025em; }
 .intro > p, .section-heading > p, .partners .wide, .contact p { color:var(--muted); font-size:17px; line-height:1.75; max-width:650px; }
 
