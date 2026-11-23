@@ -2348,3 +2348,36 @@ body:has(main > .footer) {
     grid-template-columns: 1fr;
   }
 }
+
+/* Keep the volunteer navigation CTA visually distinct from plain links */
+.desktop-nav .nav-volunteer {
+  padding: 11px 15px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .mobile-nav .mobile-volunteer-link {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0 0;
+    padding: 13px 18px;
+    border: 1px solid rgba(224, 197, 91, .88);
+    border-radius: 999px;
+    background: transparent;
+    color: #f4e8b5;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .045em;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: none;
+  }
+  .mobile-nav .mobile-volunteer-link:hover,
+  .mobile-nav .mobile-volunteer-link:focus-visible {
+    background: rgba(201,162,39,.12);
+    border-color: var(--gold-soft);
+    color: #fff4c9;
+  }
+}
