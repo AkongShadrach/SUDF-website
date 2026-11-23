@@ -1529,3 +1529,94 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   .sudf-events-programme-links { grid-template-columns:1fr; }
   .sudf-events-hero-inner > p:last-child { font-size:16px; }
 }
+
+
+/* Refined SUDF programme cards: restrained borders, soft tonal depth and clear hierarchy */
+.program-grid:not(.objective-grid) { gap:20px; }
+.program-card {
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+  padding:clamp(24px,3vw,32px);
+  border:1px solid rgba(201,162,39,.26);
+  border-top:3px solid var(--gold);
+  border-radius:22px;
+  background:linear-gradient(150deg,#fffdf7 0%,#f7f5e9 100%);
+  box-shadow:0 8px 24px rgba(11,59,46,.055), inset 0 1px 0 rgba(255,255,255,.9);
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.program-card::after {
+  content:"";
+  position:absolute;
+  right:-46px;
+  bottom:-68px;
+  width:150px;
+  height:150px;
+  border:1px solid rgba(11,59,46,.09);
+  border-radius:50%;
+  pointer-events:none;
+}
+.program-card > span {
+  display:inline-grid;
+  width:48px;
+  height:48px;
+  place-items:center;
+  margin-bottom:18px;
+  border:1px solid rgba(201,162,39,.42);
+  border-radius:15px;
+  background:#f6edce;
+  color:var(--green);
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+.program-card h3 {
+  position:relative;
+  z-index:1;
+  margin:0 0 12px;
+  color:var(--green);
+  font-size:clamp(19px,2vw,23px);
+  line-height:1.25;
+}
+.program-card p {
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.75;
+}
+@media(hover:hover) {
+  .program-card:hover {
+    transform:translateY(-4px);
+    border-color:rgba(201,162,39,.52);
+    box-shadow:0 15px 34px rgba(11,59,46,.10);
+  }
+}
+.sudf-programme-card {
+  border:1px solid rgba(201,162,39,.3);
+  border-top:3px solid var(--gold);
+  background:linear-gradient(150deg,#fffdf7 0%,#f7f5e9 100%);
+  box-shadow:0 8px 24px rgba(11,59,46,.055);
+}
+.sudf-programme-card .date-box {
+  border:1px solid rgba(201,162,39,.42);
+  background:#f6edce;
+  color:var(--green);
+}
+.sudf-programme-card h3 { color:var(--green); }
+.sudf-programme-card::after {
+  content:"";
+  position:absolute;
+  right:-44px;
+  bottom:-64px;
+  width:140px;
+  height:140px;
+  border:1px solid rgba(11,59,46,.08);
+  border-radius:50%;
+  pointer-events:none;
+}
+.sudf-programme-card > * { position:relative; z-index:1; }
+@media(prefers-reduced-motion:reduce) {
+  .program-card { transition:none; }
+}
