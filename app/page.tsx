@@ -61,7 +61,7 @@ export default function Home() {
           </p>
           <div className="actions">
             <a className="button button-gold" href="#programs">Explore Our Work</a>
-            <a className="button button-outline" href="#support">Support Our Mission</a>
+            <a className="button button-outline" href="/donate-support">Support Our Mission</a>
           </div>
         </div>
         <div className="hero-image" aria-label="SUDF hero image placeholder">
@@ -224,7 +224,7 @@ export default function Home() {
             Support diabetes awareness, prevention, education, screening activities and community programmes.
           </p>
         </div>
-        <a className="button button-gold" href="#contact">Donate / Support SUDF</a>
+        <a className="button button-gold" href="/donate-support">Donate / Support SUDF</a>
       </section>
 
       <section id="partners" className="section partners">
@@ -273,7 +273,7 @@ export default function Home() {
         </div>
         <div className="footer-links">
           <a href="#about">About</a><a href="#mission">Our Mission</a><a href="#objectives">Objectives</a>
-          <a href="#programs">Our Work</a><a href="#events">Events</a><a href="#resources">Resources</a>
+          <a href="#programs">Our Work</a><a href="#events">Events</a><a href="#resources">Resources</a><a href="/donate-support">Donate / Support</a>
         </div>
         <div className="footer-legal">
           Contact SUDF • Privacy • Safeguarding • Transparency<br />
