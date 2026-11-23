@@ -1,4 +1,4 @@
-import SiteHeader from "../../components/SiteHeader.tsx";
+import SiteHeader from "../../components/SiteHeader";
 import SupportForm from "./SupportForm";
 import { Activity, HandHeart, BookOpen, UsersRound } from "lucide-react";
 
