@@ -2219,3 +2219,34 @@ body:has(main > .footer) {
   .volunteer-area-card { min-height:0; }
   .volunteer-footer nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
+/* Shared SUDF footer contact details */
+.footer-contact {
+  display: grid;
+  gap: 13px;
+  margin-top: 22px;
+}
+.footer-contact p {
+  margin: 0;
+  color: #d8e2dd;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.footer-contact p span {
+  display: inline-block;
+  margin-bottom: 3px;
+  color: var(--gold-soft);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.footer-contact a {
+  color: #e8d17b;
+  text-decoration: none;
+}
+.footer-contact a:hover,
+.footer-contact a:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+}
