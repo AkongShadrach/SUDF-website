@@ -8,8 +8,8 @@ const links = [
   ["Events", "/events"],
   ["Resources", "/#resources"],
   ["Meet Our Team", "/team"],
-  ["Become a Volunteer", "/volunteer"],
   ["Contact", "/contact"],
+  ["Become a Volunteer", "/volunteer"],
 ];
 
 export default function SiteHeader() {
