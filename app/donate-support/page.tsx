@@ -1,12 +1,12 @@
 import SiteHeader from "../../components/SiteHeader";
 import SupportForm from "./SupportForm";
-import { Activity, HandHeart, BookOpen, UsersRound } from "lucide-react";
+import { Activity, HandHeart, BookOpen, BedDouble } from "lucide-react";
 
 const supportOptions = [
   { number: "01", title: "Community diabetes screening", description: "Help SUDF bring diabetes screening closer to individuals and families, supporting earlier awareness and access to appropriate guidance.", Icon: Activity },
   { number: "02", title: "Care and patient support", description: "Support guidance, basic care assistance and referral pathways for people living with diabetes, particularly vulnerable communities.", Icon: HandHeart },
   { number: "03", title: "Health education", description: "Help share practical knowledge about diabetes prevention, risk factors, healthy lifestyles and disease management.", Icon: BookOpen },
-  { number: "04", title: "Medical outreach", description: "Contribute to outreach activities and the collaboration needed to extend diabetes services within communities.", Icon: UsersRound },
+  { number: "04", title: "Medical outreach", description: "Contribute to outreach activities and the collaboration needed to extend diabetes services within communities.", Icon: BedDouble },
 ];
 
 export default function DonateSupportPage() {
