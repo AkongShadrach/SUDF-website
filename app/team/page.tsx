@@ -1,3 +1,4 @@
+import SocialLinks from "../components/SocialLinks";
 import Link from "next/link";
 import SiteHeader from "../../components/SiteHeader";
 import { Linkedin, UserRound } from "lucide-react";
@@ -89,6 +90,7 @@ export default function TeamPage() {
         <div className="footer-links">
           <Link href="/#about">About</Link><Link href="/#mission">Our Mission</Link><Link href="/#programs">Our Work</Link><Link href="/events">Events</Link><Link href="/team">Meet Our Team</Link><Link href="/contact">Contact</Link><Link href="/donate-support">Donate / Support</Link>
         </div>
+        <SocialLinks />
         <div className="footer-legal">© SUDF. All rights reserved.</div>
       </footer>
     </main>
