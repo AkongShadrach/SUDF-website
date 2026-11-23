@@ -1,4 +1,4 @@
-import SocialLinks from "../components/SocialLinks";
+import SocialLinks from "../../components/SocialLinks";
 import SiteHeader from "../../components/SiteHeader";
 import ContactForm from "./ContactForm";
 
