@@ -1181,3 +1181,102 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   }
   .menu-icon { width: 23px; gap: 5px; }
 }
+
+
+/* SUDF Gallery — responsive, data-driven outreach photo grid */
+.sudf-gallery-section {
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  align-items: start;
+  gap: clamp(28px, 5vw, 70px);
+}
+.sudf-gallery-panel { min-width: 0; }
+.sudf-gallery-heading { margin-bottom: 24px; }
+.sudf-gallery-heading h2 {
+  margin: 0 0 14px;
+  color: var(--green);
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.12;
+}
+.sudf-gallery-heading > p:last-child {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.sudf-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+.sudf-gallery-item {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(11,59,46,.12);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(23,35,31,.07);
+}
+.sudf-gallery-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #e8eee8;
+}
+.sudf-gallery-item figcaption {
+  padding: 11px 13px 13px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.sudf-gallery-empty {
+  grid-column: 1 / -1;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  border: 1px dashed rgba(11,59,46,.28);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #fffdf7, #edf3eb);
+  text-align: center;
+}
+.sudf-gallery-empty-mark {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  margin-bottom: 18px;
+  border: 1px solid rgba(201,162,39,.55);
+  border-radius: 50%;
+  color: var(--green);
+  background: #f7edc8;
+  font-size: 13px;
+  font-weight: 800;
+}
+.sudf-gallery-empty strong { color: var(--green); font-size: 17px; }
+.sudf-gallery-empty p {
+  max-width: 360px;
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.sudf-gallery-legacy-copy { min-width: 0; }
+@media (max-width:900px) {
+  .sudf-gallery-section { grid-template-columns: 1fr; }
+}
+@media (max-width:520px) {
+  .sudf-gallery-grid { gap: 10px; }
+  .sudf-gallery-item { border-radius: 14px; }
+  .sudf-gallery-item figcaption { padding: 9px 10px 11px; font-size: 12px; }
+  .sudf-gallery-empty { min-height: 220px; padding: 24px 18px; }
+}
+@media (max-width:340px) {
+  .sudf-gallery-grid { grid-template-columns: 1fr; }
+}
