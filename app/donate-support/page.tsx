@@ -1,7 +1,7 @@
-import SocialLinks from "../../components/SocialLinks";
 import SiteHeader from "../../components/SiteHeader";
 import SupportForm from "./SupportForm";
 import { Activity, HandHeart, BookOpen, BedDouble } from "lucide-react";
+import SiteFooter from "../../components/SiteFooter";
 
 const supportOptions = [
   { number: "01", title: "Community diabetes screening", description: "Help SUDF bring diabetes screening closer to individuals and families, supporting earlier awareness and access to appropriate guidance.", Icon: Activity },
@@ -54,12 +54,7 @@ export default function DonateSupportPage() {
         </div>
         <SupportForm />
       </section>
-      <footer className="support-footer">
-        <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
-        <nav aria-label="Footer navigation"><a href="/#about">About</a><a href="/#programs">Our Work</a><a href="/#events">Events</a><a href="/#contact">Contact</a></nav>
-        <SocialLinks />
-        <span>© 2026 Sylvester Ujong Diabetes Foundation. All rights reserved.</span>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
