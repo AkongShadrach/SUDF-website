@@ -2054,3 +2054,39 @@ img, video, iframe, svg { max-width: 100%; }
 @media(prefers-reduced-motion:reduce) {
   .sudf-footer-social a { transition:none; }
 }
+
+
+/* Homepage programme introduction: readable, purposeful supporting copy */
+.sudf-programmes-section .section-heading > p {
+  max-width: 620px;
+  margin: 0;
+  padding: 20px 22px;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 16px 16px 0;
+  background: rgba(255,255,255,.72);
+  color: #53635b;
+  font-size: 16px;
+  line-height: 1.75;
+  box-shadow: 0 7px 22px rgba(11,59,46,.045);
+}
+@media(max-width:760px) {
+  .sudf-programmes-section .section-heading > p {
+    margin-top: 18px;
+    padding: 17px 18px;
+    color: #53635b;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
+
+/* Centre the available social links in the homepage footer */
+.footer .sudf-footer-social {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Keep the area beneath the homepage footer in the same foundation green */
+body:has(main > .footer) {
+  background: #082c23;
+}
+.footer { margin-bottom: 0; }
