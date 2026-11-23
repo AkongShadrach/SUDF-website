@@ -4,12 +4,12 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const allowedSupportTypes = new Set([
-  "Donation",
+  "Financial donation",
   "Programme sponsorship",
   "In-kind contribution",
   "Volunteering",
   "Partnership",
-  "Other support",
+  "Other practical support",
 ]);
 const allowedSupportAreas = new Set([
   "General support",
@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
     const supportArea = clean(body.supportArea, 80);
     const indicativeAmount = clean(body.amount, 80);
     const message = clean(body.message, 3000);
+    const consent = body.consent === true;
 
     if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Please provide a valid name and email address." }, { status: 400 });
@@ -59,6 +60,8 @@ export async function POST(request: NextRequest) {
     if (!allowedSupportTypes.has(supportType) || !allowedSupportAreas.has(supportArea)) {
       return NextResponse.json({ error: "Please choose a valid support type and area." }, { status: 400 });
     }
+
+    if (!consent) return NextResponse.json({ error: "Please agree to be contacted about this enquiry." }, { status: 400 });
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -78,6 +81,7 @@ export async function POST(request: NextRequest) {
       support_area: supportArea,
       indicative_amount: indicativeAmount || null,
       message: message || null,
+      contact_consent: consent,
     });
 
     if (error) {
