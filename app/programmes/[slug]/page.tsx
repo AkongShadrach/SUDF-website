@@ -1,3 +1,4 @@
+import SocialLinks from "../../components/SocialLinks";
 import Link from "next/link";
 import SiteHeader from "../../../components/SiteHeader";
 
@@ -89,6 +90,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
       <footer className="support-footer sudf-programme-footer">
         <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
         <nav aria-label="Footer navigation"><Link href="/#about">About</Link><Link href="/#programmes">Programmes</Link><Link href="/#impact">Impact</Link><Link href="/donate-support">Donate / Support</Link><Link href="/contact">Contact</Link></nav>
+        <SocialLinks />
         <span>© SUDF. All rights reserved.</span>
       </footer>
     </main>
