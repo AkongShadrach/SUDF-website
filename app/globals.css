@@ -1111,3 +1111,13 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   }
   .menu-icon { width: 32px; gap: 7px; }
 }
+
+
+/* Keep the SUDF site header visible while page content scrolls beneath it */
+.support-page { overflow: clip; }
+.support-page > .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
