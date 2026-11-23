@@ -1,5 +1,6 @@
 import ObjectiveReveal from "../components/ObjectiveReveal";
 import SiteHeader from "../components/SiteHeader";
+import ContactForm from "./contact/ContactForm";
 
 const programs = [
   {
@@ -284,12 +285,7 @@ export default function Home() {
             Contact details and official organizational information can be added here from verified SUDF records.
           </p>
         </div>
-        <form className="contact-form">
-          <input placeholder="Your name" aria-label="Your name" />
-          <input type="email" placeholder="Email address" aria-label="Email address" />
-          <textarea placeholder="How can we help?" aria-label="Message" rows={5} />
-          <button className="button button-green" type="button">Send Message</button>
-        </form>
+        <ContactForm />
       </section>
 
       <footer className="footer">
