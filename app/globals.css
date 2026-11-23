@@ -1486,3 +1486,46 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
 @media(prefers-reduced-motion:reduce) {
   .sudf-back-to-top { transition: none; }
 }
+
+
+/* Events page: remove demo copy and present a clear verified-events state */
+.sudf-events-page { min-height:100vh; background:var(--cream); }
+.sudf-events-hero {
+  padding:clamp(52px,7vw,86px) 6vw;
+  background:linear-gradient(145deg,#f7f4e9,#eef2e9);
+}
+.sudf-events-hero-inner { max-width:950px; }
+.sudf-events-hero h1 { max-width:900px; margin:0; color:var(--ink); font-size:clamp(38px,5.5vw,66px); line-height:1.05; letter-spacing:-.04em; }
+.sudf-events-hero-inner > p:last-child { max-width:760px; margin:24px 0 0; color:var(--muted); font-size:18px; line-height:1.7; }
+.sudf-events-empty {
+  display:flex;
+  align-items:center;
+  gap:26px;
+  margin:0 auto;
+  max-width:1100px;
+}
+.sudf-events-empty-mark {
+  display:grid;
+  width:76px;
+  height:76px;
+  flex:0 0 76px;
+  place-items:center;
+  border:1px solid rgba(201,162,39,.45);
+  border-radius:22px;
+  background:#f7edc8;
+  color:var(--green);
+  font-weight:800;
+}
+.sudf-events-empty > div { max-width:680px; }
+.sudf-events-empty h2 { margin:0 0 12px; color:var(--green); }
+.sudf-events-empty p:not(.eyebrow) { color:var(--muted); line-height:1.7; }
+.sudf-events-programmes { padding:20px 6vw 76px; }
+.sudf-events-programmes .section-heading { max-width:1100px; margin:0 auto 28px; }
+.sudf-events-programme-links { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; max-width:1100px; margin:auto; }
+.sudf-events-programme-links a { display:flex; min-height:150px; flex-direction:column; justify-content:space-between; gap:20px; padding:24px; border:1px solid var(--line); border-top:4px solid var(--gold); border-radius:20px; background:#fff; color:var(--ink); font-size:20px; font-weight:800; }
+.sudf-events-programme-links a span { color:var(--green); font-size:14px; }
+@media(max-width:760px) {
+  .sudf-events-empty { align-items:flex-start; flex-direction:column; }
+  .sudf-events-programme-links { grid-template-columns:1fr; }
+  .sudf-events-hero-inner > p:last-child { font-size:16px; }
+}
