@@ -4,13 +4,10 @@ import { useState } from "react";
 
 const links = [
   ["About", "/#about"],
-  ["Meet Our Team", "/team"],
-  ["Our Mission", "/#mission"],
-  ["Objectives", "/#objectives"],
   ["Our Work", "/#programs"],
-  ["Impact", "/#impact"],
   ["Events", "/events"],
   ["Resources", "/#resources"],
+  ["Meet Our Team", "/team"],
   ["Partners", "/#partners"],
   ["Contact", "/contact"],
 ];
@@ -55,7 +52,7 @@ export default function SiteHeader() {
         {links.map(([label, href]) => (
           <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
         ))}
-        <a className="mobile-donate-link" href="/donate-support" onClick={() => setOpen(false)}>Donate / Support SUDF</a>
+        <a className="mobile-donate-link button button-gold" href="/donate-support" onClick={() => setOpen(false)}>Donate / Support</a>
       </nav>
     </header>
   );
