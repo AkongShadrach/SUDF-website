@@ -3,15 +3,15 @@
 import { useState } from "react";
 
 const links = [
-  ["About", "#about"],
-  ["Our Mission", "#mission"],
-  ["Objectives", "#objectives"],
-  ["Our Work", "#programs"],
-  ["Impact", "#impact"],
-  ["Events", "#events"],
-  ["Resources", "#resources"],
-  ["Partners", "#partners"],
-  ["Contact", "#contact"],
+  ["About", "/#about"],
+  ["Our Mission", "/#mission"],
+  ["Objectives", "/#objectives"],
+  ["Our Work", "/#programs"],
+  ["Impact", "/#impact"],
+  ["Events", "/#events"],
+  ["Resources", "/#resources"],
+  ["Partners", "/#partners"],
+  ["Contact", "/#contact"],
 ];
 
 export default function SiteHeader() {
@@ -19,7 +19,7 @@ export default function SiteHeader() {
 
   return (
     <header className="site-header">
-      <a className="brand" href="#home" aria-label="SUDF home" onClick={() => setOpen(false)}>
+      <a className="brand" href="/#home" aria-label="SUDF home" onClick={() => setOpen(false)}>
         <span className="brand-mark">SUDF</span>
         <span>
           <strong>SYLVESTER UJONG</strong>
@@ -29,6 +29,7 @@ export default function SiteHeader() {
 
       <nav className="desktop-nav" aria-label="Main navigation">
         {links.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+        <a className="nav-donate" href="/donate-support">Donate / Support</a>
       </nav>
 
       <button
@@ -53,7 +54,7 @@ export default function SiteHeader() {
         {links.map(([label, href]) => (
           <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
         ))}
-        <a className="mobile-donate-link" href="#support" onClick={() => setOpen(false)}>Donate / Support SUDF</a>
+        <a className="mobile-donate-link" href="/donate-support" onClick={() => setOpen(false)}>Donate / Support SUDF</a>
       </nav>
     </header>
   );
