@@ -1377,3 +1377,70 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   .sudf-contact-intro > p:not(.eyebrow) { font-size:16px; }
   .sudf-contact-form-panel { padding:25px 20px; border-radius:24px; }
 }
+
+
+/* Programme cards link to dedicated programme information pages */
+.sudf-programmes-section { background:var(--cream); }
+.sudf-programme-cards { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.sudf-programme-card {
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  min-height:360px;
+  padding:28px;
+  border:1px solid var(--line);
+  border-top:4px solid var(--gold);
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 10px 28px rgba(23,35,31,.06);
+}
+.sudf-programme-card .date-box {
+  width:64px;
+  height:64px;
+  border:1px solid rgba(201,162,39,.35);
+  border-radius:18px;
+  background:#f7edc8;
+  color:var(--green);
+  font-size:17px;
+}
+.sudf-programme-card .event-no { color:var(--green-3); }
+.sudf-programme-card h3 { margin:8px 0 10px; color:var(--ink); font-size:24px; line-height:1.2; }
+.sudf-programme-card p:not(.event-no) { color:var(--muted); line-height:1.7; }
+.sudf-programme-card a { display:inline-flex; margin-top:auto; padding-top:10px; color:var(--green); font-weight:800; }
+.sudf-programme-card a:hover { color:#987515; }
+.sudf-programme-hero {
+  padding:clamp(54px,8vw,100px) 7vw;
+  color:#fff;
+  background:radial-gradient(circle at 100% 0%,rgba(226,199,91,.16),transparent 26rem),linear-gradient(140deg,var(--green),var(--green-2) 65%,var(--green-3));
+}
+.sudf-programme-hero-inner { max-width:900px; }
+.sudf-programme-back { display:inline-block; margin-bottom:42px; color:#e5eee8; font-size:14px; }
+.sudf-programme-hero .eyebrow { color:var(--gold-soft); }
+.sudf-programme-number { display:block; margin-bottom:12px; color:var(--gold-soft); font-size:14px; font-weight:800; letter-spacing:.16em; }
+.sudf-programme-hero h1 { max-width:850px; margin:0; color:white; font-size:clamp(40px,6vw,72px); line-height:1.02; letter-spacing:-.04em; }
+.sudf-programme-intro { max-width:780px; margin:26px 0 30px; color:#e0e9e3; font-size:18px; line-height:1.8; }
+.sudf-programme-content { display:grid; grid-template-columns:.9fr 1.1fr; gap:54px; background:var(--cream); }
+.sudf-programme-content-heading h2 { color:var(--green); }
+.sudf-programme-content-heading > p:last-child { color:var(--muted); font-size:16px; line-height:1.75; }
+.sudf-programme-focus-list { display:grid; gap:14px; }
+.sudf-programme-focus-item { display:flex; align-items:flex-start; gap:18px; padding:22px; border:1px solid var(--line); border-radius:18px; background:#fff; }
+.sudf-programme-focus-item span { color:#a9871f; font-weight:800; letter-spacing:.1em; }
+.sudf-programme-focus-item p { margin:0; color:var(--ink); line-height:1.65; }
+.sudf-programme-next { padding:65px 7vw; color:white; background:var(--green-2); }
+.sudf-programme-next .eyebrow { color:var(--gold-soft); }
+.sudf-programme-next h2 { max-width:760px; color:white; }
+.sudf-programme-next > p:not(.eyebrow) { max-width:650px; color:#d6e2dc; line-height:1.7; }
+.sudf-programme-footer { background:#082c23; }
+@media(max-width:900px) {
+  .sudf-programme-cards { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .sudf-programme-content { grid-template-columns:1fr; gap:28px; }
+}
+@media(max-width:620px) {
+  .sudf-programmes-section { padding:64px 5vw; }
+  .sudf-programme-cards { grid-template-columns:1fr; }
+  .sudf-programme-card { min-height:0; padding:24px; }
+  .sudf-programme-hero { padding:52px 5vw 62px; }
+  .sudf-programme-intro { font-size:16px; }
+  .sudf-programme-content { padding:60px 5vw; }
+  .sudf-programme-next { padding:56px 5vw; }
+}
