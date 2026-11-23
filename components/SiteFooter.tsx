@@ -11,17 +11,11 @@ export default function SiteFooter() {
           <p><span>Phone</span><br /><a href="tel:+2349059592892">+2349059592892</a></p>
         </div>
       </div>
-      <nav className="footer-links" aria-label="Footer navigation">
-        <a href="/#about">About</a>
+      <nav className="footer-links" aria-label="Additional links">
         <a href="/#mission">Our Mission</a>
         <a href="/#objectives">Objectives</a>
-        <a href="/#programs">Our Work</a>
         <a href="/#programmes">Programmes</a>
-        <a href="/#resources">Resources</a>
-        <a href="/team">Meet Our Team</a>
         <a href="/volunteer">Become a Volunteer</a>
-        <a href="/donate-support">Donate / Support</a>
-        <a href="/contact">Contact</a>
       </nav>
       <SocialLinks />
       <div className="footer-legal">
