@@ -69,7 +69,7 @@ export default function Home() {
           <div className="actions">
             <a className="button button-gold" href="#programs">Explore Our Work</a>
             <a className="button button-outline" href="/donate-support">Support Our Mission</a>
-            <a className="button button-volunteer" href="/volunteer">Become a Volunteer <span aria-hidden="true">→</span></a>
+            <a className="button button-volunteer" href="/volunteer">Become a Volunteer</a>
           </div>
         </div>
         <div className="hero-image" aria-label="SUDF hero image placeholder">
