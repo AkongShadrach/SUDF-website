@@ -1,5 +1,5 @@
 import ObjectiveReveal from "../components/ObjectiveReveal";
-import { Activity, HeartHandshake, UsersRound } from "lucide-react";
+import { Activity, BookOpen, HandHeart, HeartHandshake, HeartPulse, Hospital, UsersRound } from "lucide-react";
 import SiteHeader from "../components/SiteHeader";
 
 const programs = [
@@ -147,7 +147,12 @@ export default function Home() {
         <div className="program-grid">
           {programs.map((program) => (
             <article className="program-card" key={program.number}>
-              <span>{program.number}</span>
+              <span className={`program-icon program-icon-${program.number}`} aria-hidden="true">
+                {program.number === "01" ? <HeartPulse size={29} strokeWidth={1.8} /> :
+                 program.number === "02" ? <HandHeart size={29} strokeWidth={1.8} /> :
+                 program.number === "03" ? <BookOpen size={29} strokeWidth={1.8} /> :
+                 <Hospital size={29} strokeWidth={1.8} />}
+              </span>
               <h3>{program.title}</h3>
               <p>{program.text}</p>
             </article>
