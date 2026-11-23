@@ -1,4 +1,4 @@
-import SocialLinks from "../components/SocialLinks";
+import SocialLinks from "../../components/SocialLinks";
 import SiteHeader from "../../components/SiteHeader";
 import SupportForm from "./SupportForm";
 import { Activity, HandHeart, BookOpen, BedDouble } from "lucide-react";
