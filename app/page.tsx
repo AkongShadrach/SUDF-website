@@ -324,8 +324,7 @@ export default function Home() {
         </div>
         <SocialLinks />
         <div className="footer-legal">
-          Contact SUDF • Privacy • Safeguarding • Transparency<br />
-          © SUDF
+          © 2026 Sylvester Ujong Diabetes Foundation. All rights reserved.
         </div>
       </footer>
     </main>
