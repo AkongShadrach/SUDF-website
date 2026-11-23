@@ -1,3 +1,4 @@
+import SocialLinks from "../../components/SocialLinks";
 import SiteHeader from "../../components/SiteHeader";
 import SupportForm from "./SupportForm";
 import { Activity, HandHeart, BookOpen, BedDouble } from "lucide-react";
@@ -56,6 +57,7 @@ export default function DonateSupportPage() {
       <footer className="support-footer">
         <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
         <nav aria-label="Footer navigation"><a href="/#about">About</a><a href="/#programs">Our Work</a><a href="/#events">Events</a><a href="/#contact">Contact</a></nav>
+        <SocialLinks />
         <span>© SUDF. All rights reserved.</span>
       </footer>
     </main>
