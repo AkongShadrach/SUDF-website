@@ -2,118 +2,65 @@ import SiteHeader from "../../components/SiteHeader";
 import SupportForm from "./SupportForm";
 
 const supportOptions = [
-  {
-    number: "01",
-    title: "Make a Donation",
-    description: "Contribute towards SUDF's diabetes awareness, prevention, screening, education and community support work.",
-    detail: "Financial support",
-  },
-  {
-    number: "02",
-    title: "Sponsor Community Screening",
-    description: "Help extend access to community-based screening and support earlier awareness of blood glucose status.",
-    detail: "Programme sponsorship",
-  },
-  {
-    number: "03",
-    title: "Support Health Education",
-    description: "Help share practical information about diabetes risk factors, prevention, healthy lifestyles and disease management.",
-    detail: "Education and awareness",
-  },
-  {
-    number: "04",
-    title: "Give In Kind or Volunteer",
-    description: "Offer relevant supplies, equipment, professional expertise, time or other practical support for SUDF activities.",
-    detail: "Skills and resources",
-  },
+  { number: "01", title: "Community diabetes screening", description: "Help SUDF bring diabetes screening closer to individuals and families, supporting earlier awareness and access to appropriate guidance." },
+  { number: "02", title: "Care and patient support", description: "Support guidance, basic care assistance and referral pathways for people living with diabetes, particularly vulnerable communities." },
+  { number: "03", title: "Health education", description: "Help share practical knowledge about diabetes prevention, risk factors, healthy lifestyles and disease management." },
+  { number: "04", title: "Medical outreach", description: "Contribute to outreach activities and the collaboration needed to extend diabetes services within communities." },
 ];
 
 export default function DonateSupportPage() {
   return (
     <main className="support-page">
       <SiteHeader />
-      <section className="support-hero">
+      <section className="support-hero support-hero-reference">
         <div className="support-hero-inner">
-          <p className="eyebrow light">STAND WITH SUDF</p>
-          <h1>Help protect lives.<br /><span>Support healthier communities.</span></h1>
-          <p className="support-hero-copy">
-            Your support can help bring diabetes awareness, screening, education and care closer to the people who need them.
-          </p>
-          <a className="button button-gold" href="#support-enquiry">Explore ways to support SUDF</a>
-          <div className="support-hero-note">
-            <span aria-hidden="true">✳</span>
-            Every contribution begins with a shared commitment to healthier communities.
+          <p className="eyebrow light">SUPPORT THE MISSION</p>
+          <h1>Stand with SUDF.<br /><span>Help protect healthier lives.</span></h1>
+          <p className="support-hero-copy">Help us bring diabetes awareness, screening, education and support closer to individuals, families and communities across Nigeria.</p>
+          <div className="support-hero-actions">
+            <a className="button button-gold" href="#support-enquiry">TELL US HOW YOU CAN HELP <span aria-hidden="true">→</span></a>
+            <a className="support-back-link" href="/">BACK TO HOME</a>
           </div>
         </div>
         <div className="support-hero-art" aria-hidden="true">
-          <div className="support-orbit orbit-one" />
-          <div className="support-orbit orbit-two" />
+          <div className="support-orbit orbit-one" /><div className="support-orbit orbit-two" />
           <div className="support-emblem">SUDF</div>
           <div className="support-art-caption"><strong>Awareness</strong><span>Prevention · Early detection · Support</span></div>
         </div>
       </section>
-
-      <section className="support-intro section">
-        <div>
-          <p className="eyebrow">BE PART OF THE WORK</p>
-          <h2>There are different ways to make a difference.</h2>
+      <section className="support-more section">
+        <div className="support-more-heading">
+          <p className="eyebrow">MORE THAN FUNDING</p>
+          <h2>Support the work. Expand the reach.</h2>
+          <p>Support for SUDF can take different forms. You may wish to contribute towards community screening, help strengthen health education, support people living with diabetes or provide practical resources for outreach. Tell us what you have in mind and we can discuss a useful way forward.</p>
         </div>
-        <p>
-          Whether you are an individual, organisation, healthcare professional or community partner, there are meaningful ways to stand with SUDF and support its mission.
-        </p>
-      </section>
-
-      <section className="support-options-section section">
         <div className="support-options-grid">
           {supportOptions.map((option) => (
             <article className="support-option-card" key={option.number}>
-              <div className="support-option-top">
-                <span className="support-option-number">{option.number}</span>
-                <span className="support-option-icon" aria-hidden="true">{["♡", "＋", "✳", "↗"][Number(option.number) - 1]}</span>
-              </div>
-              <p className="support-option-detail">{option.detail}</p>
+              <span className="support-option-number">{option.number}</span>
               <h3>{option.title}</h3>
               <p>{option.description}</p>
-              <a href="#support-enquiry">I want to help <span aria-hidden="true">→</span></a>
             </article>
           ))}
         </div>
       </section>
-
-      <section className="support-purpose section">
-        <div className="support-purpose-heading">
-          <p className="eyebrow light">WHAT YOUR SUPPORT CAN HELP ADVANCE</p>
-          <h2>Turning compassion into practical action.</h2>
-          <p>Support can contribute to the areas of work that are central to SUDF's mission.</p>
-        </div>
-        <div className="support-purpose-list">
-          <div><span>01</span><strong>Community diabetes screening</strong><p>Taking screening closer to people and encouraging early awareness.</p></div>
-          <div><span>02</span><strong>Care and support</strong><p>Helping people living with diabetes access guidance and appropriate support.</p></div>
-          <div><span>03</span><strong>Health education</strong><p>Sharing practical knowledge about prevention, healthy lifestyles and management.</p></div>
-          <div><span>04</span><strong>Medical outreach and partnerships</strong><p>Working with health professionals and community stakeholders to extend services.</p></div>
-        </div>
-      </section>
-
-      <section id="support-enquiry" className="support-enquiry section">
+      <section id="support-enquiry" className="support-enquiry support-enquiry-reference section">
         <div className="support-enquiry-copy">
-          <p className="eyebrow">LET'S MAKE A DIFFERENCE TOGETHER</p>
-          <h2>Tell us how you would like to support SUDF.</h2>
-          <p>
-            Share your interest with the Foundation. You can enquire about making a donation, sponsoring a programme, contributing resources, volunteering or exploring a partnership.
-          </p>
+          <p className="eyebrow">BECOME A SUPPORTER</p>
+          <h2>Tell us what support looks like for you.</h2>
+          <p>There is no single way to support this mission. Tell us what you have in mind and the Foundation will have a conversation with you about the most useful way to move forward.</p>
           <div className="support-trust-note">
             <span aria-hidden="true">✓</span>
-            <p><strong>Your information matters.</strong><br />The details you submit will be used to respond to your support enquiry. Please do not include patient health information.</p>
+            <p><strong>Your information matters.</strong><br />Please share only the details needed for this enquiry. Do not include patient health information or sensitive personal medical records.</p>
           </div>
         </div>
         <SupportForm />
       </section>
-
-      <section className="support-closing">
-        <p className="eyebrow light">A LEGACY REMEMBERED THROUGH SERVICE</p>
-        <h2>Together, we can stop diabetes from being a silent killer.</h2>
-        <a className="button button-gold" href="#support-enquiry">Become a supporter</a>
-      </section>
+      <footer className="support-footer">
+        <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
+        <nav aria-label="Footer navigation"><a href="/#about">About</a><a href="/#programs">Our Work</a><a href="/#events">Events</a><a href="/#contact">Contact</a></nav>
+        <span>© SUDF. All rights reserved.</span>
+      </footer>
     </main>
   );
 }
