@@ -7,7 +7,7 @@ export default function SiteFooter() {
         <strong>SYLVESTER UJONG DIABETES FOUNDATION</strong>
         <p>Awareness • Prevention • Education • Support</p>
         <div className="footer-contact">
-          <p><span>Address</span><br />No 11 Welfare road Ugep</p>
+          <p><span>Address:</span><br />No 11 Welfare road Ugep, Nigeria</p>
           <p><span>Phone</span><br /><a href="tel:+2349059592892">+2349059592892</a></p>
         </div>
       </div>
