@@ -2454,3 +2454,31 @@ body:has(main > .footer) {
 .education-reading-aside>a span{color:var(--gold);flex-shrink:0;}
 @media(max-width:1000px){.education-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.education-article-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.education-reading{grid-template-columns:1fr;gap:25px;}.education-reading-aside{position:static;}}
 @media(max-width:700px){.education-hero,.education-article-hero{padding:66px 6vw 74px;}.education-section-heading{display:block;}.education-section-heading>p{margin-top:16px;}.education-topic-grid,.education-article-grid{grid-template-columns:1fr;}.education-topic-card{min-height:auto;}.education-article-card{min-height:240px;}.education-reading{padding-left:6vw;padding-right:6vw;}.education-reading-content p,.education-reading-content li{font-size:16px;}}
+
+/* Arrange footer navigation horizontally on mobile */
+@media (max-width: 760px) {
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    column-gap: clamp(28px, 9vw, 56px);
+    row-gap: 18px;
+    width: 100%;
+    text-align: center;
+  }
+  .footer-links a {
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+@media (min-width: 560px) and (max-width: 760px) {
+  .footer-links {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 14px;
+  }
+  .footer-links a {
+    white-space: normal;
+  }
+}
