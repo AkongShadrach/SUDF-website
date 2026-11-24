@@ -1,7 +1,7 @@
-import SocialLinks from "../../components/SocialLinks";
 import Link from "next/link";
 import SiteHeader from "../../components/SiteHeader";
 import { Linkedin, UserRound } from "lucide-react";
+import SiteFooter from "../../components/SiteFooter";
 
 const profileGroups = [
   {
@@ -82,17 +82,7 @@ export default function TeamPage() {
         <Link className="button button-gold" href="/contact">Contact the Foundation <span aria-hidden="true">→</span></Link>
       </section>
 
-      <footer className="footer">
-        <div>
-          <strong>SYLVESTER UJONG DIABETES FOUNDATION</strong>
-          <p>Awareness • Prevention • Education • Support</p>
-        </div>
-        <div className="footer-links">
-          <Link href="/#about">About</Link><Link href="/#mission">Our Mission</Link><Link href="/#programs">Our Work</Link><Link href="/events">Events</Link><Link href="/team">Meet Our Team</Link><Link href="/contact">Contact</Link><Link href="/donate-support">Donate / Support</Link>
-        </div>
-        <SocialLinks />
-        <div className="footer-legal">© 2026 Sylvester Ujong Diabetes Foundation. All rights reserved.</div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
