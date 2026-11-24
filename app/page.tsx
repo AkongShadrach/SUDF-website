@@ -297,14 +297,7 @@ export default function Home() {
         <p className="wide">
           We collaborate with healthcare professionals, hospitals, clinics, community organisations, volunteers, development partners, and other stakeholders to expand access to diabetes services and strengthen community health systems.
         </p>
-        <div className="partner-invitation">
-          <p>
-            We welcome organisations and professionals who share our commitment to diabetes awareness,
-            prevention, education and community health. If you would like to explore working with SUDF,
-            we would be pleased to hear from you.
-          </p>
-          <a className="button button-gold" href="/contact#enquiry">Explore Partnership Opportunities →</a>
-        </div>
+        <p className="partners-empty-note">Our partners will appear here once partnerships are secured.</p>
       </section>
 
       <section id="resources" className="resources section">
