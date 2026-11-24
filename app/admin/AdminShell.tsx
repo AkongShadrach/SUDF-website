@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Activity, BookOpen, CalendarDays, FileText, HandHeart, LayoutDashboard, LogOut, Mail, Menu, Newspaper, Settings, Users, X } from "lucide-react";
 import { createClient } from "../../utils/supabase/client";
-import type { SudfAdminContext } from "../../utils/supabase/admin";
+type SudfAdminContext = { userId: string; email: string; role: "super_admin" | "content_editor" };
 
 const links = [
   { label: "Overview", href: "/admin", icon: LayoutDashboard, roles: ["super_admin", "content_editor"] },
