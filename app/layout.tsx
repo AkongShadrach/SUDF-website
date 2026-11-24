@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   description:
     "Awareness, prevention, education and community support for healthier lives.",
   icons: {
-    icon: "/sudf-emblem.svg",
-    shortcut: "/sudf-emblem.svg",
-    apple: "/sudf-emblem.svg",
+    icon: "/sudf-favicon.png",
+    shortcut: "/sudf-favicon.png",
+    apple: "/sudf-favicon.png",
   },
 };
 
