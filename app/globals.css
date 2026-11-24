@@ -2524,23 +2524,11 @@ body:has(main > .footer) {
   }
 }
 
-/* Homepage partnership invitation — intentional presentation while no partners are listed */
-.partner-invitation {
-  max-width: 760px;
-  margin: 34px auto 0;
-  padding: clamp(26px,4vw,42px);
-  border: 1px solid rgba(224,233,228,.28);
-  border-radius: 24px;
-  background: rgba(255,255,255,.045);
-  text-align: center;
-}
-.partner-invitation p {
-  max-width: 650px;
-  margin: 0 auto 26px;
+/* Simple notice shown until SUDF confirms its first partners */
+.partners-empty-note {
+  margin: 32px auto 0;
   color: #e0e9e4;
-  font-size: clamp(16px,1.8vw,19px);
-  line-height: 1.8;
-}
-.partner-invitation .button {
-  white-space: normal;
+  font-size: clamp(16px, 1.8vw, 19px);
+  line-height: 1.7;
+  text-align: center;
 }
