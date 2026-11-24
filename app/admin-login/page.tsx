@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
         <h1>Welcome back.</h1>
         <p className="sudf-admin-muted">Sign in with your authorised Foundation administrator account.</p>
         <form onSubmit={submit}>
-          <label>Email address<input type="email" autoComplete="username" required value={email} onChange={(event) => setEmail(event.target.value)} /></label>
+          <label>Email address<input type="email" autoComplete="email" autoCapitalize="none" autoCorrect="off" spellCheck={false} required value={email} onChange={(event) => setEmail(event.target.value)} /></label>
           <label>Password<input type="password" autoComplete="current-password" required value={password} onChange={(event) => setPassword(event.target.value)} /></label>
           {error && <p className="sudf-admin-error" role="alert">{error}</p>}
           <button className="sudf-admin-primary" type="submit" disabled={busy}>{busy ? "Signing in..." : "Sign in securely"}</button>
