@@ -63,7 +63,6 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
           <span className="sudf-programme-number">{programme.number}</span>
           <h1>{programme.title}</h1>
           <p className="sudf-programme-intro">{programme.introduction}</p>
-          <Link className="button button-gold" href="/contact">Enquire about this programme →</Link>
         </div>
       </section>
       <section className="sudf-programme-content section">
