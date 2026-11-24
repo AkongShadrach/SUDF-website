@@ -1,6 +1,6 @@
-import SocialLinks from "../../components/SocialLinks";
 import Link from "next/link";
 import SiteHeader from "../../components/SiteHeader";
+import SiteFooter from "../../components/SiteFooter";
 
 export default function EventsPage() {
   return (
@@ -36,12 +36,7 @@ export default function EventsPage() {
           <Link href="/programmes/medical-outreach-partnerships">Medical Outreach & Partnerships <span>Explore programme →</span></Link>
         </div>
       </section>
-      <footer className="support-footer sudf-programme-footer">
-        <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
-        <nav aria-label="Footer navigation"><Link href="/#about">About</Link><Link href="/#programmes">Programmes</Link><Link href="/events">Events</Link><Link href="/donate-support">Donate / Support</Link><Link href="/contact">Contact</Link></nav>
-        <SocialLinks />
-        <span>© 2026 Sylvester Ujong Diabetes Foundation. All rights reserved.</span>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
