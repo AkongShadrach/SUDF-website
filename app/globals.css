@@ -2511,3 +2511,15 @@ body:has(main > .footer) {
     margin-bottom: 0;
   }
 }
+
+/* Improve readability of the Events page programme introduction */
+.sudf-events-programmes .section-heading > p {
+  color: #53635b;
+  opacity: 1;
+}
+@media (max-width: 760px) {
+  .sudf-events-programmes .section-heading > p {
+    color: #53635b;
+    opacity: 1;
+  }
+}
