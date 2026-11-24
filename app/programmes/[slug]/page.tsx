@@ -1,6 +1,6 @@
-import SocialLinks from "../../../components/SocialLinks";
 import Link from "next/link";
 import SiteHeader from "../../../components/SiteHeader";
+import SiteFooter from "../../../components/SiteFooter";
 
 const programmes = {
   "community-diabetes-screening": {
@@ -86,12 +86,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
         <p>Contact the Foundation to enquire about this area of work and current opportunities.</p>
         <Link className="button button-gold" href="/contact">Contact the Foundation →</Link>
       </section>
-      <footer className="support-footer sudf-programme-footer">
-        <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
-        <nav aria-label="Footer navigation"><Link href="/#about">About</Link><Link href="/#programmes">Programmes</Link><Link href="/#impact">Impact</Link><Link href="/donate-support">Donate / Support</Link><Link href="/contact">Contact</Link></nav>
-        <SocialLinks />
-        <span>© 2026 Sylvester Ujong Diabetes Foundation. All rights reserved.</span>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
