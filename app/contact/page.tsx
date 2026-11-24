@@ -1,6 +1,6 @@
-import SocialLinks from "../../components/SocialLinks";
 import SiteHeader from "../../components/SiteHeader";
 import ContactForm from "./ContactForm";
+import SiteFooter from "../../components/SiteFooter";
 
 export default function ContactPage() {
   return (
@@ -25,12 +25,7 @@ export default function ContactPage() {
           <ContactForm />
         </div>
       </section>
-      <footer className="support-footer sudf-contact-footer">
-        <div><strong>SYLVESTER UJONG DIABETES FOUNDATION</strong><p>Awareness · Prevention · Education · Support</p></div>
-        <nav aria-label="Footer navigation"><a href="/#about">About</a><a href="/#programs">Our Work</a><a href="/#impact">Impact</a><a href="/donate-support">Donate / Support</a><a href="/contact">Contact</a></nav>
-        <SocialLinks />
-        <span>© 2026 Sylvester Ujong Diabetes Foundation. All rights reserved.</span>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
