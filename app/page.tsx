@@ -308,7 +308,7 @@ export default function Home() {
         <p className="eyebrow">RESOURCES</p>
         <h2>Learn. Share. Act.</h2>
         <div className="resource-grid">
-          <a href="/#programmes">
+          <a href="/education">
             <strong>Diabetes Education</strong>
             <span>Explore diabetes awareness, prevention, early detection and healthy living →</span>
           </a>
