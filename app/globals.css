@@ -2566,3 +2566,32 @@ body:has(main > .footer) {
     margin-left: -8px;
   }
 }
+
+
+/* Keep the full desktop navigation visible on standard laptop widths */
+@media (min-width: 769px) and (max-width: 1180px) {
+  .site-header {
+    padding-left: 2vw;
+    padding-right: 2vw;
+    gap: 12px;
+  }
+  .site-header > .brand {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .site-header .brand-logo {
+    width: clamp(150px, 17vw, 200px);
+    max-height: 54px;
+  }
+  .site-header .desktop-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: flex-end;
+    gap: clamp(6px, .8vw, 10px);
+    font-size: clamp(9px, .82vw, 10px);
+  }
+  .site-header .desktop-nav .nav-donate {
+    padding: 9px 10px;
+    font-size: 9px;
+  }
+}
