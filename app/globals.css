@@ -2403,3 +2403,54 @@ body:has(main > .footer) {
     text-align: center;
   }
 }
+
+
+/* SUDF Diabetes Knowledge Centre */
+.education-hero,.education-article-hero{background:linear-gradient(115deg,rgba(7,48,37,.98),rgba(18,82,63,.93));color:#fff;padding:clamp(72px,9vw,124px) 7vw;}
+.education-hero-inner,.education-article-hero-inner{max-width:1120px;margin:0 auto;}
+.education-hero h1,.education-article-hero h1{max-width:900px;margin:20px 0;font-size:clamp(42px,6.2vw,76px);line-height:1.04;letter-spacing:-.045em;}
+.education-hero h1 span{color:var(--gold-soft);}
+.education-hero-inner>p:not(.eyebrow),.education-article-hero-inner>p:not(.eyebrow){max-width:700px;color:#d7e5de;font-size:clamp(17px,2vw,21px);line-height:1.75;margin:0 0 28px;}
+.education-topics,.education-library{background:var(--cream);}
+.education-section-heading{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:34px;}
+.education-section-heading h2{font-size:clamp(30px,4vw,46px);line-height:1.1;margin:10px 0 0;letter-spacing:-.035em;}
+.education-section-heading>p{max-width:460px;color:var(--muted);line-height:1.7;margin:0;}
+.education-topic-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
+.education-topic-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:25px;min-height:190px;}
+.education-topic-icon{width:48px;height:48px;border-radius:14px;background:#edf4ef;color:var(--green-2);display:grid;place-items:center;}
+.education-topic-card h3{font-size:18px;margin:18px 0 8px;}
+.education-topic-card p,.education-article-card p{color:var(--muted);font-size:14px;line-height:1.7;margin:0;}
+.education-library{padding-top:20px;}
+.education-article-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+.education-article-card{display:flex;flex-direction:column;align-items:flex-start;min-height:280px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;}
+.education-article-card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 14px 32px rgba(14,53,41,.08);}
+.education-article-number{font-size:13px;color:var(--gold);font-weight:800;letter-spacing:.12em;}
+.education-article-category{font-size:10px;letter-spacing:.12em;font-weight:800;color:var(--green-2);margin-top:24px;}
+.education-article-card h3{font-size:22px;line-height:1.2;margin:10px 0;}
+.education-article-meta{display:flex;justify-content:space-between;width:100%;margin-top:auto;padding-top:22px;color:var(--green-2);font-size:13px;font-weight:800;}
+.education-trust{background:#082c23;color:#fff;padding:64px 7vw;}
+.education-trust>div{max-width:850px;margin:auto;}
+.education-trust svg{color:var(--gold-soft);margin-bottom:18px;}
+.education-trust h2{font-size:clamp(28px,4vw,42px);margin:8px 0;}
+.education-trust p:not(.eyebrow){max-width:720px;color:#c9d8d1;line-height:1.8;}
+.education-trust a{display:inline-block;color:var(--gold-soft);font-weight:800;margin-top:10px;}
+.education-back-link{display:inline-flex;align-items:center;gap:8px;color:#e6d27f;font-weight:700;margin-bottom:36px;}
+.education-article-readtime{display:inline-flex;align-items:center;gap:8px;color:#d7e5de;font-size:14px;}
+.education-reading{display:grid;grid-template-columns:minmax(0,760px) minmax(220px,300px);gap:70px;align-items:start;background:var(--cream);}
+.education-reading-content>section{margin-bottom:38px;}
+.education-reading-content h2{font-size:clamp(24px,3vw,32px);margin:0 0 14px;letter-spacing:-.025em;}
+.education-reading-content p,.education-reading-content li{font-size:17px;line-height:1.85;color:#52615a;}
+.education-reading-content ul{padding-left:24px;}
+.education-reading-content li{padding:4px 0;}
+.education-disclaimer{border-left:4px solid var(--gold);background:#fff;padding:20px 24px;margin:36px 0;}
+.education-disclaimer p{font-size:14px;margin-bottom:0;}
+.education-sources{border-top:1px solid var(--line);padding-top:28px;}
+.education-sources a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);color:var(--green-2);font-weight:700;}
+.education-sources a svg{flex-shrink:0;}
+.education-back-bottom{display:inline-block;margin:10px 0 30px;color:var(--green-2);font-weight:800;}
+.education-reading-aside{position:sticky;top:110px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;}
+.education-reading-aside h3{font-size:22px;margin:10px 0 16px;}
+.education-reading-aside>a{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid var(--line);font-size:14px;font-weight:700;line-height:1.5;}
+.education-reading-aside>a span{color:var(--gold);flex-shrink:0;}
+@media(max-width:1000px){.education-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.education-article-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.education-reading{grid-template-columns:1fr;gap:25px;}.education-reading-aside{position:static;}}
+@media(max-width:700px){.education-hero,.education-article-hero{padding:66px 6vw 74px;}.education-section-heading{display:block;}.education-section-heading>p{margin-top:16px;}.education-topic-grid,.education-article-grid{grid-template-columns:1fr;}.education-topic-card{min-height:auto;}.education-article-card{min-height:240px;}.education-reading{padding-left:6vw;padding-right:6vw;}.education-reading-content p,.education-reading-content li{font-size:16px;}}
