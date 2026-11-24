@@ -308,9 +308,14 @@ export default function Home() {
         <p className="eyebrow">RESOURCES</p>
         <h2>Learn. Share. Act.</h2>
         <div className="resource-grid">
-          <a href="#contact"><strong>Diabetes Education</strong><span>Guides and practical information →</span></a>
-          <a href="#contact"><strong>Guides & Downloads</strong><span>Materials for communities and partners →</span></a>
-          <a href="#contact"><strong>News & Stories</strong><span>Updates from SUDF activities →</span></a>
+          <a href="/#programmes">
+            <strong>Diabetes Education</strong>
+            <span>Explore diabetes awareness, prevention, early detection and healthy living →</span>
+          </a>
+          <a href="/events">
+            <strong>News & Stories</strong>
+            <span>Discover SUDF outreach activities, community updates and events →</span>
+          </a>
         </div>
       </section>
 
