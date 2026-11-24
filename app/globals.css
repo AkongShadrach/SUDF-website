@@ -2558,3 +2558,11 @@ body:has(main > .footer) {
     max-height: 52px;
   }
 }
+
+
+/* Slightly align the mobile header logo closer to the left edge */
+@media (max-width: 760px) {
+  .site-header > .brand {
+    margin-left: -8px;
+  }
+}
