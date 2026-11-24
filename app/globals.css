@@ -2532,3 +2532,29 @@ body:has(main > .footer) {
   line-height: 1.7;
   text-align: center;
 }
+
+/* Official SUDF compact horizontal identity */
+.brand {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.brand-logo {
+  display: block;
+  width: clamp(220px, 22vw, 285px);
+  height: auto;
+  max-height: 64px;
+  object-fit: contain;
+  object-position: left center;
+}
+@media (max-width: 760px) {
+  .brand-logo {
+    width: clamp(205px, 54vw, 255px);
+    max-height: 58px;
+  }
+}
+@media (max-width: 420px) {
+  .brand-logo {
+    width: min(205px, 54vw);
+    max-height: 52px;
+  }
+}
