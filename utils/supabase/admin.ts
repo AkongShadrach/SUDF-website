@@ -31,7 +31,7 @@ export async function getAdminContext(): Promise<SudfAdminContext | null> {
 
 export async function requireAdmin(allowedRoles?: SudfAdminRole[]) {
   const admin = await getAdminContext();
-  if (!admin) redirect("/admin/login");
+  if (!admin) redirect("/admin-login");
   if (allowedRoles && !allowedRoles.includes(admin.role)) redirect("/admin?access=restricted");
   return admin;
 }
