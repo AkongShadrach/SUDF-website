@@ -120,7 +120,7 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
 .partner-placeholder { min-height:100px; display:grid; place-items:center; border:1px solid var(--line); color:#84908b; font-size:11px; letter-spacing:.12em; }
 
 .resources { background:var(--cream); }
-.resource-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:35px; }
+.resource-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:35px; }
 .resource-grid a { background:white; padding:28px; border:1px solid var(--line); }
 .resource-grid strong, .resource-grid span { display:block; }
 .resource-grid span { margin-top:10px; color:var(--muted); font-size:14px; }
