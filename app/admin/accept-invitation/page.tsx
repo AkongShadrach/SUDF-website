@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "../../../utils/supabase/client";
 
 export default function AcceptAdminInvitationPage() {
@@ -11,6 +12,8 @@ export default function AcceptAdminInvitationPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -96,8 +99,24 @@ export default function AcceptAdminInvitationPage() {
         ) : ready ? (
           <form onSubmit={submit}>
             <label>Email address<input type="email" value={email} readOnly /></label>
-            <label>Create password<input type="password" autoComplete="new-password" minLength={12} required value={password} onChange={(event) => setPassword(event.target.value)} /></label>
-            <label>Confirm password<input type="password" autoComplete="new-password" minLength={12} required value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} /></label>
+            <label>
+              Create password
+              <span className="sudf-password-field">
+                <input type={showPassword ? "text" : "password"} autoComplete="new-password" minLength={12} required value={password} onChange={(event) => setPassword(event.target.value)} />
+                <button className="sudf-password-toggle" type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? "Hide password" : "Show password"} aria-pressed={showPassword} title={showPassword ? "Hide password" : "Show password"}>
+                  {showPassword ? <EyeOff size={19} aria-hidden="true" /> : <Eye size={19} aria-hidden="true" />}
+                </button>
+              </span>
+            </label>
+            <label>
+              Confirm password
+              <span className="sudf-password-field">
+                <input type={showConfirmPassword ? "text" : "password"} autoComplete="new-password" minLength={12} required value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                <button className="sudf-password-toggle" type="button" onClick={() => setShowConfirmPassword((visible) => !visible)} aria-label={showConfirmPassword ? "Hide confirmation password" : "Show confirmation password"} aria-pressed={showConfirmPassword} title={showConfirmPassword ? "Hide password" : "Show password"}>
+                  {showConfirmPassword ? <EyeOff size={19} aria-hidden="true" /> : <Eye size={19} aria-hidden="true" />}
+                </button>
+              </span>
+            </label>
             <p className="sudf-admin-muted">Use at least 12 characters. Keep this password private.</p>
             {error && <p className="sudf-admin-error" role="alert">{error}</p>}
             <button className="sudf-admin-primary" type="submit" disabled={busy}>{busy ? "Saving password…" : "Create password and continue"}</button>
