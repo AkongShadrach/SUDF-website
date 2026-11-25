@@ -304,7 +304,12 @@ export default async function Home() {
               </div>
             </Link>
           ))}
-          {(!publishedNews || publishedNews.length === 0) && <p className="partners-empty-note">News and updates will appear here when published.</p>}
+          {(!publishedNews || publishedNews.length === 0) && (
+            <div className="news-empty-note">
+              <h3>Stay connected with SUDF.</h3>
+              <p>We’re working to bring you the latest Foundation news, community stories, health initiatives and important updates. Check back soon for inspiring stories and highlights from our work.</p>
+            </div>
+          )}
         </div>
       </section>
 
