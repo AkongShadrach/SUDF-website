@@ -2677,57 +2677,6 @@ body:has(main > .footer) {
 .sudf-password-toggle:focus-visible{outline:2px solid #547759;outline-offset:2px}
 
 
-/* Password reset screen: give mobile users a wider, easier-to-read form */
-.sudf-admin-reset-card {
-  width: min(100%, 540px);
-  padding: clamp(28px, 5vw, 48px);
-}
-.sudf-admin-reset-card h1 {
-  font-size: clamp(34px, 6vw, 42px);
-  line-height: 1.12;
-  margin-bottom: 22px;
-}
-.sudf-admin-reset-card form {
-  gap: 20px;
-}
-.sudf-admin-reset-card label {
-  font-size: 13px;
-  gap: 9px;
-}
-.sudf-admin-reset-card input {
-  min-height: 52px;
-  padding: 15px 48px 15px 14px;
-  font-size: 16px;
-}
-.sudf-admin-reset-card .sudf-password-toggle {
-  width: 40px;
-  height: 40px;
-  right: 6px;
-}
-.sudf-admin-reset-card .sudf-admin-primary {
-  min-height: 52px;
-  font-size: 14px;
-  margin-top: 8px;
-}
-@media (max-width: 600px) {
-  .sudf-admin-login:has(.sudf-admin-reset-card) {
-    padding: 14px;
-  }
-  .sudf-admin-reset-card {
-    width: 100%;
-    padding: 30px 24px;
-    border-radius: 16px;
-  }
-  .sudf-admin-reset-card .sudf-admin-mark {
-    font-size: 36px;
-    margin-bottom: 18px;
-  }
-  .sudf-admin-reset-card h1 {
-    font-size: clamp(32px, 9vw, 38px);
-  }
-}
-
-
 /* Make the administrator password recovery action easy to find */
 .sudf-admin-login-recovery {
   display: flex;
