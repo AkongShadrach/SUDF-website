@@ -2,6 +2,9 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname === "/admin/accept-invitation") {
+    return NextResponse.rewrite(new URL("/accept-invitation", request.url), { request });
+  }
   if (request.nextUrl.pathname === "/admin/login") return NextResponse.redirect(new URL("/admin-login", request.url));
   let response = NextResponse.next({ request });
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
