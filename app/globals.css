@@ -2749,3 +2749,28 @@ body:has(main > .footer) {
 .sudf-admin-login-card .sudf-password-field input {
   padding-right: 48px;
 }
+
+
+/* Keep the complete admin sidebar reachable on short mobile screens */
+.sudf-admin-sidebar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 194, 124, .45) transparent;
+}
+.sudf-admin-sidebar-bottom {
+  flex: 0 0 auto;
+  padding-bottom: max(18px, env(safe-area-inset-bottom, 0px));
+}
+@media (max-width: 760px) {
+  .sudf-admin-sidebar {
+    height: 100dvh;
+    max-height: 100dvh;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: max(20px, env(safe-area-inset-bottom, 0px));
+  }
+  .sudf-admin-sidebar nav {
+    flex: 0 0 auto;
+  }
+}
