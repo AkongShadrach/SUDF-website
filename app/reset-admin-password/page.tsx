@@ -66,7 +66,7 @@ export default function AdminResetPasswordPage() {
 
   return (
     <main className="sudf-admin-login">
-      <section className="sudf-admin-login-card sudf-admin-reset-card">
+      <section className="sudf-admin-login-card">
         <div className="sudf-admin-mark">SUDF</div>
         <p className="sudf-admin-eyebrow">FOUNDATION ADMINISTRATION</p>
         <h1>Create a new password.</h1>
