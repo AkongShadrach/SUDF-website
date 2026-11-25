@@ -2,6 +2,7 @@ import ObjectiveReveal from "../components/ObjectiveReveal";
 import { Activity, BookOpen, HandHeart, HeartHandshake, HeartPulse, Hospital, UsersRound } from "lucide-react";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import Link from "next/link";
 import { createAdminServiceClient } from "../utils/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -293,14 +294,15 @@ export default async function Home() {
         </div>
         <div className="event-grid sudf-programme-cards">
           {(publishedNews ?? []).map((article) => (
-            <article className="event-card sudf-programme-card" key={article.id}>
+            <Link href={"/news/" + article.slug} className="event-card sudf-programme-card" key={article.id}>
               <div>
                 <p className="event-no">SUDF NEWS</p>
                 <h3>{article.title}</h3>
                 <p>{article.excerpt || "Read the latest update from the Sylvester Ujong Diabetes Foundation."}</p>
                 {article.published_at ? <small>{new Date(article.published_at).toLocaleDateString("en-NG", { dateStyle: "long" })}</small> : null}
+                <span className="event-no">Read story →</span>
               </div>
-            </article>
+            </Link>
           ))}
           {(!publishedNews || publishedNews.length === 0) && <p className="partners-empty-note">News and updates will appear here when published.</p>}
         </div>
