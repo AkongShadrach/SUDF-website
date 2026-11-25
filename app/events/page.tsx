@@ -1,14 +1,17 @@
 import Link from "next/link";
+import SiteHeader from "../../components/SiteHeader";
+import SiteFooter from "../../components/SiteFooter";
 import { createAdminServiceClient } from "../../utils/supabase/admin";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-import SiteHeader from "../../components/SiteHeader";
-import SiteFooter from "../../components/SiteFooter";
 
 export default async function EventsPage() {
   const supabase = createAdminServiceClient();
-  const { data: publishedEvents } = await supabase.from("events").select("id,title,slug,description,starts_at,ends_at,location,registration_url,status").eq("status", "published").order("starts_at", { ascending: true });
+  const [{ data: publishedEvents }, { data: publishedProgrammes }] = await Promise.all([
+    supabase.from("events").select("id,title,slug,description,starts_at,ends_at,location,registration_url,status").eq("status", "published").order("starts_at", { ascending: true }),
+    supabase.from("programs").select("id,title,slug").eq("status", "published").order("created_at", { ascending: true }),
+  ]);
 
   return (
     <main className="sudf-events-page">
@@ -56,10 +59,11 @@ export default async function EventsPage() {
           </div>
           <p>Explore the Foundation's programme areas while event announcements are being prepared.</p>
         </div>
-        <div className="sudf-events-programme-links">
-          <Link href="/programmes/community-diabetes-screening">Community Diabetes Screening <span>Explore programme →</span></Link>
-          <Link href="/programmes/health-education-outreach">Health Education & Outreach <span>Explore programme →</span></Link>
-          <Link href="/programmes/medical-outreach-partnerships">Medical Outreach & Partnerships <span>Explore programme →</span></Link>
+                <div className="sudf-events-programme-links">
+          {(publishedProgrammes ?? []).map((programme) => (
+            <Link key={programme.id} href={"/programmes/" + programme.slug}>{programme.title} <span>Explore programme →</span></Link>
+          ))}
+          {(!publishedProgrammes || publishedProgrammes.length === 0) ? <p>Programme information will appear here when published.</p> : null}
         </div>
       </section>
       <SiteFooter />
