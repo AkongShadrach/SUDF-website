@@ -31,11 +31,6 @@ const programs = [
   },
 ];
 
-// Add each approved outreach photo here after placing its file in /public/images/gallery/.
-const galleryPhotos: { src: string; alt: string; caption?: string }[] = [
-  // { src: "/images/gallery/community-screening-01.jpg", alt: "SUDF team conducting a community diabetes screening", caption: "Community diabetes screening" },
-];
-
 const objectives = [
   {
     number: "01",
@@ -65,10 +60,12 @@ export default async function Home() {
     { data: publishedProgrammes },
     { data: publishedNews },
     { data: verifiedMetrics },
+    { data: publishedGallery },
   ] = await Promise.all([
     supabase.from("programs").select("id,title,slug,summary,description,status").eq("status", "published").order("created_at", { ascending: false }),
     supabase.from("news").select("id,title,slug,excerpt,published_at").eq("status", "published").order("published_at", { ascending: false }),
     supabase.from("impact_metrics").select("id,metric_name,metric_value,unit").eq("verified", true).order("created_at", { ascending: false }),
+    supabase.from("gallery_items").select("id,title,caption,image_url,category,display_order").eq("status", "published").order("display_order", { ascending: true }).order("created_at", { ascending: false }),
   ]);
 
   return (
@@ -225,13 +222,13 @@ export default async function Home() {
             <p>Moments from the Foundation's community outreach, diabetes screening, health education and other activities.</p>
           </div>
           <div className="sudf-gallery-grid">
-            {galleryPhotos.map((photo) => (
-              <figure className="sudf-gallery-item" key={photo.src}>
-                <img src={photo.src} alt={photo.alt} loading="lazy" />
-                {photo.caption ? <figcaption>{photo.caption}</figcaption> : null}
+            {(publishedGallery ?? []).map((photo) => (
+              <figure className="sudf-gallery-item" key={photo.id}>
+                <img src={photo.image_url} alt={photo.title} loading="lazy" />
+                {photo.caption ? <figcaption>{photo.caption}</figcaption> : <figcaption>{photo.title}</figcaption>}
               </figure>
             ))}
-            {galleryPhotos.length === 0 ? (
+            {(!publishedGallery || publishedGallery.length === 0) ? (
               <div className="sudf-gallery-empty">
                 <span className="sudf-gallery-empty-mark" aria-hidden="true">SUDF</span>
                 <strong>Our outreach stories will appear here.</strong>
