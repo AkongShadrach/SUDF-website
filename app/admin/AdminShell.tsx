@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Activity, CalendarDays, FileText, LayoutDashboard, LogOut, Menu, Newspaper, Settings, X } from "lucide-react";
+import { Activity, BookOpen, CalendarDays, FileText, HandHeart, LayoutDashboard, LogOut, Mail, Menu, Newspaper, Settings, Users, X } from "lucide-react";
 import { createClient } from "../../utils/supabase/client";
 type SudfAdminContext = { userId: string; email: string; role: "super_admin" | "content_editor" };
 
@@ -12,7 +12,13 @@ const links = [
   { label: "Programmes", href: "/admin/programmes", icon: Activity, roles: ["super_admin", "content_editor"] },
   { label: "Events", href: "/admin/events", icon: CalendarDays, roles: ["super_admin", "content_editor"] },
   { label: "News & Updates", href: "/admin/news", icon: Newspaper, roles: ["super_admin", "content_editor"] },
-  { label: "Impact Metrics", href: "/admin/impact", icon: FileText, roles: ["super_admin", "content_editor"] },
+  { label: "Knowledge Centre", href: "/admin/education", icon: BookOpen, roles: ["super_admin", "content_editor"] },
+  { label: "Gallery & Partners", href: "/admin/media", icon: FileText, roles: ["super_admin", "content_editor"] },
+  { label: "Impact Metrics", href: "/admin/impact", icon: Activity, roles: ["super_admin", "content_editor"] },
+  { label: "Contact Inbox", href: "/admin/contacts", icon: Mail, roles: ["super_admin"] },
+  { label: "Support Enquiries", href: "/admin/support", icon: HandHeart, roles: ["super_admin"] },
+  { label: "Volunteer Applications", href: "/admin/volunteers", icon: Users, roles: ["super_admin"] },
+  { label: "Newsletter", href: "/admin/newsletter", icon: Mail, roles: ["super_admin"] },
   { label: "Administration", href: "/admin/settings", icon: Settings, roles: ["super_admin"] },
 ];
 
@@ -23,7 +29,7 @@ export default function AdminShell({ admin, children }: { admin: SudfAdminContex
   async function signOut() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.replace("/admin-login");
+    router.replace("/admin/login");
     router.refresh();
   }
   const visibleLinks = links.filter((item) => item.roles.includes(admin.role));
