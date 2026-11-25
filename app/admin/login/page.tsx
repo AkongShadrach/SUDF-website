@@ -2,12 +2,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "../../../utils/supabase/client";
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -43,11 +46,19 @@ export default function AdminLoginPage() {
         <p className="sudf-admin-muted">Sign in with your authorised Foundation administrator account.</p>
         <form onSubmit={submit}>
           <label>Email address<input type="email" autoComplete="username" required value={email} onChange={(event) => setEmail(event.target.value)} /></label>
-          <label>Password<input type="password" autoComplete="current-password" required value={password} onChange={(event) => setPassword(event.target.value)} /></label>
+          <label>
+            Password
+            <span className="sudf-password-field">
+              <input type={showPassword ? "text" : "password"} autoComplete="current-password" required value={password} onChange={(event) => setPassword(event.target.value)} />
+              <button className="sudf-password-toggle" type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? "Hide password" : "Show password"} aria-pressed={showPassword} title={showPassword ? "Hide password" : "Show password"}>
+                {showPassword ? <EyeOff size={19} aria-hidden="true" /> : <Eye size={19} aria-hidden="true" />}
+              </button>
+            </span>
+          </label>
           {error && <p className="sudf-admin-error" role="alert">{error}</p>}
           <button className="sudf-admin-primary" type="submit" disabled={busy}>{busy ? "Signing in..." : "Sign in securely"}</button>
         </form>
-        <p className="sudf-admin-login-foot"><a href="/admin/forgot-password">Forgot your password?</a></p>
+        <div className="sudf-admin-login-recovery"><Link href="/admin/forgot-password">Forgot password?</Link></div>
         <p className="sudf-admin-login-foot">Access is restricted to approved SUDF administrators.</p>
       </section>
     </main>
