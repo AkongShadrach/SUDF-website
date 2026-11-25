@@ -18,13 +18,8 @@ export default function AdminResetPasswordPage() {
     async function verifyRecovery() {
       const supabase = createClient();
       try {
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get("code");
-        if (code) {
-          const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
-          if (exchangeError) throw exchangeError;
-          window.history.replaceState({}, "", window.location.pathname);
-        }
+        // The server-side /auth/callback route exchanges the one-time code and
+        // stores the session in shared Supabase SSR cookies before this page loads.
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
         if (sessionError || !session) throw new Error("This password-reset link is invalid, expired, or has already been used. Request a new one.");
         if (active) setValid(true);
