@@ -5,6 +5,7 @@ import SiteFooter from "../components/SiteFooter";
 import { createAdminServiceClient } from "../utils/supabase/admin";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const programs = [
   {
@@ -59,11 +60,15 @@ const objectives = [
 
 export default async function Home() {
   const supabase = createAdminServiceClient();
-  const { data: publishedProgrammes } = await supabase
-    .from("programs")
-    .select("id,title,slug,summary,description,status")
-    .eq("status", "published")
-    .order("created_at", { ascending: false });
+  const [
+    { data: publishedProgrammes },
+    { data: publishedNews },
+    { data: verifiedMetrics },
+  ] = await Promise.all([
+    supabase.from("programs").select("id,title,slug,summary,description,status").eq("status", "published").order("created_at", { ascending: false }),
+    supabase.from("news").select("id,title,slug,excerpt,published_at").eq("status", "published").order("published_at", { ascending: false }),
+    supabase.from("impact_metrics").select("id,metric_name,metric_value,unit").eq("verified", true).order("created_at", { ascending: false }),
+  ]);
 
   return (
     <main>
@@ -203,10 +208,11 @@ export default async function Home() {
           </article>
         </div>
         <div className="metrics">
-          <div><strong>—</strong><span>People reached</span></div>
-          <div><strong>—</strong><span>People screened</span></div>
-          <div><strong>—</strong><span>Communities engaged</span></div>
-          <div><strong>—</strong><span>Programmes delivered</span></div>
+          {["People reached", "People screened", "Communities engaged", "Programmes delivered"].map((label) => {
+            const metric = (verifiedMetrics ?? []).find((item) => item.metric_name.toLowerCase() === label.toLowerCase());
+            const value = metric ? String(metric.metric_value ?? "—") + (metric.unit ? " " + metric.unit : "") : "—";
+            return <div key={label}><strong>{value}</strong><span>{label}</span></div>;
+          })}
         </div>
       </section>
 
@@ -274,6 +280,29 @@ export default async function Home() {
           {(!publishedProgrammes || publishedProgrammes.length === 0) && (
             <p className="partners-empty-note">SUDF programme information will appear here as programmes are published.</p>
           )}
+        </div>
+      </section>
+
+      <section id="news-updates" className="section sudf-programmes-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">NEWS & UPDATES</p>
+            <h2>Latest from the Foundation.</h2>
+          </div>
+          <p>Updates and stories published by SUDF.</p>
+        </div>
+        <div className="event-grid sudf-programme-cards">
+          {(publishedNews ?? []).map((article) => (
+            <article className="event-card sudf-programme-card" key={article.id}>
+              <div>
+                <p className="event-no">SUDF NEWS</p>
+                <h3>{article.title}</h3>
+                <p>{article.excerpt || "Read the latest update from the Sylvester Ujong Diabetes Foundation."}</p>
+                {article.published_at ? <small>{new Date(article.published_at).toLocaleDateString("en-NG", { dateStyle: "long" })}</small> : null}
+              </div>
+            </article>
+          ))}
+          {(!publishedNews || publishedNews.length === 0) && <p className="partners-empty-note">News and updates will appear here when published.</p>}
         </div>
       </section>
 
