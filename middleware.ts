@@ -3,7 +3,9 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/admin/accept-invitation") {
-    return NextResponse.rewrite(new URL("/accept-invitation", request.url), { request });
+    const invitationUrl = request.nextUrl.clone();
+    invitationUrl.pathname = "/accept-invitation";
+    return NextResponse.rewrite(invitationUrl, { request });
   }
   if (request.nextUrl.pathname === "/admin/login") return NextResponse.redirect(new URL("/admin-login", request.url));
   let response = NextResponse.next({ request });
