@@ -2667,3 +2667,11 @@ body:has(main > .footer) {
 @media(max-width:1050px){.sudf-admin-sidebar{width:245px;flex-basis:245px}.sudf-admin-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.sudf-admin-sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-102%);transition:transform .25s;width:min(82vw,300px);height:100dvh}.sudf-admin-sidebar.is-open{transform:translateX(0)}.sudf-admin-backdrop{display:block;position:fixed;inset:0;background:rgba(9,25,17,.48);border:0;z-index:50}.sudf-admin-menu-button{display:grid;place-items:center}.sudf-admin-menu-button svg{width:22px}.sudf-admin-topbar{height:66px;padding:0 17px}.sudf-admin-content{padding:24px 17px}.sudf-admin-page-heading{align-items:flex-start;flex-direction:column}.sudf-admin-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sudf-admin-stat-card{padding:15px}.sudf-admin-stat-card>strong{font-size:29px}.sudf-admin-lower-grid{grid-template-columns:1fr}.sudf-admin-top-role{font-size:9px;padding:7px 9px}}
 @media(max-width:390px){.sudf-admin-stat-grid{grid-template-columns:1fr}.sudf-admin-top-role{display:none}}
+
+
+/* Administrator invitation password visibility controls */
+.sudf-password-field{position:relative;display:block;width:100%}
+.sudf-admin-login-card .sudf-password-field input{padding-right:46px}
+.sudf-password-toggle{position:absolute;right:7px;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;padding:0;border:0;border-radius:6px;background:transparent;color:#647568;cursor:pointer}
+.sudf-password-toggle:hover{background:#f1f5ef;color:#1c4532}
+.sudf-password-toggle:focus-visible{outline:2px solid #547759;outline-offset:2px}
