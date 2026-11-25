@@ -18,7 +18,8 @@ export async function PATCH(request: Request) {
 
   const id = typeof input.id === "string" ? input.id : "";
   const status = input.status;
-  if (!id || !["new", "read", "resolved"].includes(String(status))) {
+  const allowedStatuses = ["new", "read", "resolved"] as const;
+  if (!id || typeof status !== "string" || !allowedStatuses.includes(status as (typeof allowedStatuses)[number])) {
     return NextResponse.json({ error: "A valid message ID and status are required." }, { status: 400 });
   }
 
