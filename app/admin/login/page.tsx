@@ -47,6 +47,7 @@ export default function AdminLoginPage() {
           {error && <p className="sudf-admin-error" role="alert">{error}</p>}
           <button className="sudf-admin-primary" type="submit" disabled={busy}>{busy ? "Signing in..." : "Sign in securely"}</button>
         </form>
+        <p className="sudf-admin-login-foot"><a href="/admin/forgot-password">Forgot your password?</a></p>
         <p className="sudf-admin-login-foot">Access is restricted to approved SUDF administrators.</p>
       </section>
     </main>

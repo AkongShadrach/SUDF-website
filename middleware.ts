@@ -2,6 +2,16 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname === "/admin/forgot-password") {
+    const recoveryUrl = request.nextUrl.clone();
+    recoveryUrl.pathname = "/forgot-admin-password";
+    return NextResponse.rewrite(recoveryUrl, { request });
+  }
+  if (request.nextUrl.pathname === "/admin/reset-password") {
+    const recoveryUrl = request.nextUrl.clone();
+    recoveryUrl.pathname = "/reset-admin-password";
+    return NextResponse.rewrite(recoveryUrl, { request });
+  }
   if (request.nextUrl.pathname === "/admin/accept-invitation") {
     const invitationUrl = request.nextUrl.clone();
     invitationUrl.pathname = "/accept-invitation";
