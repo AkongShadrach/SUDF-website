@@ -2776,14 +2776,14 @@ body:has(main > .footer) {
 }
 
 
-/* Extra scroll clearance keeps the final sidebar action above mobile browser/system bars */
+/* Keep the sign-out action reachable without excessive blank space below it */
 @media (max-width: 760px) {
   .sudf-admin-sidebar {
-    padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px));
-    scroll-padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    scroll-padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   }
   .sudf-admin-sidebar-bottom {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
     margin-bottom: 0;
   }
   .sudf-admin-sidebar-bottom button {
