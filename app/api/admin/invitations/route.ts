@@ -4,8 +4,6 @@ import { createAdminServiceClient, getAdminContext } from "../../../../utils/sup
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const INVITATION_REDIRECT = "https://sudf.org.ng/admin/accept-invitation";
-
 export async function POST(request: NextRequest) {
   try {
     const origin = request.headers.get("origin");
@@ -35,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     const service = createAdminServiceClient();
     const { data: invited, error: inviteError } = await service.auth.admin.inviteUserByEmail(email, {
-      redirectTo: INVITATION_REDIRECT,
+      redirectTo: new URL("/admin/accept-invitation", request.url).toString(),
       data: { sudf_admin_invitation: true, sudf_admin_role: role },
     });
 
@@ -74,7 +72,7 @@ export async function POST(request: NextRequest) {
       success: true,
       email,
       role,
-      redirectTo: INVITATION_REDIRECT,
+      redirectTo: new URL("/admin/accept-invitation", request.url).toString(),
       message: `Invitation sent to ${email}.`,
     });
   } catch {
