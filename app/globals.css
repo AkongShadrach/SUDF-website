@@ -2776,14 +2776,14 @@ body:has(main > .footer) {
 }
 
 
-/* Keep the sign-out action reachable without excessive blank space below it */
+/* Balanced mobile clearance: keep Sign out fully visible with modest space below */
 @media (max-width: 760px) {
   .sudf-admin-sidebar {
-    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    scroll-padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(36px + env(safe-area-inset-bottom, 0px));
+    scroll-padding-bottom: calc(36px + env(safe-area-inset-bottom, 0px));
   }
   .sudf-admin-sidebar-bottom {
-    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(30px + env(safe-area-inset-bottom, 0px));
     margin-bottom: 0;
   }
   .sudf-admin-sidebar-bottom button {
