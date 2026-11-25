@@ -2818,3 +2818,29 @@ body:has(main > .footer) {
     padding-right: 46px;
   }
 }
+
+
+/* Clear, accessible empty state for the homepage news preview */
+.news-empty-note {
+  width: min(100%, 760px);
+  box-sizing: border-box;
+  margin: 32px auto 0;
+  padding: clamp(22px, 4vw, 36px);
+  border: 1px solid rgba(196, 165, 55, 0.28);
+  border-left: 5px solid #c4a537;
+  border-radius: 0 22px 22px 0;
+  background: rgba(255, 255, 255, 0.72);
+  color: #53635b;
+  text-align: left;
+}
+.news-empty-note h3 {
+  margin: 0 0 10px;
+  color: #123f31;
+  font-size: clamp(19px, 2.2vw, 24px);
+}
+.news-empty-note p {
+  margin: 0;
+  color: #53635b;
+  font-size: clamp(15px, 1.8vw, 18px);
+  line-height: 1.75;
+}
