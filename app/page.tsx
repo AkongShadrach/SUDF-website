@@ -2,6 +2,7 @@ import ObjectiveReveal from "../components/ObjectiveReveal";
 import { Activity, BookOpen, HandHeart, HeartHandshake, HeartPulse, Hospital, UsersRound } from "lucide-react";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import { createAdminServiceClient } from "../utils/supabase/admin";
 
 const programs = [
   {
@@ -54,7 +55,14 @@ const objectives = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createAdminServiceClient();
+  const { data: publishedProgrammes } = await supabase
+    .from("programs")
+    .select("id,title,slug,summary,description,status")
+    .eq("status", "published")
+    .order("created_at", { ascending: false });
+
   return (
     <main>
       <SiteHeader />
@@ -250,33 +258,20 @@ export default function Home() {
           <p>Discover how SUDF advances diabetes awareness, early detection, education and support. Explore each programme to understand its purpose and the work it is designed to deliver with communities.</p>
         </div>
         <div className="event-grid sudf-programme-cards">
-          <article className="event-card sudf-programme-card">
-            <span className="date-box">01</span>
-            <div>
-              <p className="event-no">SCREENING & EARLY DETECTION</p>
-              <h3>Community Diabetes Screening</h3>
-              <p>Early detection can help people understand their blood glucose status and identify potential risks.</p>
-              <a href="/programmes/community-diabetes-screening">Explore programme →</a>
-            </div>
-          </article>
-          <article className="event-card sudf-programme-card">
-            <span className="date-box">02</span>
-            <div>
-              <p className="event-no">AWARENESS & PREVENTION</p>
-              <h3>Health Education & Outreach</h3>
-              <p>Practical information about nutrition, physical activity, healthy lifestyles, diabetes risk factors and disease management.</p>
-              <a href="/programmes/health-education-outreach">Explore programme →</a>
-            </div>
-          </article>
-          <article className="event-card sudf-programme-card">
-            <span className="date-box">03</span>
-            <div>
-              <p className="event-no">COLLABORATION & ACCESS</p>
-              <h3>Medical Outreach & Partnerships</h3>
-              <p>Working with healthcare professionals and community partners to expand access to diabetes services.</p>
-              <a href="/programmes/medical-outreach-partnerships">Explore programme →</a>
-            </div>
-          </article>
+          {(publishedProgrammes ?? []).map((programme, index) => (
+            <article className="event-card sudf-programme-card" key={programme.id}>
+              <span className="date-box">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <p className="event-no">SUDF PROGRAMME</p>
+                <h3>{programme.title}</h3>
+                <p>{programme.summary || programme.description || "Learn more about this SUDF programme and its work with communities."}</p>
+                <a href={`/programmes/${programme.slug}`}>Explore programme →</a>
+              </div>
+            </article>
+          ))}
+          {(!publishedProgrammes || publishedProgrammes.length === 0) && (
+            <p className="partners-empty-note">SUDF programme information will appear here as programmes are published.</p>
+          )}
         </div>
       </section>
 
