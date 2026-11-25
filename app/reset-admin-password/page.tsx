@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "../../../utils/supabase/client";
+import { createClient } from "../../utils/supabase/client";
 
 export default function AdminResetPasswordPage() {
   const router = useRouter();
