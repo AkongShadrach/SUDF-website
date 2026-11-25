@@ -4,6 +4,8 @@ import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import { createAdminServiceClient } from "../utils/supabase/admin";
 
+export const dynamic = "force-dynamic";
+
 const programs = [
   {
     number: "01",
