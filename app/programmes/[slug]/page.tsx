@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteHeader from "../../../components/SiteHeader";
 import SiteFooter from "../../../components/SiteFooter";
+import { createAdminServiceClient } from "../../../utils/supabase/admin";
 
 const programmes = {
   "community-diabetes-screening": {
@@ -45,13 +46,31 @@ const programmes = {
 
 type ProgrammeSlug = keyof typeof programmes;
 
-export function generateStaticParams() {
-  return Object.keys(programmes).map((slug) => ({ slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function ProgrammeDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const programme = programmes[slug as ProgrammeSlug];
+  const supabase = createAdminServiceClient();
+  const { data: databaseProgramme } = await supabase
+    .from("programs")
+    .select("title,slug,summary,description,status")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .maybeSingle();
+
+  const legacyProgramme = programmes[slug as ProgrammeSlug];
+  const programme = databaseProgramme
+    ? {
+        number: "SUDF",
+        category: "SUDF PROGRAMME",
+        title: databaseProgramme.title,
+        introduction: databaseProgramme.summary || databaseProgramme.description || "Learn more about this programme and its work with communities.",
+        focusTitle: "About this programme",
+        focus: databaseProgramme.description && databaseProgramme.summary
+          ? [databaseProgramme.description]
+          : ["Contact the Foundation to learn more about this programme."],
+      }
+    : legacyProgramme;
   if (!programme) return null;
 
   return (
