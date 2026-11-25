@@ -34,9 +34,11 @@ function pickFields(input: Record<string, unknown>, allowed: readonly string[]) 
 function refreshContent(section: string) {
   revalidatePath("/admin");
   revalidatePath(`/admin/${section}`);
-  if (section === "programmes") revalidatePath("/programmes", "layout");
+  // All public CMS content is rendered from the live database.
+  // Revalidate the homepage for programmes, news and impact metrics.
+  revalidatePath("/", "page");
+  if (section === "programmes") revalidatePath("/programmes/[slug]", "page");
   if (section === "events") revalidatePath("/events", "page");
-  if (section === "news") revalidatePath("/", "page");
 }
 
 export async function POST(request: Request, { params }: { params: Promise<{ section: string }> }) {
