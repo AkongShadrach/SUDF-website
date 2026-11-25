@@ -40,14 +40,18 @@ export default function AdminSettingsPage() {
         <p className="sudf-admin-eyebrow">ADMINISTRATOR ONBOARDING</p>
         <h2>Invite an administrator</h2>
         <p>Supabase will email a secure, one-time invitation link. The link opens the SUDF password setup page—not the public homepage.</p>
-        <form onSubmit={sendInvitation} style={{ display: "grid", gap: 16, maxWidth: 520 }}>
-          <label htmlFor="admin-invite-email">Email address</label>
-          <input id="admin-invite-email" type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="name@example.com" />
-          <label htmlFor="admin-invite-role">Administrator role</label>
-          <select id="admin-invite-role" value={role} onChange={(event) => setRole(event.target.value as "content_editor" | "super_admin")}>
-            <option value="content_editor">Content Editor — manage website content</option>
-            <option value="super_admin">Super Admin — full administration access</option>
-          </select>
+        <form onSubmit={sendInvitation} className="sudf-admin-invite-form">
+          <div className="sudf-admin-form-field">
+            <label htmlFor="admin-invite-email">Email address</label>
+            <input className="sudf-admin-form-control" id="admin-invite-email" type="email" autoComplete="email" autoCapitalize="none" autoCorrect="off" spellCheck={false} required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="name@example.com" />
+          </div>
+          <div className="sudf-admin-form-field">
+            <label htmlFor="admin-invite-role">Administrator role</label>
+            <select className="sudf-admin-form-control sudf-admin-form-select" id="admin-invite-role" value={role} onChange={(event) => setRole(event.target.value as "content_editor" | "super_admin")}>
+              <option value="content_editor">Content Editor — manage website content</option>
+              <option value="super_admin">Super Admin — full administration access</option>
+            </select>
+          </div>
           {notice && <p role="status" style={{ color: notice.type === "success" ? "#16734a" : "#b42318" }}>{notice.text}</p>}
           <button className="sudf-admin-primary" type="submit" disabled={busy}>
             <MailPlus size={17} /> {busy ? "Sending invitation…" : "Send invitation"}
