@@ -2726,3 +2726,26 @@ body:has(main > .footer) {
     font-size: clamp(32px, 9vw, 38px);
   }
 }
+
+
+/* Make the administrator password recovery action easy to find */
+.sudf-admin-login-recovery {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -5px;
+}
+.sudf-admin-login-recovery a {
+  color: #1c6347;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 7px 0;
+}
+.sudf-admin-login-recovery a:hover,
+.sudf-admin-login-recovery a:focus-visible {
+  color: #9a7b2f;
+}
+.sudf-admin-login-card .sudf-password-field input {
+  padding-right: 48px;
+}
