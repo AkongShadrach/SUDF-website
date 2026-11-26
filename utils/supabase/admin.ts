@@ -3,7 +3,7 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import { createClient } from "./server";
 
-export type SudfAdminRole = "super_admin" | "content_editor";
+export type SudfAdminRole = "super_admin" | "content_editor" | "admin_email";
 export type SudfAdminContext = { userId: string; email: string; role: SudfAdminRole };
 
 export function createAdminServiceClient() {
