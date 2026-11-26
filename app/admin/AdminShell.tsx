@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Activity, BookOpen, CalendarDays, FileText, HandHeart, LayoutDashboard, LogOut, Mail, Menu, Newspaper, Settings, Users, X } from "lucide-react";
 import { createClient } from "../../utils/supabase/client";
-type SudfAdminContext = { userId: string; email: string; role: "super_admin" | "content_editor" };
+type SudfAdminContext = { userId: string; email: string; role: "super_admin" | "content_editor" | "admin_email" };
 
 const links = [
   { label: "Overview", href: "/admin", icon: LayoutDashboard, roles: ["super_admin", "content_editor"] },
@@ -15,9 +15,9 @@ const links = [
   { label: "Knowledge Centre", href: "/admin/education", icon: BookOpen, roles: ["super_admin", "content_editor"] },
   { label: "Gallery & Partners", href: "/admin/media", icon: FileText, roles: ["super_admin", "content_editor"] },
   { label: "Impact Metrics", href: "/admin/impact", icon: Activity, roles: ["super_admin", "content_editor"] },
-  { label: "Contact Inbox", href: "/admin/contacts", icon: Mail, roles: ["super_admin"] },
-  { label: "Support Enquiries", href: "/admin/support", icon: HandHeart, roles: ["super_admin"] },
-  { label: "Volunteer Applications", href: "/admin/volunteers", icon: Users, roles: ["super_admin"] },
+  { label: "Contact Inbox", href: "/admin/contacts", icon: Mail, roles: ["super_admin", "admin_email"] },
+  { label: "Support Enquiries", href: "/admin/support", icon: HandHeart, roles: ["super_admin", "admin_email"] },
+  { label: "Volunteer Applications", href: "/admin/volunteers", icon: Users, roles: ["super_admin", "admin_email"] },
   { label: "Newsletter", href: "/admin/newsletter", icon: Mail, roles: ["super_admin"] },
   { label: "Administration", href: "/admin/settings", icon: Settings, roles: ["super_admin"] },
 ];
@@ -44,7 +44,7 @@ export default function AdminShell({ admin, children }: { admin: SudfAdminContex
           ))}
         </nav>
         <div className="sudf-admin-sidebar-bottom">
-          <div className="sudf-admin-user"><span className="sudf-admin-avatar">{admin.email.slice(0,1).toUpperCase()}</span><span><strong>{admin.email}</strong><small>{admin.role === "super_admin" ? "Super Admin" : "Content Editor"}</small></span></div>
+          <div className="sudf-admin-user"><span className="sudf-admin-avatar">{admin.email.slice(0,1).toUpperCase()}</span><span><strong>{admin.email}</strong><small>{admin.role === "super_admin" ? "Super Admin" : admin.role === "admin_email" ? "Admin Email" : "Content Editor"}</small></span></div>
           <button type="button" onClick={signOut}><LogOut size={17}/> Sign out</button>
         </div>
       </aside>
