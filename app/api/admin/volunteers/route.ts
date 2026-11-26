@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export async function PATCH(request: Request) {
   const admin = await getAdminContext();
-  if (!admin || admin.role !== "super_admin") return NextResponse.json({ error: "Super administrator access required." }, { status: 403 });
+  if (!admin || !["super_admin", "admin_email"].includes(admin.role)) return NextResponse.json({ error: "Super administrator access required." }, { status: 403 });
 
   let input: Record<string, unknown>;
   try { input = await request.json(); } catch { return NextResponse.json({ error: "Invalid request body." }, { status: 400 }); }
