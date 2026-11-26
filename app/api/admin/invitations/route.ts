@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
-    const role = body.role === "content_editor" ? "content_editor" : body.role === "super_admin" ? "super_admin" : null;
+    const role = body.role === "content_editor" ? "content_editor" : body.role === "admin_email" ? "admin_email" : body.role === "super_admin" ? "super_admin" : null;
 
     if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
