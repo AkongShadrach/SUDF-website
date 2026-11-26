@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export async function PATCH(request: Request) {
   const admin = await getAdminContext();
-  if (!admin || admin.role !== "super_admin") {
+  if (!admin || !["super_admin", "admin_email"].includes(admin.role)) {
     return NextResponse.json({ error: "Super administrator access required." }, { status: 403 });
   }
 
