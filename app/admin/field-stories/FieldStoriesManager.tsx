@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowUpRight, FilePlus2, ImagePlus, Pencil, Search, Trash2, Upload, X, Check, RefreshCw, Star } from "lucide-react";
+import { ArrowUpRight, FilePlus2, Pencil, Search, Trash2, Upload, X, Check, RefreshCw, Star } from "lucide-react";
 
 type StoryImage = { url: string; path: string; alt?: string };
 type FieldStory = {
