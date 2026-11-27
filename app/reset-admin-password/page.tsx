@@ -69,7 +69,7 @@ export default function AdminResetPasswordPage() {
       <section className="sudf-admin-login-card">
         <div className="sudf-admin-mark">SUDF</div>
         <p className="sudf-admin-eyebrow">FOUNDATION ADMINISTRATION</p>
-        <h1>Create a new password.</h1>
+        <h1>Create a new password</h1>
         {checking ? <p className="sudf-admin-muted" role="status">Verifying your secure link…</p> : valid ? (
           <form onSubmit={submit}>
             <label>
