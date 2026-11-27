@@ -22,6 +22,31 @@ const labelStyle = { display: "grid", gap: 6, color: "#315343", fontSize: 13, fo
 function slugPreview(value: string) {
   return value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "your-story";
 }
+async function preparePhoto(file: File): Promise<File> {
+  if (!file.type.startsWith("image/")) throw new Error(`${file.name} is not a supported image.`);
+  if (file.size <= 900 * 1024 && ["image/jpeg", "image/png", "image/webp", "image/avif"].includes(file.type)) return file;
+  let bitmap: ImageBitmap;
+  try { bitmap = await createImageBitmap(file); }
+  catch { throw new Error(`Could not read ${file.name}. Please choose a JPG, PNG or WebP photograph.`); }
+  try {
+    const scale = Math.min(1, 1800 / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("Your browser could not prepare the photograph.");
+    context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    for (const quality of [0.82, 0.74, 0.66, 0.58]) {
+      const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/webp", quality));
+      if (blob && blob.size <= 900 * 1024) {
+        const base = file.name.replace(/\.[^.]+$/, "") || "sudf-photo";
+        return new File([blob], `${base}.webp`, { type: "image/webp", lastModified: Date.now() });
+      }
+    }
+    throw new Error(`${file.name} is too large to prepare for upload. Please select a smaller photograph.`);
+  } finally { bitmap.close(); }
+}
+
 function dateLabel(value: string) {
   if (!value) return "Date not set";
   return new Date(value + (value.length === 10 ? "T12:00:00" : "")).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" });
@@ -78,6 +103,15 @@ export default function FieldStoriesManager({ initialItems, loadError }: { initi
     event.preventDefault();
     setBusy(true); setNotice(null);
     try {
+      // Vercel limits a single function request body to roughly 4.5 MB.
+      // Optimise photos in the browser before sending multipart data to the API.
+      const sourcePhotos = [cover, ...gallery].filter((file): file is File => file !== null);
+      const preparedPhotos: File[] = [];
+      for (const photo of sourcePhotos) preparedPhotos.push(await preparePhoto(photo));
+      const totalPhotoBytes = preparedPhotos.reduce((total, photo) => total + photo.size, 0);
+      if (totalPhotoBytes > 3.6 * 1024 * 1024) {
+        throw new Error("The selected photographs are still too large to send together. Please reduce the number of additional photos and try again. Your original photos have not been changed.");
+      }
       const form = new FormData();
       form.set("title", title); form.set("excerpt", excerpt); form.set("body", body);
       form.set("activity_date", activityDate); form.set("activity_type", activityType);
@@ -85,12 +119,15 @@ export default function FieldStoriesManager({ initialItems, loadError }: { initi
       form.set("people_reached", peopleReached); form.set("people_screened", peopleScreened);
       form.set("impact_notes", impactNotes); form.set("partners", partners);
       form.set("status", status); form.set("is_featured", String(featured));
-      if (cover) form.set("cover", cover);
-      gallery.forEach(file => form.append("gallery", file));
+      let photoIndex = 0;
+      if (cover) form.set("cover", preparedPhotos[photoIndex++]);
+      gallery.forEach(() => form.append("gallery", preparedPhotos[photoIndex++]));
       if (editing) form.set("id", editing.id);
       const response = await fetch("/api/admin/field-stories", { method: editing ? "PATCH" : "POST", body: form });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Field story could not be saved.");
+      const result = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(result?.error || (response.status === 413
+        ? "The photographs exceed the hosting upload limit. Please choose fewer or smaller images."
+        : "Field story could not be saved."));
       setItems(current => editing ? current.map(item => item.id === editing.id ? result.item : item) : [result.item, ...current]);
       reset();
       setNotice(editing ? "Field story updated successfully." : status === "published" ? "Field story published successfully." : "Field story saved as a draft.");
@@ -155,8 +192,8 @@ export default function FieldStoriesManager({ initialItems, loadError }: { initi
           <label style={labelStyle}>People screened<input type="number" min="0" step="1" value={peopleScreened} onChange={event => setPeopleScreened(event.target.value)} style={inputStyle} placeholder="Optional verified figure" /></label>
           <label style={{ ...labelStyle, gridColumn: "1 / -1" }}>Impact notes<textarea rows={3} value={impactNotes} onChange={event => setImpactNotes(event.target.value)} style={inputStyle} placeholder="Optional outcomes, referrals, observations or follow-up needs." /></label>
           <label style={{ ...labelStyle, gridColumn: "1 / -1" }}>Partners and collaborators<textarea rows={2} value={partners} onChange={event => setPartners(event.target.value)} style={inputStyle} placeholder="One organisation per line" /></label>
-          <label style={labelStyle}>Cover photograph {!editing && "*"}<input type="file" accept="image/jpeg,image/png,image/webp,image/avif" required={!editing} onChange={event => setCover(event.target.files?.[0] ?? null)} style={inputStyle} /><small style={{ color: "#748078", fontWeight: 400 }}>JPG, PNG, WebP or AVIF · Maximum 10 MB</small></label>
-          <label style={labelStyle}>Additional photographs<input type="file" multiple accept="image/jpeg,image/png,image/webp,image/avif" onChange={event => setGallery(Array.from(event.target.files ?? []))} style={inputStyle} /><small style={{ color: "#748078", fontWeight: 400 }}>Up to 12 photos, 10 MB each. {editing ? "New photos are added to the existing gallery." : "Optional supporting images."}</small></label>
+          <label style={labelStyle}>Cover photograph {!editing && "*"}<input type="file" accept="image/jpeg,image/png,image/webp,image/avif" required={!editing} onChange={event => setCover(event.target.files?.[0] ?? null)} style={inputStyle} /><small style={{ color: "#748078", fontWeight: 400 }}>Photos are automatically optimised for reliable upload</small></label>
+          <label style={labelStyle}>Additional photographs<input type="file" multiple accept="image/jpeg,image/png,image/webp,image/avif" onChange={event => setGallery(Array.from(event.target.files ?? []))} style={inputStyle} /><small style={{ color: "#748078", fontWeight: 400 }}>Up to 12 photos; files are automatically optimised. {editing ? "New photos are added to the existing gallery." : "Optional supporting images."}</small></label>
           {editing && <div style={{ gridColumn: "1 / -1", display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}><img src={editing.cover_image_url} alt={editing.title} style={{ width: 130, height: 84, objectFit: "cover", borderRadius: 10 }} /><span style={{ color: "#748078", fontSize: 13 }}>Current cover photo. Select a new file above to replace it. {editing.gallery_images?.length ?? 0} additional photo(s) already attached.</span></div>}
           <label style={labelStyle}>Publishing status<select value={status} onChange={event => setStatus(event.target.value as typeof status)} style={inputStyle}><option value="draft">Draft</option><option value="published">Published</option><option value="archived">Archived</option></select></label>
           <label style={{ ...labelStyle, display: "flex", flexDirection: "row", alignItems: "center", gap: 9, alignSelf: "center" }}><input type="checkbox" checked={featured} onChange={event => setFeatured(event.target.checked)} /> Feature this story on the homepage</label>
