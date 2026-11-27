@@ -92,7 +92,7 @@ export default function AcceptAdminInvitationPage() {
       <section className="sudf-admin-login-card">
         <div className="sudf-admin-mark">SUDF</div>
         <p className="sudf-admin-eyebrow">FOUNDATION ADMINISTRATION</p>
-        <h1>Create your password.</h1>
+        <h1>Create your password</h1>
         <p className="sudf-admin-muted">Complete your administrator invitation to access the secure SUDF workspace.</p>
         {checking ? (
           <p className="sudf-admin-muted" role="status">Verifying your invitation…</p>
