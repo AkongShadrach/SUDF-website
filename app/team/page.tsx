@@ -31,7 +31,7 @@ export default function TeamPage() {
       <section className="sudf-team-hero">
         <div className="sudf-team-hero-inner">
           <p className="eyebrow">THE PEOPLE BEHIND THE WORK</p>
-          <h1>Meet our team.</h1>
+          <h1>Meet our team</h1>
           <p>Get to know the people whose leadership, commitment and service help advance the Sylvester Ujong Diabetes Foundation's work.</p>
           <span className="sudf-team-hero-rule" aria-hidden="true" />
         </div>
@@ -41,7 +41,7 @@ export default function TeamPage() {
       <section className="sudf-team-intro section">
         <div>
           <p className="eyebrow">OUR PEOPLE</p>
-          <h2>Working together for healthier communities.</h2>
+          <h2>Working together for healthier communities</h2>
         </div>
         <div>
           <p>SUDF's work is supported by people who contribute leadership, programme coordination, community engagement and specialist support.</p>
