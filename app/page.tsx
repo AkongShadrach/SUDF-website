@@ -1,4 +1,5 @@
 import ObjectiveReveal from "../components/ObjectiveReveal";
+import GalleryLightbox from "../components/GalleryLightbox";
 import { Activity, BookOpen, HandHeart, HeartHandshake, HeartPulse, Hospital, UsersRound } from "lucide-react";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
@@ -214,21 +215,7 @@ export default async function Home() {
             <h2>Our work. Our communities. Our impact</h2>
             <p>Moments from the Foundation's community outreach, diabetes screening, health education and other activities.</p>
           </div>
-          <div className="sudf-gallery-grid">
-            {(publishedGallery ?? []).map((photo) => (
-              <figure className="sudf-gallery-item" key={photo.id}>
-                <img src={photo.image_url} alt={photo.title} loading="lazy" />
-                {photo.caption ? <figcaption>{photo.caption}</figcaption> : <figcaption>{photo.title}</figcaption>}
-              </figure>
-            ))}
-            {(!publishedGallery || publishedGallery.length === 0) ? (
-              <div className="sudf-gallery-empty">
-                <span className="sudf-gallery-empty-mark" aria-hidden="true">SUDF</span>
-                <strong>Our outreach stories will appear here</strong>
-                <p>Photos from SUDF activities will be added to this gallery as the Foundation's work continues.</p>
-              </div>
-            ) : null}
-          </div>
+          <GalleryLightbox photos={(publishedGallery ?? []).map((photo) => ({ ...photo, caption: photo.caption ?? null }))} />
         </div>
         <div className="sudf-gallery-legacy-copy">
           <p className="eyebrow">OUR LEGACY, OUR RESPONSIBILITY</p>
