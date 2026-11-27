@@ -11,46 +11,46 @@ export const revalidate = 0;
 const programs = [
   {
     number: "01",
-    title: "Free Community Diabetes Screening",
-    text: "Early detection can save lives. SUDF takes diabetes screening directly into communities, helping individuals understand their blood glucose status and identify potential risks before serious complications develop.",
+    title: "Community screening",
+    text: "Bring diabetes risk assessment and testing closer to communities because early detection saves lives.",
   },
   {
     number: "02",
-    title: "Care & Support for People Living with Diabetes",
-    text: "A diagnosis should not leave anyone feeling abandoned or uncertain about what comes next. We provide guidance, basic support services, counselling, and appropriate referral pathways to help people living with diabetes access the care they need.",
+    title: "Care and patient support",
+    text: "Provide guidance, basic support and clear referral pathways for people living with diabetes.",
   },
   {
     number: "03",
-    title: "Health Education & Lifestyle Empowerment",
-    text: "Prevention begins with knowledge. Through seminars, outreach programmes, community engagements, and public health campaigns, we provide practical information about nutrition, physical activity, healthy lifestyles, diabetes risk factors, and disease management.",
+    title: "Health education",
+    text: "Use seminars, community engagement and media to promote practical, healthier choices.",
   },
   {
     number: "04",
-    title: "Medical Outreach & Partnerships",
-    text: "We collaborate with healthcare professionals, hospitals, clinics, community organisations, volunteers, development partners, and other stakeholders to expand access to diabetes services and strengthen community health systems.",
+    title: "Medical outreach and partnerships",
+    text: "Work with health professionals and institutions to expand access and strengthen community health systems.",
   },
 ];
 
 const objectives = [
   {
     number: "01",
-    title: "Preserving a Legacy of Service",
-    text: "To honour and sustain the legacy of the late HRH Obol Sylvester Oka Ujong by advancing initiatives that reflect his values of compassion, service, and community development.",
+    title: "Accessible diabetes services",
+    text: "Provide accessible diabetes services, including free screening, basic treatment support, counselling and referral for vulnerable and underserved populations.",
   },
   {
     number: "02",
-    title: "Expanding Access to Diabetes Care",
-    text: "To provide accessible and free diabetes care services, including screening, basic treatment support, counselling, and referral services for vulnerable and underserved populations.",
+    title: "Awareness, prevention and healthier lifestyles",
+    text: "Promote diabetes awareness, prevention and healthier lifestyles through outreach, public campaigns and practical education.",
   },
   {
     number: "03",
-    title: "Promoting Awareness and Prevention",
-    text: "To promote diabetes awareness, prevention, and lifestyle education through community outreach, public health campaigns, and capacity-building programmes for healthcare providers and volunteers.",
+    title: "Capacity building",
+    text: "Build the capacity of healthcare providers, volunteers and community advocates to support effective outreach and follow-up.",
   },
   {
     number: "04",
-    title: "Reducing Complications and Mortality",
-    text: "To reduce diabetes-related complications and mortality through early detection, sustainable interventions, strategic partnerships, and advocacy.",
+    title: "Reduce complications and mortality",
+    text: "Reduce preventable complications and mortality through early detection, sustainable interventions, partnerships and advocacy.",
   },
 ];
 
@@ -150,7 +150,7 @@ export default async function Home() {
             <p className="eyebrow light">OUR MISSION IN ACTION</p>
             <h2>From Awareness to Action</h2>
           </div>
-          <p>Through community-based interventions and partnerships, we work to bring diabetes services closer to the people who need them most.</p>
+          <p>SUDF’s work includes community screening, care and patient support, health education, and medical outreach and partnerships.</p>
         </div>
         <div className="program-grid">
           {programs.map((program) => (
