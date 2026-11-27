@@ -32,7 +32,7 @@ export default function AdminForgotPasswordPage() {
       <section className="sudf-admin-login-card">
         <div className="sudf-admin-mark">SUDF</div>
         <p className="sudf-admin-eyebrow">FOUNDATION ADMINISTRATION</p>
-        <h1>Reset your password.</h1>
+        <h1>Reset your password</h1>
         {sent ? (
           <p className="sudf-admin-muted" role="status">If an account exists for that address, a password-reset email has been sent. Open it on this device and follow the secure link to choose a new password.</p>
         ) : (
