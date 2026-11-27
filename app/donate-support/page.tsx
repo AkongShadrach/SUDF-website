@@ -29,7 +29,7 @@ export default function DonateSupportPage() {
       <section className="support-more support-more-reference section">
         <div className="support-more-heading">
           <p className="eyebrow">MORE THAN FUNDING</p>
-          <h2>Support the work. Expand the reach.</h2>
+          <h2>Support the work. Expand the reach</h2>
           <p>Support for SUDF can take different forms. You may wish to contribute towards community screening, help strengthen health education, support people living with diabetes or provide practical resources for outreach. Tell us what you have in mind and we can discuss a useful way forward.</p>
         </div>
         <div className="support-options-grid">
@@ -45,11 +45,11 @@ export default function DonateSupportPage() {
       <section id="support-enquiry" className="support-enquiry support-enquiry-reference section">
         <div className="support-enquiry-copy">
           <p className="eyebrow">BECOME A SUPPORTER</p>
-          <h2>Tell us what support looks like for you.</h2>
+          <h2>Tell us what support looks like for you</h2>
           <p>There is no single way to support this mission. Tell us what you have in mind and the Foundation will have a conversation with you about the most useful way to move forward.</p>
           <div className="support-trust-note">
             <span aria-hidden="true">✓</span>
-            <p><strong>Your information matters.</strong><br />Please share only the details needed for this enquiry. Do not include patient health information or sensitive personal medical records.</p>
+            <p><strong>Your information matters</strong><br />Please share only the details needed for this enquiry. Do not include patient health information or sensitive personal medical records.</p>
           </div>
         </div>
         <SupportForm />
