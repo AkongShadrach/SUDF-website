@@ -2953,3 +2953,49 @@ body:has(main > .footer) {
   .sudf-lightbox { padding: 70px 10px 20px; }
   .sudf-lightbox-image { max-height: calc(100dvh - 130px); }
 }
+
+
+/* SUDF gallery reference layout: uniform 4:3 two-column photo tiles */
+.sudf-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(8px, 2vw, 14px);
+  align-items: start;
+}
+.sudf-gallery-item {
+  overflow: hidden;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  box-shadow: none;
+}
+.sudf-gallery-image-trigger {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: #e8eee8;
+  cursor: zoom-in;
+}
+.sudf-gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  background: #e8eee8;
+}
+.sudf-gallery-item figcaption {
+  display: none;
+}
+@media (max-width: 520px) {
+  .sudf-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .sudf-gallery-item { border-radius: 14px; }
+}
+@media (max-width: 340px) {
+  .sudf-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+}
