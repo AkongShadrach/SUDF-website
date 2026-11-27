@@ -35,7 +35,7 @@ const objectives = [
   {
     number: "01",
     title: "Preserving a Legacy of Service",
-    text: "To honour and sustain the legacy of HRH Late Obol Sylvester Oka Ujong by advancing initiatives that reflect his values of compassion, service, and community development.",
+    text: "To honour and sustain the legacy of the late HRH Obol Sylvester Oka Ujong by advancing initiatives that reflect his values of compassion, service, and community development.",
   },
   {
     number: "02",
@@ -75,7 +75,7 @@ export default async function Home() {
       <section id="home" className="hero">
         <div className="hero-copy">
           <p className="eyebrow">SYLVESTER UJONG DIABETES FOUNDATION (SUDF)</p>
-          <h1>CONTINUING A LEGACY.<br />EMPOWERING HEALTHIER LIVES.</h1>
+          <h1>Continuing a legacy<br />Empowering healthier lives</h1>
           <p className="lead">
             The Sylvester Ujong Diabetes Foundation (SUDF) is a non-profit organisation dedicated to transforming lives, protecting families, and building healthier communities through the prevention, early detection, management, and increased awareness of diabetes.
           </p>
@@ -103,7 +103,7 @@ export default async function Home() {
             The Sylvester Ujong Diabetes Foundation (SUDF) is a non-profit organisation dedicated to transforming lives, protecting families, and building healthier communities through the prevention, early detection, management, and increased awareness of diabetes.
           </p>
           <p>
-            The Foundation was established in honour and memory of HRH Late Obol Sylvester Oka Ujong, whose life reflected the values of compassion, service, and commitment to community development. SUDF carries forward this legacy by addressing a health challenge that continues to affect individuals and families, particularly those with limited access to screening, health information, and appropriate care.
+            The Foundation was established in honour and memory of the late HRH Obol Sylvester Oka Ujong, whose life reflected the values of compassion, service, and commitment to community development. SUDF carries forward this legacy by addressing a health challenge that continues to affect individuals and families, particularly those with limited access to screening, health information, and appropriate care.
           </p>
           <p>
             At SUDF, we believe that diabetes should not become a silent killer simply because someone lacks information, access to screening, or the support needed to manage the condition.
@@ -118,20 +118,17 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow light">OUR VISION</p>
-            <h2>A society where diabetes is no longer a silent killer.</h2>
+            <h2>A society where diabetes is no longer a silent killer</h2>
           </div>
           <p>
-            A society where diabetes is no longer a silent killer, and every individual has access to the knowledge, care, and support needed to live a healthy and productive life.
+            To reduce diabetes-related suffering through prevention, early detection, education, accessible support and strategic healthcare partnerships.
           </p>
         </div>
         <div className="mission-statement">
           <p className="eyebrow light">OUR MISSION</p>
-          <h2>Transform lives. Protect families. Build healthier communities.</h2>
+          <h2>Transform lives, protect families and build healthier communities</h2>
           <p>
-            Our mission is to transform lives, protect families, and build healthier communities by improving access to diabetes prevention, early detection, education, care, and support, particularly for vulnerable and underserved populations.
-          </p>
-          <p>
-            We combine compassion with practical action, taking diabetes awareness and essential services directly into communities while building partnerships that can create sustainable improvements in health outcomes.
+            A society where diabetes is no longer a silent killer and every person has access to the knowledge, care and support needed to live a healthy, productive life
           </p>
         </div>
       </section>
@@ -140,9 +137,8 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">OUR OBJECTIVES</p>
-            <h2>What SUDF is committed to.</h2>
+            <h2>What SUDF is committed to</h2>
           </div>
-          <p>SUDF is committed to:</p>
         </div>
         <div className="program-grid objective-grid">
           {objectives.map((objective, index) => (
@@ -155,7 +151,7 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow light">OUR MISSION IN ACTION</p>
-            <h2>From awareness to action.</h2>
+            <h2>From Awareness to Action</h2>
           </div>
           <p>Through community-based interventions and partnerships, we work to bring diabetes services closer to the people who need them most.</p>
         </div>
