@@ -46,7 +46,7 @@ export default async function EducationArticlePage({params}:{params:Promise<{slu
           <section className="education-sources"><h2>Trusted sources and further reading</h2>{article.sources.map(source=><a href={source.url} key={source.url} target="_blank" rel="noreferrer">{source.label}<ExternalLink size={15}/></a>)}</section>
           <Link className="education-back-bottom" href="/education">← Back to all education topics</Link>
         </div>
-        <aside className="education-reading-aside"><p className="eyebrow">KEEP LEARNING</p><h3>Explore another topic.</h3>{educationArticles.filter(item=>item.slug!==article.slug).slice(0,4).map(item=><Link href={`/education/${item.slug}`} key={item.slug}>{item.title}<span>→</span></Link>)}</aside>
+        <aside className="education-reading-aside"><p className="eyebrow">KEEP LEARNING</p><h3>Explore another topic</h3>{educationArticles.filter(item=>item.slug!==article.slug).slice(0,4).map(item=><Link href={`/education/${item.slug}`} key={item.slug}>{item.title}<span>→</span></Link>)}</aside>
       </article>
       <SiteFooter />
     </main>
