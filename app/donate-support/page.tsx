@@ -17,7 +17,7 @@ export default function DonateSupportPage() {
       <section className="support-hero support-hero-reference">
         <div className="support-hero-inner">
           <p className="eyebrow light">SUPPORT THE MISSION</p>
-          <h1>Stand with SUDF.<br /><span>Help protect healthier lives.</span></h1>
+          <h1>Stand with SUDF<br /><span>Help protect healthier lives</span></h1>
           <p className="support-hero-copy">Help us bring diabetes awareness, screening, education and support closer to individuals, families and communities across Nigeria.</p>
         </div>
         <div className="support-hero-art" aria-hidden="true">
