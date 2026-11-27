@@ -867,7 +867,7 @@ blockquote { margin:32px 0 0; padding:20px 0 0 22px; border-left:3px solid var(-
   .support-emblem { width:125px;height:125px;font-size:30px; }
   .orbit-one { width:220px;height:220px; }
   .orbit-two { width:290px;height:290px; }
-  .support-art-caption { right:0;bottom:0;padding:13px 15px; }
+  .support-art-caption { left:50%;right:auto;bottom:0;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);box-sizing:border-box;padding:13px 15px; }
   .support-intro { grid-template-columns:1fr;gap:20px; }
   .support-intro > p { font-size:16px; }
   .support-options-section { padding-top:0; }
