@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Activity, BookOpen, CalendarDays, FileText, HandHeart, LayoutDashboard, LogOut, Mail, Menu, Newspaper, Settings, Users, X } from "lucide-react";
+import { Activity, BookOpen, CalendarDays, FileText, HandHeart, LayoutDashboard, LogOut, Mail, Menu, Newspaper, Settings, Users, X, ClipboardList } from "lucide-react";
 import { createClient } from "../../utils/supabase/client";
 type SudfAdminContext = { userId: string; email: string; role: "super_admin" | "content_editor" | "admin_email" };
 
@@ -11,6 +11,7 @@ const links = [
   { label: "Overview", href: "/admin", icon: LayoutDashboard, roles: ["super_admin", "content_editor"] },
   { label: "Programmes", href: "/admin/programmes", icon: Activity, roles: ["super_admin", "content_editor"] },
   { label: "Events", href: "/admin/events", icon: CalendarDays, roles: ["super_admin", "content_editor"] },
+  { label: "From the Field", href: "/admin/field-stories", icon: ClipboardList, roles: ["super_admin", "content_editor"] },
   { label: "News & Updates", href: "/admin/news", icon: Newspaper, roles: ["super_admin", "content_editor"] },
   { label: "Knowledge Centre", href: "/admin/education", icon: BookOpen, roles: ["super_admin", "content_editor"] },
   { label: "Gallery & Partners", href: "/admin/media", icon: FileText, roles: ["super_admin", "content_editor"] },
