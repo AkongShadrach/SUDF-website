@@ -85,11 +85,8 @@ export default async function Home() {
             <a className="button button-volunteer" href="/volunteer">Become a Volunteer</a>
           </div>
         </div>
-        <div className="hero-image" aria-label="SUDF hero image placeholder">
-          <div>
-            <span>SUDF</span>
-            <p>Community • Health • Legacy</p>
-          </div>
+        <div className="hero-image">
+          <img src="/legacy-image.jpg" alt="The legacy of the Sylvester Ujong Diabetes Foundation" />
         </div>
       </section>
 
