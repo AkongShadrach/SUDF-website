@@ -124,8 +124,8 @@ export default function FieldStoriesManager({ initialItems, loadError }: { initi
     <div style={{ display: "grid", gap: 22, color: "#203b31" }}>
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "end", gap: 14, flexWrap: "wrap" }}>
         <div>
-          <p style={{ fontSize: ".7rem", fontWeight: 800, letterSpacing: ".2em", color: "#9b8b4c", margin: 0 }}>FIELD REPORTING</p>
-          <h1 style={{ fontFamily: "Georgia,serif", fontWeight: 500, fontSize: "clamp(2rem,4vw,2.8rem)", margin: "8px 0" }}>From the Field</h1>
+          <p style={{ fontSize: ".7rem", fontWeight: 800, letterSpacing: ".2em", color: "#9b8b4c", margin: 0 }}>SUDF IN ACTION</p>
+          <h1 style={{ fontFamily: "Georgia,serif", fontWeight: 500, fontSize: "clamp(2rem,4vw,2.8rem)", margin: "8px 0" }}>SUDF in Action</h1>
           <p style={{ color: "#748078", margin: 0 }}>Publish outreach stories, photographs, locations and verified impact from SUDF activities.</p>
         </div>
         <button type="button" style={buttonStyle} onClick={startCreate}><FilePlus2 size={17} /> New field story</button>
