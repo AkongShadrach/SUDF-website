@@ -175,7 +175,7 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">WHY OUR WORK MATTERS</p>
-            <h2>SUDF seeks to change that story.</h2>
+            <h2>SUDF seeks to change that story</h2>
           </div>
           <p>
             Diabetes can progress for years without obvious symptoms. For many people, the first serious warning may come only after complications have developed.
@@ -185,19 +185,19 @@ export default async function Home() {
           <article className="sudf-impact-card">
             <span className="sudf-impact-icon"><Activity size={27} strokeWidth={1.8} aria-hidden="true" /></span>
             <span className="sudf-impact-step">01 · AWARENESS</span>
-            <h3>Know the risk. Understand the numbers.</h3>
+            <h3>Know the risk. Understand the numbers</h3>
             <p>We want more people to know their risk, know their numbers, understand diabetes, receive support early, and take informed steps towards healthier lives.</p>
           </article>
           <article className="sudf-impact-card">
             <span className="sudf-impact-icon"><HeartHandshake size={27} strokeWidth={1.8} aria-hidden="true" /></span>
             <span className="sudf-impact-step">02 · EARLY SUPPORT</span>
-            <h3>Make support easier to reach.</h3>
+            <h3>Make support easier to reach</h3>
             <p>Every person screened and every patient supported brings us closer to a future where preventable diabetes-related suffering and deaths are significantly reduced.</p>
           </article>
           <article className="sudf-impact-card">
             <span className="sudf-impact-icon"><UsersRound size={27} strokeWidth={1.8} aria-hidden="true" /></span>
             <span className="sudf-impact-step">03 · COMMUNITY</span>
-            <h3>Strengthen healthier communities.</h3>
+            <h3>Strengthen healthier communities</h3>
             <p>Every family educated and every community reached brings us closer to a future where preventable diabetes-related suffering and deaths are significantly reduced.</p>
           </article>
         </div>
@@ -214,7 +214,7 @@ export default async function Home() {
         <div className="sudf-gallery-panel">
           <div className="sudf-gallery-heading">
             <p className="eyebrow">SUDF GALLERY</p>
-            <h2>Our work. Our communities. Our impact.</h2>
+            <h2>Our work. Our communities. Our impact</h2>
             <p>Moments from the Foundation's community outreach, diabetes screening, health education and other activities.</p>
           </div>
           <div className="sudf-gallery-grid">
@@ -227,7 +227,7 @@ export default async function Home() {
             {(!publishedGallery || publishedGallery.length === 0) ? (
               <div className="sudf-gallery-empty">
                 <span className="sudf-gallery-empty-mark" aria-hidden="true">SUDF</span>
-                <strong>Our outreach stories will appear here.</strong>
+                <strong>Our outreach stories will appear here</strong>
                 <p>Photos from SUDF activities will be added to this gallery as the Foundation's work continues.</p>
               </div>
             ) : null}
@@ -235,7 +235,7 @@ export default async function Home() {
         </div>
         <div className="sudf-gallery-legacy-copy">
           <p className="eyebrow">OUR LEGACY, OUR RESPONSIBILITY</p>
-          <h2>A living legacy of service.</h2>
+          <h2>A living legacy of service</h2>
           <p>
             The Sylvester Ujong Diabetes Foundation is more than a memorial to a respected community leader. It is a living legacy of service.
           </p>
@@ -243,8 +243,8 @@ export default async function Home() {
             By transforming remembrance into action, SUDF seeks to ensure that the values represented by the late HRH Obol Sylvester Oka Ujong continue to touch lives across generations.
           </p>
           <blockquote>
-            A legacy remembered through service.<br />
-            A community strengthened through knowledge.<br />
+            A legacy remembered through service<br />
+            A community strengthened through knowledge<br />
             Lives protected through action.
           </blockquote>
           <p>Together, we can stop diabetes from being a silent killer</p>
@@ -255,7 +255,7 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">OUR PROGRAMMES</p>
-            <h2>Explore how SUDF works with communities.</h2>
+            <h2>Explore how SUDF works with communities</h2>
           </div>
           <p>Discover how SUDF advances diabetes awareness, early detection, education and support. Explore each programme to understand its purpose and the work it is designed to deliver with communities.</p>
         </div>
@@ -281,7 +281,7 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">NEWS & UPDATES</p>
-            <h2>Latest from the Foundation.</h2>
+            <h2>Latest from the Foundation</h2>
           </div>
           <p>Updates and stories published by SUDF.</p>
         </div>
@@ -299,7 +299,7 @@ export default async function Home() {
           ))}
           {(!publishedNews || publishedNews.length === 0) && (
             <div className="news-empty-note">
-              <h3>Stay connected with SUDF.</h3>
+              <h3>Stay connected with SUDF</h3>
               <p>We’re working to bring you the latest Foundation news, community stories, health initiatives and important updates. Check back soon for inspiring stories and highlights from our work.</p>
             </div>
           )}
@@ -309,7 +309,7 @@ export default async function Home() {
       <section id="support" className="support section">
         <div>
           <p className="eyebrow light">SUPPORT OUR WORK</p>
-          <h2>Help turn awareness into action.</h2>
+          <h2>Help turn awareness into action</h2>
           <p>
             Support diabetes awareness, prevention, education, screening activities and community programmes.
           </p>
@@ -319,7 +319,7 @@ export default async function Home() {
 
       <section id="partners" className="section partners">
         <p className="eyebrow">PARTNERS & COLLABORATION</p>
-        <h2>Building healthier communities together.</h2>
+        <h2>Building healthier communities together</h2>
         <p className="wide">
           We collaborate with healthcare professionals, hospitals, clinics, community organisations, volunteers, development partners, and other stakeholders to expand access to diabetes services and strengthen community health systems.
         </p>
@@ -328,7 +328,7 @@ export default async function Home() {
 
       <section id="resources" className="resources section">
         <p className="eyebrow">RESOURCES</p>
-        <h2>Learn. Share. Act.</h2>
+        <h2>Learn. Share. Act</h2>
         <div className="resource-grid">
           <a href="/education">
             <strong>Diabetes Education</strong>
