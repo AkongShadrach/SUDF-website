@@ -24,7 +24,7 @@ export default function EducationPage() {
       <section className="education-hero">
         <div className="education-hero-inner">
           <p className="eyebrow light">SUDF KNOWLEDGE CENTRE</p>
-          <h1>Understand diabetes.<br /><span>Make informed choices.</span></h1>
+          <h1>Understand diabetes<br /><span>Make informed choices</span></h1>
           <p>Clear, practical information to support diabetes awareness, prevention, early detection and care.</p>
           <a className="button button-gold" href="#education-library">Explore the knowledge centre ↓</a>
         </div>
@@ -32,7 +32,7 @@ export default function EducationPage() {
 
       <section className="education-topics section">
         <div className="education-section-heading">
-          <div><p className="eyebrow">EXPLORE BY TOPIC</p><h2>Knowledge for every step.</h2></div>
+          <div><p className="eyebrow">EXPLORE BY TOPIC</p><h2>Knowledge for every step</h2></div>
           <p>Start with the topic that matters to you. Each guide is written in plain language and includes links to trusted health information.</p>
         </div>
         <div className="education-topic-grid">
@@ -47,7 +47,7 @@ export default function EducationPage() {
 
       <section className="education-library section" id="education-library">
         <div className="education-section-heading">
-          <div><p className="eyebrow">LEARNING LIBRARY</p><h2>Explore diabetes education.</h2></div>
+          <div><p className="eyebrow">LEARNING LIBRARY</p><h2>Explore diabetes education</h2></div>
           <p>{educationArticles.length} introductory guides to help you learn at your own pace.</p>
         </div>
         <div className="education-article-grid">
@@ -64,7 +64,7 @@ export default function EducationPage() {
       </section>
 
       <section className="education-trust">
-        <div><ShieldCheck size={30} aria-hidden="true" /><p className="eyebrow light">INFORMATION YOU CAN CHECK</p><h2>Learn from reliable sources.</h2><p>Our introductory guides link to recognised health organisations. They are for general education and do not replace personal medical advice, diagnosis or treatment.</p><a href="https://www.who.int/news-room/fact-sheets/detail/diabetes" target="_blank" rel="noreferrer">Visit the World Health Organization →</a></div>
+        <div><ShieldCheck size={30} aria-hidden="true" /><p className="eyebrow light">INFORMATION YOU CAN CHECK</p><h2>Learn from reliable sources</h2><p>Our introductory guides link to recognised health organisations. They are for general education and do not replace personal medical advice, diagnosis or treatment.</p><a href="https://www.who.int/news-room/fact-sheets/detail/diabetes" target="_blank" rel="noreferrer">Visit the World Health Organization →</a></div>
       </section>
       <SiteFooter />
     </main>
