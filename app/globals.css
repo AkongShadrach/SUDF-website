@@ -3151,3 +3151,15 @@ body:has(main > .footer) {
   .sudf-field-photo-gallery > div { gap: 8px; }
   .sudf-field-photo-gallery figure { border-radius: 12px; }
 }
+
+/* Improve contrast for the SUDF in Action homepage section */
+.sudf-field-home-section .sudf-field-home-heading h2 {
+  color: #f8f5e9;
+}
+.sudf-field-home-section .sudf-field-home-heading .eyebrow {
+  color: #d8c36a;
+}
+.sudf-field-home-section .sudf-field-home-heading > div:first-child > p:last-child {
+  color: rgba(248, 245, 233, .78);
+}
+
