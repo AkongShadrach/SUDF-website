@@ -62,11 +62,13 @@ export default async function Home() {
     { data: publishedNews },
     { data: verifiedMetrics },
     { data: publishedGallery },
+    { data: publishedFieldStories },
   ] = await Promise.all([
     supabase.from("programs").select("id,title,slug,summary,description,status").eq("status", "published").order("created_at", { ascending: false }),
     supabase.from("news").select("id,title,slug,excerpt,published_at").eq("status", "published").order("published_at", { ascending: false }),
     supabase.from("impact_metrics").select("id,metric_name,metric_value,unit").eq("verified", true).order("created_at", { ascending: false }),
     supabase.from("gallery_items").select("id,title,caption,image_url,category,display_order").eq("status", "published").order("display_order", { ascending: true }).order("created_at", { ascending: false }),
+    supabase.from("field_stories").select("id,title,slug,excerpt,activity_date,venue,lga,state,activity_type,cover_image_url,people_reached,people_screened,is_featured").eq("status", "published").order("is_featured", { ascending: false }).order("activity_date", { ascending: false }),
   ]);
 
   return (
@@ -208,31 +210,60 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="legacy section sudf-gallery-section">
-        <div className="sudf-gallery-panel">
-          <div className="sudf-gallery-heading">
-            <p className="eyebrow">SUDF GALLERY</p>
-            <h2>Our work. Our communities. Our impact</h2>
-            <p>Moments from the Foundation's community outreach, diabetes screening, health education and other activities.</p>
+      <section id="from-the-field" className="section sudf-field-home-section">
+        <div className="sudf-field-home-heading">
+          <div>
+            <p className="eyebrow">FROM THE FIELD</p>
+            <h2>Where our work meets the community</h2>
+            <p>Real stories from SUDF outreach, diabetes screening, health education and the communities we serve.</p>
           </div>
-          <GalleryLightbox photos={(publishedGallery ?? []).map((photo) => ({ ...photo, caption: photo.caption ?? null }))} />
+          <div className="sudf-field-home-count">
+            <strong>{(publishedFieldStories ?? []).length}</strong>
+            <span>published field {(publishedFieldStories ?? []).length === 1 ? "story" : "stories"}</span>
+            {(publishedFieldStories ?? []).length > 0 && <small>Latest: {new Date(publishedFieldStories![0].activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "long", year: "numeric" })}</small>}
+          </div>
         </div>
-        <div className="sudf-gallery-legacy-copy">
-          <p className="eyebrow">OUR LEGACY, OUR RESPONSIBILITY</p>
-          <h2>A living legacy of service</h2>
-          <p>
-            The Sylvester Ujong Diabetes Foundation is more than a memorial to a respected community leader. It is a living legacy of service.
-          </p>
-          <p>
-            By transforming remembrance into action, SUDF seeks to ensure that the values represented by the late HRH Obol Sylvester Oka Ujong continue to touch lives across generations.
-          </p>
-          <blockquote>
-            A legacy remembered through service<br />
-            A community strengthened through knowledge<br />
-            Lives protected through action.
-          </blockquote>
-          <p>Together, we can stop diabetes from being a silent killer</p>
-        </div>
+        {(() => {
+          const stories = publishedFieldStories ?? [];
+          const featuredStory = stories.find((story) => story.is_featured) ?? stories[0];
+          const moreStories = stories.filter((story) => story.id !== featuredStory?.id);
+          return featuredStory ? (
+            <>
+              <Link href={"/field-stories/" + featuredStory.slug} className="sudf-field-featured-card">
+                <div className="sudf-field-featured-image">
+                  <img src={featuredStory.cover_image_url} alt={featuredStory.title} />
+                  <span className="sudf-field-latest-badge">LATEST FIELD STORY</span>
+                </div>
+                <div className="sudf-field-featured-copy">
+                  <p className="sudf-field-date">{new Date(featuredStory.activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "long", year: "numeric" })} · {[featuredStory.venue, featuredStory.lga, featuredStory.state].filter(Boolean).join(", ") || featuredStory.activity_type}</p>
+                  <h3>{featuredStory.title}</h3>
+                  <p>{featuredStory.excerpt}</p>
+                  <span>Read the full story →</span>
+                </div>
+              </Link>
+              {moreStories.length > 0 && (
+                <div className="sudf-field-more-wrap">
+                  <div className="sudf-field-more-heading"><h3>More field stories</h3><span>Swipe to explore</span></div>
+                  <div className="sudf-field-story-rail">
+                    {moreStories.map((story) => (
+                      <Link href={"/field-stories/" + story.slug} className="sudf-field-mini-card" key={story.id}>
+                        <img src={story.cover_image_url} alt={story.title} />
+                        <div><p className="sudf-field-date">{new Date(story.activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "short", year: "numeric" })}</p><h4>{story.title}</h4><span>Read story →</span></div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="sudf-field-empty">
+              <span className="eyebrow">OUR WORK IN THE COMMUNITY</span>
+              <h3>Field stories are coming soon</h3>
+              <p>As SUDF carries out outreach and community activities, stories and photographs from the field will be shared here.</p>
+            </div>
+          );
+        })()}
+        {(publishedFieldStories ?? []).length > 0 && <Link href="/field-stories" className="sudf-field-see-all">See all field stories →</Link>}
       </section>
 
       <section id="programmes" className="section sudf-programmes-section">
@@ -261,32 +292,22 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="news-updates" className="section sudf-programmes-section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">NEWS & UPDATES</p>
-            <h2>Latest from the Foundation</h2>
+      <section className="legacy section sudf-gallery-section">
+        <div className="sudf-gallery-panel">
+          <div className="sudf-gallery-heading">
+            <p className="eyebrow">SUDF GALLERY</p>
+            <h2>Our work. Our communities. Our impact</h2>
+            <p>Moments from the Foundation's community outreach, diabetes screening, health education and other activities.</p>
           </div>
-          <p>Updates and stories published by SUDF.</p>
+          <GalleryLightbox photos={(publishedGallery ?? []).map((photo) => ({ ...photo, caption: photo.caption ?? null }))} />
         </div>
-        <div className="event-grid sudf-programme-cards">
-          {(publishedNews ?? []).map((article) => (
-            <Link href={"/news/" + article.slug} className="event-card sudf-programme-card" key={article.id}>
-              <div>
-                <p className="event-no">SUDF NEWS</p>
-                <h3>{article.title}</h3>
-                <p>{article.excerpt || "Read the latest update from the Sylvester Ujong Diabetes Foundation."}</p>
-                {article.published_at ? <small>{new Date(article.published_at).toLocaleDateString("en-NG", { dateStyle: "long" })}</small> : null}
-                <span className="event-no">Read story →</span>
-              </div>
-            </Link>
-          ))}
-          {(!publishedNews || publishedNews.length === 0) && (
-            <div className="news-empty-note">
-              <h3>Stay connected with SUDF</h3>
-              <p>We’re working to bring you the latest Foundation news, community stories, health initiatives and important updates. Check back soon for inspiring stories and highlights from our work.</p>
-            </div>
-          )}
+        <div className="sudf-gallery-legacy-copy">
+          <p className="eyebrow">OUR LEGACY, OUR RESPONSIBILITY</p>
+          <h2>A living legacy of service</h2>
+          <p>The Sylvester Ujong Diabetes Foundation is more than a memorial to a respected community leader. It is a living legacy of service.</p>
+          <p>By transforming remembrance into action, SUDF seeks to ensure that the values represented by the late HRH Obol Sylvester Oka Ujong continue to touch lives across generations.</p>
+          <blockquote>A legacy remembered through service<br />A community strengthened through knowledge<br />Lives protected through action.</blockquote>
+          <p>Together, we can stop diabetes from being a silent killer</p>
         </div>
       </section>
 
