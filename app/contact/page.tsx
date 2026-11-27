@@ -9,7 +9,7 @@ export default function ContactPage() {
       <section className="sudf-contact-hero">
         <div className="sudf-contact-intro">
           <p className="eyebrow light">CONTACT THE FOUNDATION</p>
-          <h1>Let’s start a conversation.</h1>
+          <h1>Let’s start a conversation</h1>
           <p>Have a question about SUDF, our programmes, community outreach or ways to work with the Foundation? Send us a message using the form and our team can follow up.</p>
           <div className="sudf-contact-note">
             <span aria-hidden="true">✓</span>
