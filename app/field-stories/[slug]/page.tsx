@@ -32,9 +32,9 @@ export default async function FieldStoryPage({ params }: { params: Promise<{ slu
     <main className="sudf-field-story-page">
       <SiteHeader />
       <article className="sudf-field-story">
-        <Link href="/#from-the-field" className="sudf-field-back"><ArrowLeft size={16} /> Back to From the Field</Link>
+        <Link href="/#from-the-field" className="sudf-field-back"><ArrowLeft size={16} /> Back to SUDF in Action</Link>
         <header className="sudf-field-story-header">
-          <p className="eyebrow">FROM THE FIELD · {story.activity_type.toUpperCase()}</p>
+          <p className="eyebrow">SUDF IN ACTION · {story.activity_type.toUpperCase()}</p>
           <h1>{story.title}</h1>
           <div className="sudf-field-story-meta">
             <span><CalendarDays size={16} />{formatDate(story.activity_date)}</span>
