@@ -240,7 +240,7 @@ export default async function Home() {
             The Sylvester Ujong Diabetes Foundation is more than a memorial to a respected community leader. It is a living legacy of service.
           </p>
           <p>
-            By transforming remembrance into action, SUDF seeks to ensure that the values represented by HRH Late Obol Sylvester Oka Ujong continue to touch lives across generations.
+            By transforming remembrance into action, SUDF seeks to ensure that the values represented by the late HRH Obol Sylvester Oka Ujong continue to touch lives across generations.
           </p>
           <blockquote>
             A legacy remembered through service.<br />
