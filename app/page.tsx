@@ -211,8 +211,8 @@ export default async function Home() {
       <section id="from-the-field" className="section sudf-field-home-section">
         <div className="sudf-field-home-heading">
           <div>
-            <p className="eyebrow">FROM THE FIELD</p>
-            <h2>Where our work meets the community</h2>
+            <p className="eyebrow">HIGHLIGHTS FROM THE FIELD</p>
+            <h2>SUDF in Action</h2>
             <p>Real stories from SUDF outreach, diabetes screening, health education and the communities we serve.</p>
           </div>
           <div className="sudf-field-home-count">
@@ -230,7 +230,7 @@ export default async function Home() {
               <Link href={"/field-stories/" + featuredStory.slug} className="sudf-field-featured-card">
                 <div className="sudf-field-featured-image">
                   <img src={featuredStory.cover_image_url} alt={featuredStory.title} />
-                  <span className="sudf-field-latest-badge">LATEST FIELD STORY</span>
+                  <span className="sudf-field-latest-badge">FEATURED STORY</span>
                 </div>
                 <div className="sudf-field-featured-copy">
                   <p className="sudf-field-date">{new Date(featuredStory.activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "long", year: "numeric" })} · {[featuredStory.venue, featuredStory.lga, featuredStory.state].filter(Boolean).join(", ") || featuredStory.activity_type}</p>
