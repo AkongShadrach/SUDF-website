@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin, CalendarDays, UsersRound, HeartPulse } from "lucide-react";
-import SiteHeader from "../../../../components/SiteHeader";
-import SiteFooter from "../../../../components/SiteFooter";
-import { createAdminServiceClient } from "../../../../utils/supabase/admin";
+import SiteHeader from "../../../components/SiteHeader";
+import SiteFooter from "../../../components/SiteFooter";
+import { createAdminServiceClient } from "../../../utils/supabase/admin";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
