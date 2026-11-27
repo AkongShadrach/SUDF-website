@@ -59,13 +59,11 @@ export default async function Home() {
   const supabase = createAdminServiceClient();
   const [
     { data: publishedProgrammes },
-    { data: publishedNews },
     { data: verifiedMetrics },
     { data: publishedGallery },
     { data: publishedFieldStories },
   ] = await Promise.all([
     supabase.from("programs").select("id,title,slug,summary,description,status").eq("status", "published").order("created_at", { ascending: false }),
-    supabase.from("news").select("id,title,slug,excerpt,published_at").eq("status", "published").order("published_at", { ascending: false }),
     supabase.from("impact_metrics").select("id,metric_name,metric_value,unit").eq("verified", true).order("created_at", { ascending: false }),
     supabase.from("gallery_items").select("id,title,caption,image_url,category,display_order").eq("status", "published").order("display_order", { ascending: true }).order("created_at", { ascending: false }),
     supabase.from("field_stories").select("id,title,slug,excerpt,activity_date,venue,lga,state,activity_type,cover_image_url,people_reached,people_screened,is_featured").eq("status", "published").order("is_featured", { ascending: false }).order("activity_date", { ascending: false }),
@@ -220,7 +218,7 @@ export default async function Home() {
           <div className="sudf-field-home-count">
             <strong>{(publishedFieldStories ?? []).length}</strong>
             <span>published field {(publishedFieldStories ?? []).length === 1 ? "story" : "stories"}</span>
-            {(publishedFieldStories ?? []).length > 0 && <small>Latest: {new Date(publishedFieldStories![0].activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "long", year: "numeric" })}</small>}
+            {(publishedFieldStories ?? []).length > 0 && <small>Latest: {new Date([...publishedFieldStories!].sort((a, b) => b.activity_date.localeCompare(a.activity_date))[0].activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "long", year: "numeric" })}</small>}
           </div>
         </div>
         {(() => {
