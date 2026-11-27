@@ -2848,3 +2848,41 @@ body:has(main > .footer) {
   font-size: clamp(15px, 1.8vw, 18px);
   line-height: 1.75;
 }
+
+/* Official SUDF team profile cards */
+.sudf-team-initials {
+  display:grid;
+  width:104px;
+  height:104px;
+  place-items:center;
+  border:1px solid rgba(201,162,39,.65);
+  border-radius:50%;
+  background:linear-gradient(145deg,#174d3c,#0b3b2e);
+  color:#e2c75b !important;
+  font-size:34px !important;
+  font-weight:800;
+  letter-spacing:.04em !important;
+}
+.sudf-team-card-copy .sudf-team-role {
+  min-height:0;
+  margin:0 0 14px;
+  color:var(--green-2);
+  font-size:14px;
+  font-weight:800;
+  line-height:1.5;
+}
+.sudf-team-card-copy > p:not(.eyebrow) {
+  min-height:0;
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+}
+.sudf-team-photo-placeholder > span:last-child {
+  color:#7b795e;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+@media(max-width:620px) {
+  .sudf-team-card-copy { padding:22px; }
+}
