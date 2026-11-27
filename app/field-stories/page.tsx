@@ -13,7 +13,7 @@ export default async function FieldStoriesIndexPage() {
     <main className="sudf-field-story-page">
       <SiteHeader />
       <section className="section sudf-field-index">
-        <p className="eyebrow">FROM THE FIELD</p>
+        <p className="eyebrow">SUDF IN ACTION</p>
         <h1>Stories from our communities</h1>
         <p className="sudf-field-index-intro">Explore SUDF outreach activities, diabetes screening, health education and the people and communities behind the work.</p>
         <div className="sudf-field-index-grid">
