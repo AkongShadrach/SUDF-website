@@ -12,6 +12,7 @@ const teamMembers = [
   },
   {
     name: "Goodness Omini",
+    photo: "/team/goodness-omini.png",
     role: "Media and Publicity",
     group: "MEDIA AND COMMUNICATIONS",
     bio: "Goodness coordinates media engagement and publicity for SUDF’s outreach activities and awareness campaigns.",
@@ -36,6 +37,7 @@ const teamMembers = [
   },
   {
     name: "Sylvia Ujong",
+    photo: "/team/sylvia-ujong.png",
     role: "Head of Financial Operations",
     group: "OPERATIONS AND ADMINISTRATION",
     bio: "Sylvia oversees SUDF’s day-to-day financial operations, including budgeting, expenditure tracking and financial reporting.",
@@ -66,6 +68,7 @@ const teamMembers = [
   },
   {
     name: "Obia Oka-michael",
+    photo: "/team/obia-oka-michael.png",
     role: "Secretary",
     group: "OPERATIONS AND ADMINISTRATION",
     bio: "Obia Oka-michael coordinates meeting records, official correspondence and administrative follow-up for the Foundation.",
@@ -106,9 +109,15 @@ export default function TeamPage() {
         <div className="sudf-team-grid">
           {teamMembers.map((member) => (
             <article className="sudf-team-card" key={member.name}>
-              <div className="sudf-team-photo-placeholder" aria-label={`No photograph supplied for ${member.name}`}>
-                <span className="sudf-team-initials" aria-hidden="true">{member.name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase()}</span>
-                <span>SUDF TEAM</span>
+              <div className="sudf-team-photo-placeholder">
+                {"photo" in member && member.photo ? (
+                  <img className="sudf-team-photo" src={member.photo} alt={`${member.name} — SUDF team member`} />
+                ) : (
+                  <>
+                    <span className="sudf-team-initials" aria-hidden="true">{member.name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase()}</span>
+                    <span>SUDF TEAM</span>
+                  </>
+                )}
               </div>
               <div className="sudf-team-card-copy">
                 <p className="eyebrow">{member.group}</p>
