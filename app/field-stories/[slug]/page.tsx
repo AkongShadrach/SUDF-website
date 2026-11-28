@@ -57,7 +57,7 @@ export default async function FieldStoryPage({ params }: { params: Promise<{ slu
                 {story.people_reached !== null && <div><UsersRound size={22}/><strong>{story.people_reached.toLocaleString("en-NG")}</strong><span>People reached</span></div>}
                 {story.people_screened !== null && <div><HeartPulse size={22}/><strong>{story.people_screened.toLocaleString("en-NG")}</strong><span>People screened</span></div>}
               </div>
-              {story.impact_notes && <p>{story.impact_notes}</p>}
+              {story.impact_notes && <ul className="sudf-field-impact-notes">{story.impact_notes.split(/\\r?\\n/).map(line => line.trim()).filter(Boolean).map((line, index) => <li key={index}>{line.replace(/^[•·\\-]+\\s*/, "")}</li>)}</ul>}
             </section>
           )}
           {story.partners?.length > 0 && <section className="sudf-field-partners"><p className="eyebrow">PARTNERS & COLLABORATORS</p><p>{story.partners.join(" · ")}</p></section>}
