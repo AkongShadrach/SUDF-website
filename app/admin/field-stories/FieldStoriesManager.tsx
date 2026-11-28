@@ -26,28 +26,21 @@ async function preparePhoto(file: File): Promise<File> {
   const extension = file.name.split(".").pop()?.toLowerCase();
   const inferredType = file.type || (extension === "png" ? "image/png" : extension === "jpg" || extension === "jpeg" ? "image/jpeg" : extension === "webp" ? "image/webp" : extension === "avif" ? "image/avif" : "");
   if (!["image/jpeg", "image/png", "image/webp", "image/avif"].includes(inferredType)) {
-    throw new Error(`${file.name} does not appear to be a supported JPG, PNG, WebP or AVIF image.`);
+    throw new Error(`${file.name} is not a supported JPG, PNG, WebP or AVIF image.`);
   }
   const source = file.type === inferredType ? file : new File([file], file.name, { type: inferredType, lastModified: file.lastModified });
-  if (source.size <= 900 * 1024) return source;
-
-  // Some Android browsers cannot decode files selected from the device gallery
-  // with createImageBitmap. Use the HTML image decoder as a compatible fallback.
+  // Keep every image compact so a cover plus 12 supporting photos fit safely
+  // inside Vercel's serverless request-body limit.
+  if (source.size <= 240 * 1024) return source;
   let bitmap: ImageBitmap | null = null;
   let image: HTMLImageElement | null = null;
   let objectUrl: string | null = null;
-  let width = 0;
-  let height = 0;
   try {
     if (typeof createImageBitmap === "function") {
-      try {
-        bitmap = await createImageBitmap(source);
-        width = bitmap.width;
-        height = bitmap.height;
-      } catch {
-        // Fall through to the HTMLImageElement decoder.
-      }
+      try { bitmap = await createImageBitmap(source); } catch { /* Android fallback below */ }
     }
+    let width = bitmap?.width ?? 0;
+    let height = bitmap?.height ?? 0;
     if (!bitmap) {
       objectUrl = URL.createObjectURL(source);
       image = new Image();
@@ -60,9 +53,8 @@ async function preparePhoto(file: File): Promise<File> {
       width = image.naturalWidth;
       height = image.naturalHeight;
     }
-
     if (!width || !height) throw new Error("The selected photograph has invalid image dimensions.");
-    const scale = Math.min(1, 1800 / Math.max(width, height));
+    const scale = Math.min(1, 1600 / Math.max(width, height));
     const canvas = document.createElement("canvas");
     canvas.width = Math.max(1, Math.round(width * scale));
     canvas.height = Math.max(1, Math.round(height * scale));
@@ -70,18 +62,14 @@ async function preparePhoto(file: File): Promise<File> {
     if (!context) throw new Error("Your browser could not prepare the photograph.");
     if (bitmap) context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
     else if (image) context.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-    for (const quality of [0.82, 0.74, 0.66, 0.58]) {
+    for (const quality of [0.76, 0.68, 0.60, 0.52, 0.44, 0.36]) {
       const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/webp", quality));
-      if (blob && blob.size <= 900 * 1024) {
+      if (blob && blob.size <= 240 * 1024) {
         const base = source.name.replace(/\.[^.]+$/, "") || "sudf-photo";
         return new File([blob], `${base}.webp`, { type: "image/webp", lastModified: Date.now() });
       }
     }
-    throw new Error(`${file.name} could not be compressed small enough. Please choose a smaller photograph.`);
-  } catch (error) {
-    if (error instanceof Error && error.message.includes("could not be compressed")) throw error;
-    throw new Error(`Your browser could not process ${file.name}. Please try selecting the original photo from Gallery, or use a smaller JPG/PNG image.`);
+    throw new Error(`${file.name} could not be reduced enough for upload. Please choose a smaller photograph.`);
   } finally {
     bitmap?.close();
     if (objectUrl) URL.revokeObjectURL(objectUrl);
@@ -234,7 +222,7 @@ export default function FieldStoriesManager({ initialItems, loadError }: { initi
           <label style={{ ...labelStyle, gridColumn: "1 / -1" }}>Impact notes<textarea rows={3} value={impactNotes} onChange={event => setImpactNotes(event.target.value)} style={inputStyle} placeholder="Optional outcomes, referrals, observations or follow-up needs." /></label>
           <label style={{ ...labelStyle, gridColumn: "1 / -1" }}>Partners and collaborators<textarea rows={2} value={partners} onChange={event => setPartners(event.target.value)} style={inputStyle} placeholder="One organisation per line" /></label>
           <label style={labelStyle}>Cover photograph {!editing && "*"}<input type="file" accept="image/jpeg,image/png,image/webp,image/avif" required={!editing} onChange={event => setCover(event.target.files?.[0] ?? null)} style={inputStyle} /><small style={{ color: "#748078", fontWeight: 400 }}>Photos are automatically optimised for reliable upload</small></label>
-          <label style={labelStyle}>Additional photographs<input type="file" multiple accept="image/jpeg,image/png,image/webp,image/avif" onChange={event => setGallery(Array.from(event.target.files ?? []))} style={inputStyle} /><small style={{ color: "#748078", fontWeight: 400 }}>Up to 12 photos; files are automatically optimised. {editing ? "New photos are added to the existing gallery." : "Optional supporting images."}</small></label>
+          <label style={labelStyle}>Additional photographs<input type="file" multiple accept="image/jpeg,image/png,image/webp,image/avif" onChange={event => { const selected = Array.from(event.target.files ?? []); setGallery(current => { const combined = [...current]; for (const file of selected) { if (!combined.some(existing => existing.name === file.name && existing.size === file.size && existing.lastModified === file.lastModified)) combined.push(file); } return combined.slice(0, Math.max(0, 12 - (editing?.gallery_images?.length ?? 0))); }); event.target.value = ""; }} style={inputStyle} /><small style={{ color: "#748078", fontWeight: 400 }}>{editing ? `Up to ${Math.max(0, 12 - (editing.gallery_images?.length ?? 0))} more photos; ${editing.gallery_images?.length ?? 0} already attached.` : "Up to 12 supporting photos. You can select photos more than once; selections are added together."} Photos are automatically optimised.</small></label>
           {editing && <div style={{ gridColumn: "1 / -1", display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}><img src={editing.cover_image_url} alt={editing.title} style={{ width: 130, height: 84, objectFit: "cover", borderRadius: 10 }} /><span style={{ color: "#748078", fontSize: 13 }}>Current cover photo. Select a new file above to replace it. {editing.gallery_images?.length ?? 0} additional photo(s) already attached.</span></div>}
           <label style={labelStyle}>Publishing status<select value={status} onChange={event => setStatus(event.target.value as typeof status)} style={inputStyle}><option value="draft">Draft</option><option value="published">Published</option><option value="archived">Archived</option></select></label>
           <label style={{ ...labelStyle, display: "flex", flexDirection: "row", alignItems: "center", gap: 9, alignSelf: "center" }}><input type="checkbox" checked={featured} onChange={event => setFeatured(event.target.checked)} /> Feature this story on the homepage</label>
