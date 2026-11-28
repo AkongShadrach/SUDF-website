@@ -17,7 +17,7 @@ export default function SiteHeader() {
 
   return (
     <header className="site-header">
-      <a className="brand" href="/#home" aria-label="SUDF home" onClick={() => setOpen(false)}>
+      <a className="brand" href="/" aria-label="SUDF home" onClick={() => { setOpen(false); window.scrollTo(0, 0); }}>
         <img className="brand-logo" src="/sudf-logo-horizontal.png" alt="Sylvester Ujong Diabetes Foundation" />
       </a>
 
