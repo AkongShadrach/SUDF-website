@@ -3164,11 +3164,14 @@ body:has(main > .footer) {
 }
 
 
-/* Keep the featured marker low on the photo, clear of people's faces. */
+/* Keep the featured marker compact and low on the photo. */
 .sudf-field-latest-badge {
   top: auto;
   bottom: 18px;
   left: 18px;
+  padding: 7px 12px;
+  font-size: 9px;
+  letter-spacing: .1em;
 }
 
 /* Preserve each impact note as a distinct readable line. */
