@@ -92,7 +92,7 @@ export default function DonationsManager({ initialDonations, loadError, relatedE
           <label className={styles.search}><Search size={17}/><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search donor, email or reference"/></label>
         </div>
         <div className={styles.filters}>{filters.map((key) => <button type="button" key={key} onClick={() => setFilter(key)} className={filter === key ? styles.filterActive : styles.filter}>{key === "all" ? "All" : key.replaceAll("_", " ")}</button>)}</div>
-        {visible.length === 0 ? <div className={styles.empty}><Wallet size={30}/><strong>{items.length ? "No matching donations" : "No donation records yet"}</strong><p>{items.length ? "Try a different search or status filter." : "New donations submitted through the public website will appear here once the database migration is applied."}</p></div> :
+        {visible.length === 0 ? <div className={styles.empty}><Wallet size={30}/><strong>{items.length ? "No matching donations" : "No donation records yet"}</strong><p>{items.length ? "Try a different search or status filter." : "New donations submitted through the public website will appear here."}</p></div> :
           <div className={styles.tableWrap}><table className={styles.table}>
             <thead><tr><th>Donor</th><th>Amount</th><th>Purpose</th><th>Payment</th><th>Status</th><th>Date</th><th></th></tr></thead>
             <tbody>{visible.map((item) => <tr key={item.id}>
