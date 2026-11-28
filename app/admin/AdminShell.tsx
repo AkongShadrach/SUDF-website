@@ -18,7 +18,7 @@ const links = [
   { label: "Impact Metrics", href: "/admin/impact", icon: Activity, roles: ["super_admin", "content_editor"] },
   { label: "Contact Inbox", href: "/admin/contacts", icon: Mail, roles: ["super_admin", "admin_email"] },
   { label: "Support Enquiries", href: "/admin/support", icon: HandHeart, roles: ["super_admin", "admin_email"] },
-  { label: "Donations", href: "/admin/donations", icon: Wallet, roles: ["super_admin"] },
+  { label: "Donations", href: "/admin/donations", icon: Wallet, roles: ["super_admin", "admin_email"] },
   { label: "Volunteer Applications", href: "/admin/volunteers", icon: Users, roles: ["super_admin", "admin_email"] },
   { label: "Newsletter", href: "/admin/newsletter", icon: Mail, roles: ["super_admin"] },
   { label: "Administration", href: "/admin/settings", icon: Settings, roles: ["super_admin"] },
@@ -52,7 +52,7 @@ export default function AdminShell({ admin, children }: { admin: SudfAdminContex
       </aside>
       {menuOpen && <button className="sudf-admin-backdrop" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />}
       <div className="sudf-admin-main">
-        <header className="sudf-admin-topbar"><button className="sudf-admin-menu-button" onClick={() => setMenuOpen((value) => !value)} aria-label={menuOpen ? "Close menu" : "Open menu"}>{menuOpen ? <X/> : <Menu/>}</button><div><span>SUDF / Administration</span><strong>{pathname === "/admin" ? "Dashboard overview" : pathname.split("/").filter(Boolean).at(-1)?.replaceAll("-", " ")}</strong></div><span className="sudf-admin-top-role">{admin.role === "super_admin" ? "Super Admin" : "Content Editor"}</span></header>
+        <header className="sudf-admin-topbar"><button className="sudf-admin-menu-button" onClick={() => setMenuOpen((value) => !value)} aria-label={menuOpen ? "Close menu" : "Open menu"}>{menuOpen ? <X/> : <Menu/>}</button><div><span>SUDF / Administration</span><strong>{pathname === "/admin" ? "Dashboard overview" : pathname.split("/").filter(Boolean).at(-1)?.replaceAll("-", " ")}</strong></div><span className="sudf-admin-top-role">{admin.role === "super_admin" ? "Super Admin" : admin.role === "admin_email" ? "Admin Email" : "Content Editor"}</span></header>
         <main className="sudf-admin-content">{children}</main>
       </div>
     </div>
