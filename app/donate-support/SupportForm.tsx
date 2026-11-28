@@ -34,7 +34,7 @@ export default function SupportForm() {
 
     try {
       const isCheckoutDonation = values.supportType === "Financial donation"
-        && /^\s*₦?\s*\d[\d,]*(\.\d{1,2})?\s*$/.test(values.amount);
+        && /^\\s*₦?\\s*\\d[\\d,]*(\\.\\d{1,2})?\\s*$/.test(values.amount);
 
       const endpoint = isCheckoutDonation ? "/api/donations" : "/api/support-enquiries";
       const payload = isCheckoutDonation
@@ -43,7 +43,7 @@ export default function SupportForm() {
             organisation: values.organisation,
             email: values.email,
             phone: values.phone,
-            amount: values.amount.replace(/[₦,\s]/g, ""),
+            amount: values.amount.replace(/[₦,\\s]/g, ""),
             purpose: values.supportArea,
             message: values.message,
             source: "support_form",
@@ -76,6 +76,8 @@ export default function SupportForm() {
       setFeedback(error instanceof Error ? error.message : "Something went wrong. Please try again.");
     }
   }
+
+  const isReadyForPayment = values.supportType === "Financial donation" && Boolean(values.amount.trim());
 
   return (
     <form className="support-form" onSubmit={handleSubmit}>
@@ -110,10 +112,9 @@ export default function SupportForm() {
         <span>I agree that Sylvester Ujong Diabetes Foundation may contact me about this support enquiry or donation.</span>
       </label>
       <button className="button button-green support-submit" type="submit" disabled={status === "sending"}>
-        {status === "sending" ? "Submitting..." : values.supportType === "Financial donation" && values.amount.trim() ? "CONTINUE TO PAYMENT" : "BECOME A SUPPORTER"} <span aria-hidden="true">→</span>
+        {status === "sending" ? "Submitting..." : isReadyForPayment ? "CONTINUE TO PAYMENT OPTIONS" : "SEND SUPPORT ENQUIRY"} <span aria-hidden="true">→</span>
       </button>
       {feedback && <p className={status === "success" ? "support-form-feedback success" : "support-form-feedback error"} role="status">{feedback}</p>}
-      <p className="support-form-footnote">A specific amount creates a pending donation record and continues to payment options. Other support enquiries and open-ended pledges are recorded for Foundation follow-up. No payment is taken by this form.</p>
     </form>
   );
 }
