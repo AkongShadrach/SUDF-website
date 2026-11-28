@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 
 export async function PATCH(request: Request) {
   const admin = await getAdminContext();
-  if (!admin || admin.role !== "super_admin") {
-    return NextResponse.json({ error: "Super administrator access is required to manage donation records." }, { status: 403 });
+  if (!admin || !["super_admin", "admin_email"].includes(admin.role)) {
+    return NextResponse.json({ error: "Authorised donation-management access is required." }, { status: 403 });
   }
 
   let input: Record<string, unknown>;
