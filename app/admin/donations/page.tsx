@@ -1,7 +1,9 @@
 import { createAdminServiceClient, requireAdmin } from "../../../utils/supabase/admin";
 import DonationsManager, { type DonationRecord } from "./DonationsManager";
 
-type PaymentRow = { id: string; donation_id: string; provider: string; payment_method: string | null; provider_reference: string | null; amount: number; currency: string; status: string; verified_at: string | null; created_at: string };\n\nexport const dynamic = "force-dynamic";
+type PaymentRow = { id: string; donation_id: string; provider: string; payment_method: string | null; provider_reference: string | null; amount: number; currency: string; status: string; verified_at: string | null; created_at: string };
+
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function DonationsPage() {
