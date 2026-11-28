@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Activity, BookOpen, CalendarDays, FileText, HandHeart, LayoutDashboard, LogOut, Mail, Menu, Newspaper, Settings, Users, X, ClipboardList } from "lucide-react";
+import { Activity, BookOpen, CalendarDays, FileText, HandHeart, LayoutDashboard, LogOut, Mail, Menu, Newspaper, Settings, Users, X, ClipboardList, Wallet } from "lucide-react";
 import { createClient } from "../../utils/supabase/client";
 type SudfAdminContext = { userId: string; email: string; role: "super_admin" | "content_editor" | "admin_email" };
 
@@ -18,6 +18,7 @@ const links = [
   { label: "Impact Metrics", href: "/admin/impact", icon: Activity, roles: ["super_admin", "content_editor"] },
   { label: "Contact Inbox", href: "/admin/contacts", icon: Mail, roles: ["super_admin", "admin_email"] },
   { label: "Support Enquiries", href: "/admin/support", icon: HandHeart, roles: ["super_admin", "admin_email"] },
+  { label: "Donations", href: "/admin/donations", icon: Wallet, roles: ["super_admin"] },
   { label: "Volunteer Applications", href: "/admin/volunteers", icon: Users, roles: ["super_admin", "admin_email"] },
   { label: "Newsletter", href: "/admin/newsletter", icon: Mail, roles: ["super_admin"] },
   { label: "Administration", href: "/admin/settings", icon: Settings, roles: ["super_admin"] },
