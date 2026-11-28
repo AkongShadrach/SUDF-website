@@ -18,36 +18,39 @@ export async function POST(request: Request) {
   const admin = await authorised();
   if (!admin) return NextResponse.json({error:"Super administrator access required."},{status:403});
   const form = await request.formData();
-  const file = form.get("image");
+  const files = form.getAll("images").filter((entry): entry is File => entry instanceof File && entry.size > 0);
+  const legacyFile = form.get("image");
+  if (!files.length && legacyFile instanceof File) files.push(legacyFile);
   const title = String(form.get("title") ?? "").trim();
   const caption = String(form.get("caption") ?? "").trim();
   const category = String(form.get("category") ?? "outreach").trim();
   const status = String(form.get("status") ?? "draft");
   const displayOrder = Number(form.get("display_order") ?? 0);
-  if (!(file instanceof File) || !title) return NextResponse.json({error:"A title and image file are required."},{status:400});
-  const ext = MIME_EXT[file.type];
-  if (!ext) return NextResponse.json({error:"Use a JPG, PNG, WebP or AVIF image."},{status:400});
-  if (file.size > MAX_BYTES) return NextResponse.json({error:"Image must be 10 MB or smaller."},{status:400});
-  if (!["draft","published","archived"].includes(status)) return NextResponse.json({error:"Invalid publishing status."},{status:400});
+  if (!title || !files.length) return NextResponse.json({error:"A title and at least one image are required."},{status:400});
+  if (files.length > 12) return NextResponse.json({error:"You can upload a maximum of 12 photographs at once."},{status:400});
+  if (![ "draft", "published", "archived" ].includes(status)) return NextResponse.json({error:"Invalid publishing status."},{status:400});
   const supabase = createAdminServiceClient();
-  const id = crypto.randomUUID();
-  const path = `gallery/${id}.${ext}`;
-  const {error:uploadError} = await supabase.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});
-  if (uploadError) return NextResponse.json({error:"Image upload failed: "+uploadError.message},{status:400});
-  const {data:{publicUrl}} = supabase.storage.from(BUCKET).getPublicUrl(path);
-  const {data,error} = await supabase.from("gallery_items").insert({
-    id,title,caption:caption||null,image_url:publicUrl,storage_path:path,category:category||"outreach",
-    display_order:Number.isFinite(displayOrder)?displayOrder:0,status
-  }).select("*").single();
-  if (error) {
-    await supabase.storage.from(BUCKET).remove([path]);
-    return NextResponse.json({error:"The image uploaded but its gallery record could not be saved: "+error.message},{status:400});
+  const uploadedPaths: string[] = [];
+  const rows = [];
+  for (let index = 0; index < files.length; index++) {
+    const file = files[index];
+    const ext = MIME_EXT[file.type];
+    if (!ext) { if (uploadedPaths.length) await supabase.storage.from(BUCKET).remove(uploadedPaths); return NextResponse.json({error:"Use JPG, PNG, WebP or AVIF images."},{status:400}); }
+    if (file.size > MAX_BYTES) { if (uploadedPaths.length) await supabase.storage.from(BUCKET).remove(uploadedPaths); return NextResponse.json({error:"Each image must be 10 MB or smaller."},{status:400}); }
+    const id = crypto.randomUUID();
+    const storagePath = `gallery/${id}.${ext}`;
+    const {error:uploadError} = await supabase.storage.from(BUCKET).upload(storagePath,file,{contentType:file.type,upsert:false});
+    if (uploadError) { if (uploadedPaths.length) await supabase.storage.from(BUCKET).remove(uploadedPaths); return NextResponse.json({error:"Image upload failed: "+uploadError.message},{status:400}); }
+    uploadedPaths.push(storagePath);
+    const {data:{publicUrl}} = supabase.storage.from(BUCKET).getPublicUrl(storagePath);
+    rows.push({id,title,caption:caption||null,image_url:publicUrl,storage_path:storagePath,category:category||"outreach",display_order:(Number.isFinite(displayOrder)?displayOrder:0)+index,status});
   }
-  await supabase.from("sudf_admin_audit_logs").insert({actor_auth_user_id:admin.userId,actor_email:admin.email,actor_role:admin.role,action:"gallery_item_created",resource_type:"gallery_items",resource_id:id,details:{title,status}});
+  const {data,error} = await supabase.from("gallery_items").insert(rows).select("*");
+  if (error) { await supabase.storage.from(BUCKET).remove(uploadedPaths); return NextResponse.json({error:"Images uploaded but gallery records could not be saved: "+error.message},{status:400}); }
+  await supabase.from("sudf_admin_audit_logs").insert({actor_auth_user_id:admin.userId,actor_email:admin.email,actor_role:admin.role,action:"gallery_items_created",resource_type:"gallery_items",details:{title,status,count:rows.length}});
   refresh();
-  return NextResponse.json({item:data},{status:201});
+  return NextResponse.json({items:data},{status:201});
 }
-
 export async function PATCH(request: Request) {
   const admin = await authorised();
   if (!admin) return NextResponse.json({error:"Super administrator access required."},{status:403});
