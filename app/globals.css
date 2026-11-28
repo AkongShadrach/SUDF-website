@@ -3188,3 +3188,71 @@ body:has(main > .footer) {
 @media (max-width: 520px) {
   .sudf-field-latest-badge { bottom: 12px; left: 12px; }
 }
+
+
+/* Improve the More field stories heading contrast on the dark SUDF section. */
+.sudf-field-more-heading h3 {
+  color: #f8f5e9;
+  font-family: Georgia, serif;
+  font-size: clamp(25px, 3vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.sudf-field-more-heading span {
+  color: rgba(248,245,233,.78);
+}
+
+/* Full-screen swipeable photo viewer shared by stories and the main gallery. */
+.sudf-story-photo-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background: transparent;
+  cursor: zoom-in;
+}
+.sudf-story-photo-trigger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sudf-story-cover-trigger img {
+  max-height: 620px;
+  object-fit: cover;
+}
+.sudf-field-photo-gallery figure {
+  overflow: hidden;
+}
+.sudf-lightbox {
+  touch-action: pan-y;
+}
+.sudf-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  width: 48px;
+  height: 58px;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.48);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255,255,255,.12);
+  cursor: pointer;
+  z-index: 2;
+}
+.sudf-lightbox-prev { left: max(12px, env(safe-area-inset-left)); }
+.sudf-lightbox-next { right: max(12px, env(safe-area-inset-right)); }
+.sudf-lightbox-image {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+@media (max-width: 520px) {
+  .sudf-lightbox-nav { width: 38px; height: 48px; }
+  .sudf-lightbox-prev { left: 6px; }
+  .sudf-lightbox-next { right: 6px; }
+  .sudf-lightbox-image { max-width: calc(100vw - 26px); }
+}
