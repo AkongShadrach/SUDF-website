@@ -3163,3 +3163,25 @@ body:has(main > .footer) {
   color: rgba(248, 245, 233, .78);
 }
 
+
+/* Keep the featured marker low on the photo, clear of people's faces. */
+.sudf-field-latest-badge {
+  top: auto;
+  bottom: 18px;
+  left: 18px;
+}
+
+/* Preserve each impact note as a distinct readable line. */
+.sudf-field-impact-notes {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding-left: 22px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.sudf-field-impact-notes li { padding-left: 3px; }
+@media (max-width: 520px) {
+  .sudf-field-latest-badge { bottom: 12px; left: 12px; }
+}
