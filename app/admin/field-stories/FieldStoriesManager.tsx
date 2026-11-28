@@ -23,28 +23,69 @@ function slugPreview(value: string) {
   return value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "your-story";
 }
 async function preparePhoto(file: File): Promise<File> {
-  if (!file.type.startsWith("image/")) throw new Error(`${file.name} is not a supported image.`);
-  if (file.size <= 900 * 1024 && ["image/jpeg", "image/png", "image/webp", "image/avif"].includes(file.type)) return file;
-  let bitmap: ImageBitmap;
-  try { bitmap = await createImageBitmap(file); }
-  catch { throw new Error(`Could not read ${file.name}. Please choose a JPG, PNG or WebP photograph.`); }
+  const extension = file.name.split(".").pop()?.toLowerCase();
+  const inferredType = file.type || (extension === "png" ? "image/png" : extension === "jpg" || extension === "jpeg" ? "image/jpeg" : extension === "webp" ? "image/webp" : extension === "avif" ? "image/avif" : "");
+  if (!["image/jpeg", "image/png", "image/webp", "image/avif"].includes(inferredType)) {
+    throw new Error(`${file.name} does not appear to be a supported JPG, PNG, WebP or AVIF image.`);
+  }
+  const source = file.type === inferredType ? file : new File([file], file.name, { type: inferredType, lastModified: file.lastModified });
+  if (source.size <= 900 * 1024) return source;
+
+  // Some Android browsers cannot decode files selected from the device gallery
+  // with createImageBitmap. Use the HTML image decoder as a compatible fallback.
+  let bitmap: ImageBitmap | null = null;
+  let image: HTMLImageElement | null = null;
+  let objectUrl: string | null = null;
+  let width = 0;
+  let height = 0;
   try {
-    const scale = Math.min(1, 1800 / Math.max(bitmap.width, bitmap.height));
+    if (typeof createImageBitmap === "function") {
+      try {
+        bitmap = await createImageBitmap(source);
+        width = bitmap.width;
+        height = bitmap.height;
+      } catch {
+        // Fall through to the HTMLImageElement decoder.
+      }
+    }
+    if (!bitmap) {
+      objectUrl = URL.createObjectURL(source);
+      image = new Image();
+      image.decoding = "async";
+      image.src = objectUrl;
+      await new Promise<void>((resolve, reject) => {
+        image!.onload = () => resolve();
+        image!.onerror = () => reject(new Error("The browser could not decode this photograph."));
+      });
+      width = image.naturalWidth;
+      height = image.naturalHeight;
+    }
+
+    if (!width || !height) throw new Error("The selected photograph has invalid image dimensions.");
+    const scale = Math.min(1, 1800 / Math.max(width, height));
     const canvas = document.createElement("canvas");
-    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
-    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    canvas.width = Math.max(1, Math.round(width * scale));
+    canvas.height = Math.max(1, Math.round(height * scale));
     const context = canvas.getContext("2d");
     if (!context) throw new Error("Your browser could not prepare the photograph.");
-    context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    if (bitmap) context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    else if (image) context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
     for (const quality of [0.82, 0.74, 0.66, 0.58]) {
       const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/webp", quality));
       if (blob && blob.size <= 900 * 1024) {
-        const base = file.name.replace(/\.[^.]+$/, "") || "sudf-photo";
+        const base = source.name.replace(/\.[^.]+$/, "") || "sudf-photo";
         return new File([blob], `${base}.webp`, { type: "image/webp", lastModified: Date.now() });
       }
     }
-    throw new Error(`${file.name} is too large to prepare for upload. Please select a smaller photograph.`);
-  } finally { bitmap.close(); }
+    throw new Error(`${file.name} could not be compressed small enough. Please choose a smaller photograph.`);
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("could not be compressed")) throw error;
+    throw new Error(`Your browser could not process ${file.name}. Please try selecting the original photo from Gallery, or use a smaller JPG/PNG image.`);
+  } finally {
+    bitmap?.close();
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+  }
 }
 
 function dateLabel(value: string) {
