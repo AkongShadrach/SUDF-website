@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function DonationsPage() {
-  await requireAdmin(["super_admin"]);
+  await requireAdmin(["super_admin", "admin_email"]);
   const supabase = createAdminServiceClient();
   const { data: donations, error } = await supabase
     .from("donations")
