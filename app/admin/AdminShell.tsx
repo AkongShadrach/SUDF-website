@@ -46,7 +46,7 @@ export default function AdminShell({ admin, children }: { admin: SudfAdminContex
           ))}
         </nav>
         <div className="sudf-admin-sidebar-bottom">
-          <div className="sudf-admin-user"><span className="sudf-admin-avatar">{admin.email.slice(0,1).toUpperCase()}</span><span><strong>{admin.email}</strong><small>{admin.role === "super_admin" ? "Super Admin" : admin.role === "admin_email" ? "Admin Email" : "Content Editor"}</small></span></div>
+          <div className="sudf-admin-user"><span className="sudf-admin-avatar">{admin.email.slice(0,1).toUpperCase()}</span><span><strong>{admin.email}</strong><small>{admin.role === "super_admin" ? "Super Admin" : admin.role === "admin_email" ? "Founder & Operations" : "Content Editor"}</small></span></div>
           <button type="button" onClick={signOut}><LogOut size={17}/> Sign out</button>
         </div>
       </aside>
