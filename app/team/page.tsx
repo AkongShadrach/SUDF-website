@@ -19,6 +19,7 @@ const teamMembers = [
   },
   {
     name: "Shadrach Akong",
+    photo: "/team/shadrach-akong.png",
     role: "Head of IT",
     group: "OPERATIONS AND ADMINISTRATION",
     bio: "Shadrach oversees the digital systems and tools that support SUDF’s day-to-day operations and programme delivery.",
