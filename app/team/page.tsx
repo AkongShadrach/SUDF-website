@@ -65,10 +65,10 @@ const teamMembers = [
     bio: "Emmanuel leads strategic planning and coordinates training and professional development for staff and volunteers.",
   },
   {
-    name: "Obia Samuel",
+    name: "Obia Oka-michael",
     role: "Secretary",
     group: "OPERATIONS AND ADMINISTRATION",
-    bio: "Obia coordinates meeting records, official correspondence and administrative follow-up for the Foundation.",
+    bio: "Obia Oka-michael coordinates meeting records, official correspondence and administrative follow-up for the Foundation.",
   },
 ];
 
