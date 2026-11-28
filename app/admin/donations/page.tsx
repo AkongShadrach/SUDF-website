@@ -22,7 +22,8 @@ export default async function DonationsPage() {
     ? await supabase.from("donation_payments").select("id,donation_id,provider,payment_method,provider_reference,amount,currency,status,verified_at,created_at").in("donation_id", donationIds).order("created_at", { ascending: false })
     : null;
 
-  const donors = new Map((donorResult?.data ?? []).map((donor) => [donor.id, donor]));
+  const donors = new Map<string, { id: string; full_name: string; email: string; phone: string | null; organisation: string | null }>();
+  for (const donor of donorResult?.data ?? []) donors.set(donor.id, donor);
   const latestPayments = new Map<string, PaymentRow>();
   for (const payment of paymentResult?.data ?? []) {
     if (!latestPayments.has(payment.donation_id)) latestPayments.set(payment.donation_id, payment);
