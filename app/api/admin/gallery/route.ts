@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   if (![ "draft", "published", "archived" ].includes(status)) return NextResponse.json({error:"Invalid publishing status."},{status:400});
   const supabase = createAdminServiceClient();
   const uploadedPaths: string[] = [];
-  const rows = [];
+  const rows: Record<string, unknown>[] = [];
   for (let index = 0; index < files.length; index++) {
     const file = files[index];
     const ext = MIME_EXT[file.type];
