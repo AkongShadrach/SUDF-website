@@ -3302,3 +3302,27 @@ body:has(main > .footer) {
     margin-bottom: 20px;
   }
 }
+
+
+/* Framed legacy portrait — SUDF green mat with a restrained gold edge. */
+.hero-image {
+  padding: clamp(14px, 2.6vw, 28px) clamp(14px, 3vw, 34px);
+  background: var(--green);
+}
+.hero-image img {
+  box-sizing: border-box;
+  border: 7px solid var(--green);
+  border-radius: clamp(24px, 3.5vw, 38px);
+  outline: 1px solid rgba(226, 199, 91, .72);
+  outline-offset: -1px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .2);
+}
+@media (max-width: 620px) {
+  .hero-image {
+    padding: 12px 5vw 20px;
+  }
+  .hero-image img {
+    border-width: 6px;
+    border-radius: 28px;
+  }
+}
