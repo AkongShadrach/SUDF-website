@@ -23,15 +23,17 @@ function slugPreview(value: string) {
   return value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "your-story";
 }
 async function preparePhoto(file: File): Promise<File> {
+  const TARGET_BYTES = 200 * 1024;
   const extension = file.name.split(".").pop()?.toLowerCase();
   const inferredType = file.type || (extension === "png" ? "image/png" : extension === "jpg" || extension === "jpeg" ? "image/jpeg" : extension === "webp" ? "image/webp" : extension === "avif" ? "image/avif" : "");
   if (!["image/jpeg", "image/png", "image/webp", "image/avif"].includes(inferredType)) {
     throw new Error(`${file.name} is not a supported JPG, PNG, WebP or AVIF image.`);
   }
   const source = file.type === inferredType ? file : new File([file], file.name, { type: inferredType, lastModified: file.lastModified });
-  // Keep every image compact so a cover plus 12 supporting photos fit safely
-  // inside Vercel's serverless request-body limit.
-  if (source.size <= 240 * 1024) return source;
+  // Keep each image near 200 KB so one cover plus 12 supporting photos
+  // stay comfortably below the combined multipart request limit.
+  if (source.size <= TARGET_BYTES) return source;
+
   let bitmap: ImageBitmap | null = null;
   let image: HTMLImageElement | null = null;
   let objectUrl: string | null = null;
@@ -54,22 +56,27 @@ async function preparePhoto(file: File): Promise<File> {
       height = image.naturalHeight;
     }
     if (!width || !height) throw new Error("The selected photograph has invalid image dimensions.");
-    const scale = Math.min(1, 1600 / Math.max(width, height));
-    const canvas = document.createElement("canvas");
-    canvas.width = Math.max(1, Math.round(width * scale));
-    canvas.height = Math.max(1, Math.round(height * scale));
-    const context = canvas.getContext("2d");
-    if (!context) throw new Error("Your browser could not prepare the photograph.");
-    if (bitmap) context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-    else if (image) context.drawImage(image, 0, 0, canvas.width, canvas.height);
-    for (const quality of [0.76, 0.68, 0.60, 0.52, 0.44, 0.36]) {
-      const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/webp", quality));
-      if (blob && blob.size <= 240 * 1024) {
-        const base = source.name.replace(/\.[^.]+$/, "") || "sudf-photo";
-        return new File([blob], `${base}.webp`, { type: "image/webp", lastModified: Date.now() });
+
+    const base = source.name.replace(/\.[^.]+$/, "") || "sudf-photo";
+    let scale = Math.min(1, 1400 / Math.max(width, height));
+    for (let dimensionPass = 0; dimensionPass < 4; dimensionPass += 1) {
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(width * scale));
+      canvas.height = Math.max(1, Math.round(height * scale));
+      const context = canvas.getContext("2d");
+      if (!context) throw new Error("Your browser could not prepare the photograph.");
+      if (bitmap) context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      else if (image) context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      for (const quality of [0.78, 0.70, 0.62, 0.54, 0.46, 0.38, 0.30, 0.24]) {
+        const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, "image/webp", quality));
+        if (blob && blob.size <= TARGET_BYTES) {
+          return new File([blob], `${base}.webp`, { type: "image/webp", lastModified: source.lastModified });
+        }
       }
+      scale *= 0.78;
     }
-    throw new Error(`${file.name} could not be reduced enough for upload. Please choose a smaller photograph.`);
+    throw new Error(`${file.name} could not be compressed below 200 KB. Please choose a smaller or clearer original photograph.`);
   } finally {
     bitmap?.close();
     if (objectUrl) URL.revokeObjectURL(objectUrl);
@@ -150,8 +157,8 @@ export default function FieldStoriesManager({ initialItems, loadError }: { initi
       const preparedPhotos: File[] = [];
       for (const photo of sourcePhotos) preparedPhotos.push(await preparePhoto(photo));
       const totalPhotoBytes = preparedPhotos.reduce((total, photo) => total + photo.size, 0);
-      if (totalPhotoBytes > 3.6 * 1024 * 1024) {
-        throw new Error("The selected photographs are still too large to send together. Please reduce the number of additional photos and try again. Your original photos have not been changed.");
+      if (totalPhotoBytes > 3.12 * 1024 * 1024) {
+        throw new Error("The selected photographs exceed the 3.12 MB combined upload limit after compression. Please reduce the number of additional photos and try again. Your original photos have not been changed.");
       }
       const form = new FormData();
       form.set("title", title); form.set("excerpt", excerpt); form.set("body", body);
