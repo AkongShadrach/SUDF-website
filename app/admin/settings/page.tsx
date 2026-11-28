@@ -49,7 +49,7 @@ export default function AdminSettingsPage() {
             <label htmlFor="admin-invite-role">Administrator role</label>
             <select className="sudf-admin-form-control sudf-admin-form-select" id="admin-invite-role" value={role} onChange={(event) => setRole(event.target.value as "content_editor" | "admin_email" | "super_admin")}>
               <option value="content_editor">Content Editor — manage website content</option>
-              <option value="admin_email">Admin Email — Contact Inbox, Support Enquiries &amp; Volunteer Applications</option>
+              <option value="admin_email">Admin Email — Contact Inbox, Support Enquiries, Volunteer Applications &amp; Donations</option>
               <option value="super_admin">Super Admin — full administration access</option>
             </select>
           </div>
