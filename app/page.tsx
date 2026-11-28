@@ -59,12 +59,10 @@ export default async function Home() {
   const supabase = createAdminServiceClient();
   const [
     { data: publishedProgrammes },
-    { data: verifiedMetrics },
     { data: publishedGallery },
     { data: publishedFieldStories },
   ] = await Promise.all([
     supabase.from("programs").select("id,title,slug,summary,description,status").eq("status", "published").order("created_at", { ascending: false }),
-    supabase.from("impact_metrics").select("id,metric_name,metric_value,unit").eq("verified", true).order("created_at", { ascending: false }),
     supabase.from("gallery_items").select("id,title,caption,image_url,category,display_order").eq("status", "published").order("display_order", { ascending: true }).order("created_at", { ascending: false }),
     supabase.from("field_stories").select("id,title,slug,excerpt,activity_date,venue,lga,state,activity_type,cover_image_url,people_reached,people_screened,is_featured").eq("status", "published").order("is_featured", { ascending: false }).order("activity_date", { ascending: false }),
   ]);
@@ -199,13 +197,39 @@ export default async function Home() {
             <p>Every family educated and every community reached brings us closer to a future where preventable diabetes-related suffering and deaths are significantly reduced.</p>
           </article>
         </div>
-        <div className="metrics">
-          {["People reached", "People screened", "Communities engaged", "Programmes delivered"].map((label) => {
-            const metric = (verifiedMetrics ?? []).find((item) => item.metric_name.toLowerCase() === label.toLowerCase());
-            const value = metric ? String(metric.metric_value ?? "—") + (metric.unit ? " " + metric.unit : "") : "—";
-            return <div key={label}><strong>{value}</strong><span>{label}</span></div>;
-          })}
-        </div>
+        {(() => {
+          const stories = publishedFieldStories ?? [];
+          const sumReported = (field: "people_reached" | "people_screened") => {
+            const reported = stories.filter((story) => story[field] !== null && story[field] !== undefined);
+            return reported.length
+              ? reported.reduce((total, story) => total + Math.max(0, Number(story[field]) || 0), 0)
+              : null;
+          };
+          const communities = new Set(
+            stories
+              .map((story) => [story.venue, story.lga, story.state].filter(Boolean).join("|").trim().toLocaleLowerCase())
+              .filter(Boolean)
+          );
+          const metrics = [
+            { label: "People reached", value: sumReported("people_reached") },
+            { label: "People screened", value: sumReported("people_screened") },
+            { label: "Communities engaged", value: communities.size || null },
+            { label: "Activities documented", value: stories.length },
+          ];
+          return (
+            <>
+              <div className="metrics">
+                {metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <strong>{metric.value === null ? "—" : metric.value.toLocaleString("en-NG")}</strong>
+                    <span>{metric.label}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="sudf-impact-data-note">Figures are calculated from published SUDF field stories and the verified activity details recorded in them.</p>
+            </>
+          );
+        })()}
       </section>
 
       <section id="from-the-field" className="section sudf-field-home-section">
