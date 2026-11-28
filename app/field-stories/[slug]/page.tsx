@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, MapPin, CalendarDays, UsersRound, HeartPulse } from "lucide-react";
 import SiteHeader from "../../../components/SiteHeader";
 import SiteFooter from "../../../components/SiteFooter";
+import FieldStoryPhotos from "../../../components/FieldStoryPhotos";
 import { createAdminServiceClient } from "../../../utils/supabase/admin";
 
 export const dynamic = "force-dynamic";
@@ -42,9 +43,7 @@ export default async function FieldStoryPage({ params }: { params: Promise<{ slu
           </div>
           <p className="sudf-field-story-excerpt">{story.excerpt}</p>
         </header>
-        <figure className="sudf-field-cover">
-          <img src={story.cover_image_url} alt={story.title} />
-        </figure>
+        <FieldStoryPhotos title={story.title} photos={[{ url: story.cover_image_url, alt: story.title, caption: "Cover photograph" }, ...(story.gallery_images ?? []).map((image, index) => ({ url: image.url, alt: image.alt || story.title + " — photograph " + (index + 1), caption: image.alt || "Photograph " + (index + 1) }))]} />
         <div className="sudf-field-story-content">
           <div className="sudf-field-report">
             <p className="eyebrow">THE FIELD REPORT</p>
@@ -61,7 +60,7 @@ export default async function FieldStoryPage({ params }: { params: Promise<{ slu
             </section>
           )}
           {story.partners?.length > 0 && <section className="sudf-field-partners"><p className="eyebrow">PARTNERS & COLLABORATORS</p><p>{story.partners.join(" · ")}</p></section>}
-          {story.gallery_images?.length > 0 && <section className="sudf-field-photo-gallery"><p className="eyebrow">MOMENTS FROM THE ACTIVITY</p><h2>In pictures</h2><div>{story.gallery_images.map((image, index) => <figure key={image.path || image.url}><img src={image.url} alt={image.alt || `${story.title} — photograph ${index + 1}`} /></figure>)}</div></section>}
+
         </div>
         <div className="sudf-field-story-cta"><p className="eyebrow light">SUPPORT OUR WORK</p><h2>Help us take healthier communities further</h2><p>Support diabetes awareness, prevention, screening and community outreach.</p><Link href="/donate-support" className="button button-gold">Support SUDF</Link></div>
       </article>
