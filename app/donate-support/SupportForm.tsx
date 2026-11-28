@@ -34,7 +34,7 @@ export default function SupportForm() {
 
     try {
       const isCheckoutDonation = values.supportType === "Financial donation"
-        && /^\\s*₦?\\s*\\d[\\d,]*(\\.\\d{1,2})?\\s*$/.test(values.amount);
+        && /^\s*₦?\s*\\d[\\d,]*(\\.\\d{1,2})?\s*$/.test(values.amount);
 
       const endpoint = isCheckoutDonation ? "/api/donations" : "/api/support-enquiries";
       const payload = isCheckoutDonation
@@ -43,7 +43,7 @@ export default function SupportForm() {
             organisation: values.organisation,
             email: values.email,
             phone: values.phone,
-            amount: values.amount.replace(/[₦,\\s]/g, ""),
+            amount: values.amount.replace(/[₦,\s]/g, ""),
             purpose: values.supportArea,
             message: values.message,
             source: "support_form",
