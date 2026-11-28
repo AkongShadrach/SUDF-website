@@ -1,0 +1,42 @@
+import { createAdminServiceClient } from "../../../utils/supabase/admin";
+import DonationsManager, { type DonationRecord } from "./DonationsManager";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export default async function DonationsPage() {
+  const supabase = createAdminServiceClient();
+  const { data: donations, error } = await supabase
+    .from("donations")
+    .select("id,donor_id,amount,currency,purpose,message,source,status,created_at,updated_at")
+    .order("created_at", { ascending: false })
+    .limit(500);
+
+  const donorIds = [...new Set((donations ?? []).map((item) => item.donor_id))];
+  const [donorResult, paymentResult] = donorIds.length
+    ? await Promise.all([
+        supabase.from("donors").select("id,full_name,email,phone,organisation").in("id", donorIds),
+        supabase.from("donation_payments").select("id,donation_id,provider,payment_method,provider_reference,amount,currency,status,verified_at,created_at").in("donation_id", donations?.map((item) => item.id) ?? []).order("created_at", { ascending: false }),
+      ])
+    : [{ data: [], error: null }, { data: [], error: null }];
+
+  const donors = new Map((donorResult.data ?? []).map((donor) => [donor.id, donor]));
+  const latestPayments = new Map<string, NonNullable<typeof paymentResult.data>[number]>();
+  for (const payment of paymentResult.data ?? []) {
+    if (!latestPayments.has(payment.donation_id)) latestPayments.set(payment.donation_id, payment);
+  }
+
+  const records: DonationRecord[] = (donations ?? []).map((item) => ({
+    ...item,
+    donor: donors.get(item.donor_id) ?? null,
+    payment: latestPayments.get(item.id) ?? null,
+  }));
+
+  return (
+    <DonationsManager
+      initialDonations={records}
+      loadError={error ? "Donation records could not be loaded. Apply supabase/donations.sql in the Supabase SQL Editor, then refresh." : null}
+      relatedError={donorResult.error || paymentResult.error ? "Some donor or payment details could not be loaded. Check that the donation database migration has been applied." : null}
+    />
+  );
+}
