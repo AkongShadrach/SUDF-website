@@ -3336,3 +3336,20 @@ body:has(main > .footer) {
   object-fit: cover;
   object-position: center 25%;
 }
+
+
+/* Bring the field stories section closer to the public impact figures. */
+.impact {
+  padding-bottom: 42px;
+}
+.sudf-field-home-section {
+  padding-top: 48px;
+}
+@media (max-width: 620px) {
+  .impact {
+    padding-bottom: 30px;
+  }
+  .sudf-field-home-section {
+    padding-top: 34px;
+  }
+}
