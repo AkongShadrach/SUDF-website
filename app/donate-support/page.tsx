@@ -1,5 +1,6 @@
 import SiteHeader from "../../components/SiteHeader";
 import SupportForm from "./SupportForm";
+import QuickDonate from "./QuickDonate";
 import { Activity, HandHeart, BookOpen, BedDouble } from "lucide-react";
 import SiteFooter from "../../components/SiteFooter";
 
@@ -42,6 +43,7 @@ export default function DonateSupportPage() {
           ))}
         </div>
       </section>
+      <QuickDonate />
       <section id="support-enquiry" className="support-enquiry support-enquiry-reference section">
         <div className="support-enquiry-copy">
           <p className="eyebrow">BECOME A SUPPORTER</p>
