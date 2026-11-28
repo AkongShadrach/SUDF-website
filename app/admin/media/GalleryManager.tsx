@@ -9,6 +9,21 @@ type GalleryItem={id:string;title:string;caption:string|null;image_url:string;st
 const inputStyle={width:"100%",boxSizing:"border-box" as const,border:"1px solid #dce4dd",borderRadius:10,padding:"12px 13px",font:"inherit",color:"#203b31",background:"#fff"};
 const buttonStyle={display:"inline-flex",alignItems:"center",justifyContent:"center",gap:8,border:"1px solid #244b3b",background:"#244b3b",color:"#fff",borderRadius:999,padding:"11px 16px",fontWeight:700,cursor:"pointer"};
 const secondaryStyle={...buttonStyle,background:"#fff",color:"#315343",borderColor:"#dce4dd"};
+async function compressGalleryImage(file:File):Promise<File>{
+ if(!file.type.startsWith("image/")) return file;
+ const url=URL.createObjectURL(file);
+ try {
+  const image=new Image(); image.src=url;
+  await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error("The browser could not decode "+file.name));});
+  const scale=Math.min(1,1800/Math.max(image.naturalWidth,image.naturalHeight));
+  const canvas=document.createElement("canvas"); canvas.width=Math.max(1,Math.round(image.naturalWidth*scale)); canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+  const context=canvas.getContext("2d"); if(!context) return file;
+  context.drawImage(image,0,0,canvas.width,canvas.height);
+  const blob=await new Promise<Blob|null>(resolve=>canvas.toBlob(resolve,"image/jpeg",0.78)); if(!blob) return file;
+  const name=file.name.replace(/\\.[^.]+$/,"")||"gallery-photo";
+  return new File([blob],name+".jpg",{type:"image/jpeg",lastModified:Date.now()});
+ } finally { URL.revokeObjectURL(url); }
+}
 export default function GalleryManager({initialItems,loadError}:{initialItems:GalleryItem[];loadError:string|null}) {
  const router=useRouter();
  const [items,setItems]=useState(initialItems);
@@ -25,7 +40,7 @@ export default function GalleryManager({initialItems,loadError}:{initialItems:Ga
  try{
   let response:Response;
   if(editor){response=await fetch("/api/admin/gallery",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:editor.id,title,caption,category,status,display_order:Number(order)||0})});}
-  else {const form=new FormData();form.set("title",title);form.set("caption",caption);form.set("category",category);form.set("status",status);form.set("display_order",order);for(const selected of files)form.append("images",selected,selected.name);response=await fetch("/api/admin/gallery",{method:"POST",body:form});}
+  else {const form=new FormData();form.set("title",title);form.set("caption",caption);form.set("category",category);form.set("status",status);form.set("display_order",order);for(const selected of files){const compressed=await compressGalleryImage(selected);form.append("images",compressed,compressed.name);}response=await fetch("/api/admin/gallery",{method:"POST",body:form});}
   const result=await response.json();if(!response.ok)throw new Error(result.error||"Gallery item could not be saved.");
   if(editor)setItems(current=>current.map(x=>x.id===editor.id?result.item:x));else setItems(current=>[...(result.items??[result.item]).slice().reverse(),...current]);
   reset();setNotice(editor?"Gallery item updated.":"Image uploaded and added to the gallery.");router.refresh();
