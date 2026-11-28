@@ -38,8 +38,8 @@ export default async function DonationsPage() {
   return (
     <DonationsManager
       initialDonations={records}
-      loadError={error ? "Donation records could not be loaded. Apply supabase/donations.sql in the Supabase SQL Editor, then refresh." : null}
-      relatedError={donorResult?.error || paymentResult?.error ? "Some donor or payment details could not be loaded. Check that the donation database migration has been applied." : null}
+      loadError={error ? "Donation records could not be loaded. Please refresh and check the server database connection." : null}
+      relatedError={donorResult?.error || paymentResult?.error ? "Some donor or payment details could not be loaded. Please check the database permissions and server logs." : null}
     />
   );
 }
