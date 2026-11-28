@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowUpRight, FilePlus2, Pencil, Search, Trash2, Upload, X, Check, RefreshCw, Star } from "lucide-react";
@@ -105,6 +105,18 @@ export default function FieldStoriesManager({ initialItems, loadError }: { initi
   const [gallery, setGallery] = useState<File[]>([]);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState(loadError);
+  const formSectionRef = useRef<HTMLElement | null>(null);
+  const noticeRef = useRef<HTMLParagraphElement | null>(null);
+
+  useEffect(() => {
+    if (notice) {
+      noticeRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    if (formOpen) {
+      formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [formOpen, notice, editing]);
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -197,13 +209,13 @@ export default function FieldStoriesManager({ initialItems, loadError }: { initi
         <button type="button" style={buttonStyle} onClick={startCreate}><FilePlus2 size={17} /> New field story</button>
       </header>
 
-      {notice && <p role="status" style={{ padding: 12, borderRadius: 12, background: notice.toLowerCase().includes("could not") || notice.toLowerCase().includes("failed") ? "#fff1ef" : "#edf5ee", color: notice.toLowerCase().includes("could not") || notice.toLowerCase().includes("failed") ? "#a52c22" : "#286342", margin: 0 }}>{notice}</p>}
+      {notice && <p ref={noticeRef} role="status" style={{ scrollMarginTop: 24, padding: 12, borderRadius: 12, background: notice.toLowerCase().includes("could not") || notice.toLowerCase().includes("failed") ? "#fff1ef" : "#edf5ee", color: notice.toLowerCase().includes("could not") || notice.toLowerCase().includes("failed") ? "#a52c22" : "#286342", margin: 0 }}>{notice}</p>}
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(145px,1fr))", gap: 12 }}>
         {stats.map(([label, value]) => <div key={label} style={{ background: "#fff", border: "1px solid #e5e8e2", borderRadius: 16, padding: 18 }}><span style={{ color: "#748078" }}>{label}</span><strong style={{ display: "block", fontSize: "1.8rem" }}>{value}</strong></div>)}
       </div>
 
-      {formOpen && <section style={{ background: "#fff", border: "1px solid #e5e8e2", borderRadius: 18, padding: 20, display: "grid", gap: 16 }}>
+      {formOpen && <section ref={formSectionRef} style={{ scrollMarginTop: 24, background: "#fff", border: "1px solid #e5e8e2", borderRadius: 18, padding: 20, display: "grid", gap: 16 }}>
         <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
           <div><h2 style={{ margin: 0 }}>{editing ? "Edit field story" : "Create a field story"}</h2><p style={{ margin: "5px 0 0", color: "#748078", fontSize: 13 }}>The public story page is generated automatically when you publish.</p></div>
           <button type="button" aria-label="Close editor" onClick={reset} style={secondaryStyle}><X size={16} /></button>
