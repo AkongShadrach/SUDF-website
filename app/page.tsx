@@ -226,7 +226,7 @@ export default async function Home() {
                   </div>
                 ))}
               </div>
-              <p className="sudf-impact-data-note">Figures are calculated from the activity details entered in published SUDF field stories.</p>
+              
             </>
           );
         })()}
