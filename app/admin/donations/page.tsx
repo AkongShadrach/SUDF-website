@@ -15,18 +15,16 @@ export default async function DonationsPage() {
 
   const donorIds = [...new Set((donations ?? []).map((item) => item.donor_id))];
   const donationIds = (donations ?? []).map((item) => item.id);
-  const [donorResult, paymentResult] = await Promise.all([
-    donorIds.length
-      ? supabase.from("donors").select("id,full_name,email,phone,organisation").in("id", donorIds)
-      : Promise.resolve({ data: [], error: null }),
-    donationIds.length
-      ? supabase.from("donation_payments").select("id,donation_id,provider,payment_method,provider_reference,amount,currency,status,verified_at,created_at").in("donation_id", donationIds).order("created_at", { ascending: false })
-      : Promise.resolve({ data: [], error: null }),
-  ]);
+  const donorResult = donorIds.length
+    ? await supabase.from("donors").select("id,full_name,email,phone,organisation").in("id", donorIds)
+    : null;
+  const paymentResult = donationIds.length
+    ? await supabase.from("donation_payments").select("id,donation_id,provider,payment_method,provider_reference,amount,currency,status,verified_at,created_at").in("donation_id", donationIds).order("created_at", { ascending: false })
+    : null;
 
-  const donors = new Map((donorResult.data ?? []).map((donor) => [donor.id, donor]));
+  const donors = new Map((donorResult?.data ?? []).map((donor) => [donor.id, donor]));
   const latestPayments = new Map<string, NonNullable<typeof paymentResult.data>[number]>();
-  for (const payment of paymentResult.data ?? []) {
+  for (const payment of paymentResult?.data ?? []) {
     if (!latestPayments.has(payment.donation_id)) latestPayments.set(payment.donation_id, payment);
   }
 
@@ -40,7 +38,7 @@ export default async function DonationsPage() {
     <DonationsManager
       initialDonations={records}
       loadError={error ? "Donation records could not be loaded. Apply supabase/donations.sql in the Supabase SQL Editor, then refresh." : null}
-      relatedError={donorResult.error || paymentResult.error ? "Some donor or payment details could not be loaded. Check that the donation database migration has been applied." : null}
+      relatedError={donorResult?.error || paymentResult?.error ? "Some donor or payment details could not be loaded. Check that the donation database migration has been applied." : null}
     />
   );
 }
