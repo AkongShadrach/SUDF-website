@@ -5,7 +5,7 @@ import { MailPlus, ShieldCheck, Users } from "lucide-react";
 
 export default function AdminSettingsPage() {
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState<"content_editor" | "super_admin">("content_editor");
+  const [role, setRole] = useState<"content_editor" | "admin_email" | "super_admin">("content_editor");
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
@@ -47,8 +47,9 @@ export default function AdminSettingsPage() {
           </div>
           <div className="sudf-admin-form-field">
             <label htmlFor="admin-invite-role">Administrator role</label>
-            <select className="sudf-admin-form-control sudf-admin-form-select" id="admin-invite-role" value={role} onChange={(event) => setRole(event.target.value as "content_editor" | "super_admin")}>
+            <select className="sudf-admin-form-control sudf-admin-form-select" id="admin-invite-role" value={role} onChange={(event) => setRole(event.target.value as "content_editor" | "admin_email" | "super_admin")}>
               <option value="content_editor">Content Editor — manage website content</option>
+              <option value="admin_email">Admin Email — Contact Inbox, Support Enquiries, Volunteer Applications &amp; Donations</option>
               <option value="super_admin">Super Admin — full administration access</option>
             </select>
           </div>

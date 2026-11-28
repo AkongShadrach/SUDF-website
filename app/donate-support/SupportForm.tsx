@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
 };
 
 export default function SupportForm() {
+  const router = useRouter();
   const [values, setValues] = useState(initialState);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [feedback, setFeedback] = useState("");
@@ -29,16 +31,45 @@ export default function SupportForm() {
     event.preventDefault();
     setStatus("sending");
     setFeedback("");
+
     try {
-      const response = await fetch("/api/support-enquiries", {
+      const isCheckoutDonation = values.supportType === "Financial donation"
+        && /^\s*₦?\s*\d[\d,]*(\.\d{1,2})?\s*$/.test(values.amount);
+
+      const endpoint = isCheckoutDonation ? "/api/donations" : "/api/support-enquiries";
+      const payload = isCheckoutDonation
+        ? {
+            fullName: values.name,
+            organisation: values.organisation,
+            email: values.email,
+            phone: values.phone,
+            amount: values.amount.replace(/[₦,\s]/g, ""),
+            purpose: values.supportArea,
+            message: values.message,
+            source: "support_form",
+            contactConsent: values.consent,
+            website: values.website,
+            idempotencyKey: crypto.randomUUID(),
+          }
+        : values;
+
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify(payload),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "We could not submit your enquiry. Please try again.");
+      if (!response.ok) throw new Error(result.error || "We could not submit your details. Please try again.");
+
+      if (isCheckoutDonation && result.nextUrl) {
+        router.push(result.nextUrl);
+        return;
+      }
+
       setStatus("success");
-      setFeedback("Thank you. Your support enquiry has been received by the Foundation.");
+      setFeedback(values.supportType === "Financial donation"
+        ? "Thank you. Your support intention has been received. The Foundation will follow up with the next steps."
+        : "Thank you. Your support enquiry has been received by the Foundation.");
       setValues(initialState);
     } catch (error) {
       setStatus("error");
@@ -46,12 +77,14 @@ export default function SupportForm() {
     }
   }
 
+  const isReadyForPayment = values.supportType === "Financial donation" && Boolean(values.amount.trim());
+
   return (
     <form className="support-form" onSubmit={handleSubmit}>
       <div className="support-form-heading">
         <span>SUDF SUPPORT ENQUIRY</span>
         <h3>Become a supporter</h3>
-        <p>Share a few details and tell us how you would like to contribute.</p>
+        <p>Share a few details. If you enter a specific donation amount, you will continue to the payment options after submitting.</p>
       </div>
       <div className="support-form-grid">
         <label>Full name<input required maxLength={120} value={values.name} onChange={(e) => update("name", e.target.value)} placeholder="Your full name" autoComplete="name" /></label>
@@ -63,7 +96,7 @@ export default function SupportForm() {
             <option>Financial donation</option><option>Programme sponsorship</option><option>In-kind contribution</option><option>Partnership</option><option>Other practical support</option>
           </select>
         </label>
-        <label className="support-form-full">Amount / budget <span>(optional, for financial support)</span><input maxLength={80} value={values.amount} onChange={(e) => update("amount", e.target.value)} placeholder="e.g. ₦500,000 or open to discussion" /></label>
+        <label className="support-form-full">Donation amount / budget <span>(optional)</span><input inputMode="decimal" maxLength={80} value={values.amount} onChange={(e) => update("amount", e.target.value)} placeholder="e.g. ₦50,000 or open to discussion" /></label>
         <label className="support-form-full">What would you like to support?
           <select value={values.supportArea} onChange={(e) => update("supportArea", e.target.value)}>
             <option>General support</option><option>Community diabetes screening</option><option>Care and patient support</option><option>Health education and awareness</option><option>Medical outreach</option><option>Other</option>
@@ -76,13 +109,12 @@ export default function SupportForm() {
       </div>
       <label className="support-consent">
         <input type="checkbox" required checked={values.consent} onChange={(e) => update("consent", e.target.checked)} />
-        <span>I agree that Sylvester Ujong Diabetes Foundation may contact me about this support enquiry.</span>
+        <span>I agree that Sylvester Ujong Diabetes Foundation may contact me about this support enquiry or donation.</span>
       </label>
       <button className="button button-green support-submit" type="submit" disabled={status === "sending"}>
-        {status === "sending" ? "Sending enquiry..." : "BECOME A SUPPORTER"} <span aria-hidden="true">→</span>
+        {status === "sending" ? "Submitting..." : isReadyForPayment ? "CONTINUE TO PAYMENT OPTIONS" : "SEND SUPPORT ENQUIRY"} <span aria-hidden="true">→</span>
       </button>
       {feedback && <p className={status === "success" ? "support-form-feedback success" : "support-form-feedback error"} role="status">{feedback}</p>}
-      <p className="support-form-footnote">Submitting this form does not make a payment or create a financial commitment. The Foundation will follow up with next steps.</p>
     </form>
   );
 }

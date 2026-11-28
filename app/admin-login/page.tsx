@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
       <section className="sudf-admin-login-card">
         <div className="sudf-admin-mark">SUDF</div>
         <p className="sudf-admin-eyebrow">FOUNDATION ADMINISTRATION</p>
-        <h1>Welcome back.</h1>
+        <h1>Welcome back</h1>
         <p className="sudf-admin-muted">Sign in with your authorised Foundation administrator account.</p>
         <form onSubmit={submit}>
           <label>Email address<input type="email" autoComplete="email" autoCapitalize="none" autoCorrect="off" spellCheck={false} required value={email} onChange={(event) => setEmail(event.target.value)} /></label>

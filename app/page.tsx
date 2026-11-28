@@ -1,60 +1,72 @@
 import ObjectiveReveal from "../components/ObjectiveReveal";
+import GalleryLightbox from "../components/GalleryLightbox";
 import { Activity, BookOpen, HandHeart, HeartHandshake, HeartPulse, Hospital, UsersRound } from "lucide-react";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
+import Link from "next/link";
+import { createAdminServiceClient } from "../utils/supabase/admin";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const programs = [
   {
     number: "01",
-    title: "Free Community Diabetes Screening",
-    text: "Early detection can save lives. SUDF takes diabetes screening directly into communities, helping individuals understand their blood glucose status and identify potential risks before serious complications develop.",
+    title: "Community screening",
+    text: "Bring diabetes risk assessment and testing closer to communities because early detection saves lives.",
   },
   {
     number: "02",
-    title: "Care & Support for People Living with Diabetes",
-    text: "A diagnosis should not leave anyone feeling abandoned or uncertain about what comes next. We provide guidance, basic support services, counselling, and appropriate referral pathways to help people living with diabetes access the care they need.",
+    title: "Care and patient support",
+    text: "Provide guidance, basic support and clear referral pathways for people living with diabetes.",
   },
   {
     number: "03",
-    title: "Health Education & Lifestyle Empowerment",
-    text: "Prevention begins with knowledge. Through seminars, outreach programmes, community engagements, and public health campaigns, we provide practical information about nutrition, physical activity, healthy lifestyles, diabetes risk factors, and disease management.",
+    title: "Health education",
+    text: "Use seminars, community engagement and media to promote practical, healthier choices.",
   },
   {
     number: "04",
-    title: "Medical Outreach & Partnerships",
-    text: "We collaborate with healthcare professionals, hospitals, clinics, community organisations, volunteers, development partners, and other stakeholders to expand access to diabetes services and strengthen community health systems.",
+    title: "Medical outreach and partnerships",
+    text: "Work with health professionals and institutions to expand access and strengthen community health systems.",
   },
-];
-
-// Add each approved outreach photo here after placing its file in /public/images/gallery/.
-const galleryPhotos: { src: string; alt: string; caption?: string }[] = [
-  // { src: "/images/gallery/community-screening-01.jpg", alt: "SUDF team conducting a community diabetes screening", caption: "Community diabetes screening" },
 ];
 
 const objectives = [
   {
     number: "01",
-    title: "Preserving a Legacy of Service",
-    text: "To honour and sustain the legacy of HRH Late Obol Sylvester Oka Ujong by advancing initiatives that reflect his values of compassion, service, and community development.",
+    title: "Accessible diabetes services",
+    text: "Provide accessible diabetes services, including free screening, basic treatment support, counselling and referral for vulnerable and underserved populations.",
   },
   {
     number: "02",
-    title: "Expanding Access to Diabetes Care",
-    text: "To provide accessible and free diabetes care services, including screening, basic treatment support, counselling, and referral services for vulnerable and underserved populations.",
+    title: "Awareness, prevention and healthier lifestyles",
+    text: "Promote diabetes awareness, prevention and healthier lifestyles through outreach, public campaigns and practical education.",
   },
   {
     number: "03",
-    title: "Promoting Awareness and Prevention",
-    text: "To promote diabetes awareness, prevention, and lifestyle education through community outreach, public health campaigns, and capacity-building programmes for healthcare providers and volunteers.",
+    title: "Capacity building",
+    text: "Build the capacity of healthcare providers, volunteers and community advocates to support effective outreach and follow-up.",
   },
   {
     number: "04",
-    title: "Reducing Complications and Mortality",
-    text: "To reduce diabetes-related complications and mortality through early detection, sustainable interventions, strategic partnerships, and advocacy.",
+    title: "Reduce complications and mortality",
+    text: "Reduce preventable complications and mortality through early detection, sustainable interventions, partnerships and advocacy.",
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createAdminServiceClient();
+  const [
+    { data: publishedProgrammes },
+    { data: publishedGallery },
+    { data: publishedFieldStories },
+  ] = await Promise.all([
+    supabase.from("programs").select("id,title,slug,summary,description,status").eq("status", "published").order("created_at", { ascending: false }),
+    supabase.from("gallery_items").select("id,title,caption,image_url,category,display_order").eq("status", "published").order("display_order", { ascending: true }).order("created_at", { ascending: false }),
+    supabase.from("field_stories").select("id,title,slug,excerpt,activity_date,venue,lga,state,activity_type,cover_image_url,people_reached,people_screened,is_featured").eq("status", "published").order("is_featured", { ascending: false }).order("activity_date", { ascending: false }),
+  ]);
+
   return (
     <main>
       <SiteHeader />
@@ -62,7 +74,7 @@ export default function Home() {
       <section id="home" className="hero">
         <div className="hero-copy">
           <p className="eyebrow">SYLVESTER UJONG DIABETES FOUNDATION (SUDF)</p>
-          <h1>CONTINUING A LEGACY.<br />EMPOWERING HEALTHIER LIVES.</h1>
+          <h1>Continuing a legacy<br />Empowering healthier lives</h1>
           <p className="lead">
             The Sylvester Ujong Diabetes Foundation (SUDF) is a non-profit organisation dedicated to transforming lives, protecting families, and building healthier communities through the prevention, early detection, management, and increased awareness of diabetes.
           </p>
@@ -72,11 +84,8 @@ export default function Home() {
             <a className="button button-volunteer" href="/volunteer">Become a Volunteer</a>
           </div>
         </div>
-        <div className="hero-image" aria-label="SUDF hero image placeholder">
-          <div>
-            <span>SUDF</span>
-            <p>Community • Health • Legacy</p>
-          </div>
+        <div className="hero-image">
+          <img src="/legacy-image.jpg" alt="The legacy of the Sylvester Ujong Diabetes Foundation" />
         </div>
       </section>
 
@@ -90,7 +99,7 @@ export default function Home() {
             The Sylvester Ujong Diabetes Foundation (SUDF) is a non-profit organisation dedicated to transforming lives, protecting families, and building healthier communities through the prevention, early detection, management, and increased awareness of diabetes.
           </p>
           <p>
-            The Foundation was established in honour and memory of HRH Late Obol Sylvester Oka Ujong, whose life reflected the values of compassion, service, and commitment to community development. SUDF carries forward this legacy by addressing a health challenge that continues to affect individuals and families, particularly those with limited access to screening, health information, and appropriate care.
+            The Foundation was established in honour and memory of the late HRH Obol Sylvester Oka Ujong, whose life reflected the values of compassion, service, and commitment to community development. SUDF carries forward this legacy by addressing a health challenge that continues to affect individuals and families, particularly those with limited access to screening, health information, and appropriate care.
           </p>
           <p>
             At SUDF, we believe that diabetes should not become a silent killer simply because someone lacks information, access to screening, or the support needed to manage the condition.
@@ -105,20 +114,17 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow light">OUR VISION</p>
-            <h2>A society where diabetes is no longer a silent killer.</h2>
+            <h2>A society where diabetes is no longer a silent killer</h2>
           </div>
           <p>
-            A society where diabetes is no longer a silent killer, and every individual has access to the knowledge, care, and support needed to live a healthy and productive life.
+            To reduce diabetes-related suffering through prevention, early detection, education, accessible support and strategic healthcare partnerships.
           </p>
         </div>
         <div className="mission-statement">
           <p className="eyebrow light">OUR MISSION</p>
-          <h2>Transform lives. Protect families. Build healthier communities.</h2>
+          <h2>Transform lives, protect families and build healthier communities</h2>
           <p>
-            Our mission is to transform lives, protect families, and build healthier communities by improving access to diabetes prevention, early detection, education, care, and support, particularly for vulnerable and underserved populations.
-          </p>
-          <p>
-            We combine compassion with practical action, taking diabetes awareness and essential services directly into communities while building partnerships that can create sustainable improvements in health outcomes.
+            A society where diabetes is no longer a silent killer and every person has access to the knowledge, care and support needed to live a healthy, productive life
           </p>
         </div>
       </section>
@@ -127,9 +133,8 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">OUR OBJECTIVES</p>
-            <h2>What SUDF is committed to.</h2>
+            <h2>What SUDF is committed to</h2>
           </div>
-          <p>SUDF is committed to:</p>
         </div>
         <div className="program-grid objective-grid">
           {objectives.map((objective, index) => (
@@ -142,9 +147,9 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow light">OUR MISSION IN ACTION</p>
-            <h2>From awareness to action.</h2>
+            <h2>From Awareness to Action</h2>
           </div>
-          <p>Through community-based interventions and partnerships, we work to bring diabetes services closer to the people who need them most.</p>
+          <p>SUDF’s work includes community screening, care and patient support, health education, and medical outreach and partnerships.</p>
         </div>
         <div className="program-grid">
           {programs.map((program) => (
@@ -166,7 +171,7 @@ export default function Home() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">WHY OUR WORK MATTERS</p>
-            <h2>SUDF seeks to change that story.</h2>
+            <h2>SUDF seeks to change that story</h2>
           </div>
           <p>
             Diabetes can progress for years without obvious symptoms. For many people, the first serious warning may come only after complications have developed.
@@ -176,27 +181,136 @@ export default function Home() {
           <article className="sudf-impact-card">
             <span className="sudf-impact-icon"><Activity size={27} strokeWidth={1.8} aria-hidden="true" /></span>
             <span className="sudf-impact-step">01 · AWARENESS</span>
-            <h3>Know the risk. Understand the numbers.</h3>
+            <h3>Know the risk. Understand the numbers</h3>
             <p>We want more people to know their risk, know their numbers, understand diabetes, receive support early, and take informed steps towards healthier lives.</p>
           </article>
           <article className="sudf-impact-card">
             <span className="sudf-impact-icon"><HeartHandshake size={27} strokeWidth={1.8} aria-hidden="true" /></span>
             <span className="sudf-impact-step">02 · EARLY SUPPORT</span>
-            <h3>Make support easier to reach.</h3>
+            <h3>Make support easier to reach</h3>
             <p>Every person screened and every patient supported brings us closer to a future where preventable diabetes-related suffering and deaths are significantly reduced.</p>
           </article>
           <article className="sudf-impact-card">
             <span className="sudf-impact-icon"><UsersRound size={27} strokeWidth={1.8} aria-hidden="true" /></span>
             <span className="sudf-impact-step">03 · COMMUNITY</span>
-            <h3>Strengthen healthier communities.</h3>
+            <h3>Strengthen healthier communities</h3>
             <p>Every family educated and every community reached brings us closer to a future where preventable diabetes-related suffering and deaths are significantly reduced.</p>
           </article>
         </div>
-        <div className="metrics">
-          <div><strong>—</strong><span>People reached</span></div>
-          <div><strong>—</strong><span>People screened</span></div>
-          <div><strong>—</strong><span>Communities engaged</span></div>
-          <div><strong>—</strong><span>Programmes delivered</span></div>
+        {(() => {
+          const stories = publishedFieldStories ?? [];
+          const sumReported = (field: "people_reached" | "people_screened") => {
+            const reported = stories.filter((story) => story[field] !== null && story[field] !== undefined);
+            return reported.length
+              ? reported.reduce((total, story) => total + Math.max(0, Number(story[field]) || 0), 0)
+              : null;
+          };
+          const communities = new Set(
+            stories
+              .map((story) => [story.venue, story.lga, story.state].filter(Boolean).join("|").trim().toLocaleLowerCase())
+              .filter(Boolean)
+          );
+          const metrics = [
+            { label: "People reached", value: sumReported("people_reached") },
+            { label: "People screened", value: sumReported("people_screened") },
+            { label: "Communities engaged", value: communities.size || null },
+            { label: "Activities documented", value: stories.length },
+          ];
+          return (
+            <>
+              <div className="metrics">
+                {metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <strong>{metric.value === null ? "—" : metric.value.toLocaleString("en-NG")}</strong>
+                    <span>{metric.label}</span>
+                  </div>
+                ))}
+              </div>
+              
+            </>
+          );
+        })()}
+      </section>
+
+      <section id="from-the-field" className="section sudf-field-home-section">
+        <div className="sudf-field-home-heading">
+          <div>
+            <p className="eyebrow">HIGHLIGHTS FROM THE FIELD</p>
+            <h2>SUDF in Action</h2>
+            <p>Real stories from SUDF outreach, diabetes screening, health education and the communities we serve.</p>
+          </div>
+          <div className="sudf-field-home-count">
+            <strong>{(publishedFieldStories ?? []).length}</strong>
+            <span>published field {(publishedFieldStories ?? []).length === 1 ? "story" : "stories"}</span>
+            {(publishedFieldStories ?? []).length > 0 && <small>Latest: {new Date([...publishedFieldStories!].sort((a, b) => b.activity_date.localeCompare(a.activity_date))[0].activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "long", year: "numeric" })}</small>}
+          </div>
+        </div>
+        {(() => {
+          const stories = publishedFieldStories ?? [];
+          const featuredStory = stories.find((story) => story.is_featured) ?? stories[0];
+          const moreStories = stories.filter((story) => story.id !== featuredStory?.id);
+          return featuredStory ? (
+            <>
+              <Link href={"/field-stories/" + featuredStory.slug} className="sudf-field-featured-card">
+                <div className="sudf-field-featured-image">
+                  <img src={featuredStory.cover_image_url} alt={featuredStory.title} />
+                  <span className="sudf-field-latest-badge">FEATURED STORY</span>
+                </div>
+                <div className="sudf-field-featured-copy">
+                  <p className="sudf-field-date">{new Date(featuredStory.activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "long", year: "numeric" })} · {[featuredStory.venue, featuredStory.lga, featuredStory.state].filter(Boolean).join(", ") || featuredStory.activity_type}</p>
+                  <h3>{featuredStory.title}</h3>
+                  <p>{featuredStory.excerpt}</p>
+                  <span>Read the full story →</span>
+                </div>
+              </Link>
+              {moreStories.length > 0 && (
+                <div className="sudf-field-more-wrap">
+                  <div className="sudf-field-more-heading"><h3>More field stories</h3><span>Swipe to explore</span></div>
+                  <div className="sudf-field-story-rail">
+                    {moreStories.map((story) => (
+                      <Link href={"/field-stories/" + story.slug} className="sudf-field-mini-card" key={story.id}>
+                        <img src={story.cover_image_url} alt={story.title} />
+                        <div><p className="sudf-field-date">{new Date(story.activity_date + "T12:00:00").toLocaleDateString("en-NG", { month: "short", year: "numeric" })}</p><h4>{story.title}</h4><span>Read story →</span></div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="sudf-field-empty">
+              <span className="eyebrow">OUR WORK IN THE COMMUNITY</span>
+              <h3>Field stories are coming soon</h3>
+              <p>As SUDF carries out outreach and community activities, stories and photographs from the field will be shared here.</p>
+            </div>
+          );
+        })()}
+        {(publishedFieldStories ?? []).length > 0 && <Link href="/field-stories" className="sudf-field-see-all">See all field stories →</Link>}
+      </section>
+
+      <section id="programmes" className="section sudf-programmes-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">OUR PROGRAMMES</p>
+            <h2>Explore how SUDF works with communities</h2>
+          </div>
+          <p>Discover how SUDF advances diabetes awareness, early detection, education and support. Explore each programme to understand its purpose and the work it is designed to deliver with communities.</p>
+        </div>
+        <div className="event-grid sudf-programme-cards">
+          {(publishedProgrammes ?? []).map((programme, index) => (
+            <article className="event-card sudf-programme-card" key={programme.id}>
+              <span className="date-box">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <p className="event-no">SUDF PROGRAMME</p>
+                <h3>{programme.title}</h3>
+                <p>{programme.summary || programme.description || "Learn more about this SUDF programme and its work with communities."}</p>
+                <a href={`/programmes/${programme.slug}`}>Explore programme →</a>
+              </div>
+            </article>
+          ))}
+          {(!publishedProgrammes || publishedProgrammes.length === 0) && (
+            <p className="partners-empty-note">SUDF programme information will appear here as programmes are published.</p>
+          )}
         </div>
       </section>
 
@@ -204,86 +318,25 @@ export default function Home() {
         <div className="sudf-gallery-panel">
           <div className="sudf-gallery-heading">
             <p className="eyebrow">SUDF GALLERY</p>
-            <h2>Our work. Our communities. Our impact.</h2>
+            <h2>Our work. Our communities. Our impact</h2>
             <p>Moments from the Foundation's community outreach, diabetes screening, health education and other activities.</p>
           </div>
-          <div className="sudf-gallery-grid">
-            {galleryPhotos.map((photo) => (
-              <figure className="sudf-gallery-item" key={photo.src}>
-                <img src={photo.src} alt={photo.alt} loading="lazy" />
-                {photo.caption ? <figcaption>{photo.caption}</figcaption> : null}
-              </figure>
-            ))}
-            {galleryPhotos.length === 0 ? (
-              <div className="sudf-gallery-empty">
-                <span className="sudf-gallery-empty-mark" aria-hidden="true">SUDF</span>
-                <strong>Our outreach stories will appear here.</strong>
-                <p>Photos from SUDF activities will be added to this gallery as the Foundation's work continues.</p>
-              </div>
-            ) : null}
-          </div>
+          <GalleryLightbox photos={(publishedGallery ?? []).map((photo) => ({ ...photo, caption: photo.caption ?? null }))} />
         </div>
         <div className="sudf-gallery-legacy-copy">
           <p className="eyebrow">OUR LEGACY, OUR RESPONSIBILITY</p>
-          <h2>A living legacy of service.</h2>
-          <p>
-            The Sylvester Ujong Diabetes Foundation is more than a memorial to a respected community leader. It is a living legacy of service.
-          </p>
-          <p>
-            By transforming remembrance into action, SUDF seeks to ensure that the values represented by HRH Late Obol Sylvester Oka Ujong continue to touch lives across generations.
-          </p>
-          <blockquote>
-            A legacy remembered through service.<br />
-            A community strengthened through knowledge.<br />
-            Lives protected through action.
-          </blockquote>
+          <h2>A living legacy of service</h2>
+          <p>The Sylvester Ujong Diabetes Foundation is more than a memorial to a respected community leader. It is a living legacy of service.</p>
+          <p>By transforming remembrance into action, SUDF seeks to ensure that the values represented by the late HRH Obol Sylvester Oka Ujong continue to touch lives across generations.</p>
+          <blockquote>A legacy remembered through service<br />A community strengthened through knowledge<br />Lives protected through action.</blockquote>
           <p>Together, we can stop diabetes from being a silent killer</p>
-        </div>
-      </section>
-
-      <section id="programmes" className="section sudf-programmes-section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">OUR PROGRAMMES</p>
-            <h2>Explore how SUDF works with communities.</h2>
-          </div>
-          <p>Discover how SUDF advances diabetes awareness, early detection, education and support. Explore each programme to understand its purpose and the work it is designed to deliver with communities.</p>
-        </div>
-        <div className="event-grid sudf-programme-cards">
-          <article className="event-card sudf-programme-card">
-            <span className="date-box">01</span>
-            <div>
-              <p className="event-no">SCREENING & EARLY DETECTION</p>
-              <h3>Community Diabetes Screening</h3>
-              <p>Early detection can help people understand their blood glucose status and identify potential risks.</p>
-              <a href="/programmes/community-diabetes-screening">Explore programme →</a>
-            </div>
-          </article>
-          <article className="event-card sudf-programme-card">
-            <span className="date-box">02</span>
-            <div>
-              <p className="event-no">AWARENESS & PREVENTION</p>
-              <h3>Health Education & Outreach</h3>
-              <p>Practical information about nutrition, physical activity, healthy lifestyles, diabetes risk factors and disease management.</p>
-              <a href="/programmes/health-education-outreach">Explore programme →</a>
-            </div>
-          </article>
-          <article className="event-card sudf-programme-card">
-            <span className="date-box">03</span>
-            <div>
-              <p className="event-no">COLLABORATION & ACCESS</p>
-              <h3>Medical Outreach & Partnerships</h3>
-              <p>Working with healthcare professionals and community partners to expand access to diabetes services.</p>
-              <a href="/programmes/medical-outreach-partnerships">Explore programme →</a>
-            </div>
-          </article>
         </div>
       </section>
 
       <section id="support" className="support section">
         <div>
           <p className="eyebrow light">SUPPORT OUR WORK</p>
-          <h2>Help turn awareness into action.</h2>
+          <h2>Help turn awareness into action</h2>
           <p>
             Support diabetes awareness, prevention, education, screening activities and community programmes.
           </p>
@@ -293,7 +346,7 @@ export default function Home() {
 
       <section id="partners" className="section partners">
         <p className="eyebrow">PARTNERS & COLLABORATION</p>
-        <h2>Building healthier communities together.</h2>
+        <h2>Building healthier communities together</h2>
         <p className="wide">
           We collaborate with healthcare professionals, hospitals, clinics, community organisations, volunteers, development partners, and other stakeholders to expand access to diabetes services and strengthen community health systems.
         </p>
@@ -302,7 +355,7 @@ export default function Home() {
 
       <section id="resources" className="resources section">
         <p className="eyebrow">RESOURCES</p>
-        <h2>Learn. Share. Act.</h2>
+        <h2>Learn. Share. Act</h2>
         <div className="resource-grid">
           <a href="/education">
             <strong>Diabetes Education</strong>

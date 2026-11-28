@@ -19,7 +19,7 @@ export default function VolunteerPage() {
       <section className="volunteer-hero">
         <div>
           <p className="eyebrow light">VOLUNTEER WITH SUDF</p>
-          <h1>Give your time.<br /><span>Strengthen healthier communities.</span></h1>
+          <h1>Give your time<br /><span>Strengthen healthier communities</span></h1>
           <p className="volunteer-hero-copy">Join a community of people who want to support diabetes awareness, prevention, education and outreach. Tell us about your skills, experience and the ways you may be able to contribute.</p>
         </div>
         <div className="volunteer-hero-art" aria-hidden="true">
@@ -31,7 +31,7 @@ export default function VolunteerPage() {
       <section className="section volunteer-intro">
         <div>
           <p className="eyebrow">MAKE A CONTRIBUTION</p>
-          <h2>Different skills. One shared purpose.</h2>
+          <h2>Different skills. One shared purpose</h2>
         </div>
         <div className="volunteer-intro-copy">
           <p>Volunteers can contribute in different ways, depending on their qualifications, experience, interests and availability. SUDF welcomes enquiries from healthcare professionals and people who can support community-based, administrative and other non-clinical activities.</p>
@@ -56,7 +56,7 @@ export default function VolunteerPage() {
       <section id="volunteer-application" className="section volunteer-form-section">
         <div className="volunteer-form-copy">
           <p className="eyebrow light">VOLUNTEER APPLICATION</p>
-          <h2>Tell us how you would like to contribute.</h2>
+          <h2>Tell us how you would like to contribute</h2>
           <p>Share your background and preferred area of involvement. The information will help the Foundation understand your interests and consider appropriate next steps.</p>
           <div className="volunteer-safety-note"><strong>Professional and personal information</strong><br />Please provide accurate information. Where a role involves clinical duties, relevant qualifications and professional registration may be checked before any clinical responsibility is assigned. Do not submit patient records or personal medical information.</div>
         </div>

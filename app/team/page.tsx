@@ -1,26 +1,78 @@
 import Link from "next/link";
 import SiteHeader from "../../components/SiteHeader";
-import { Linkedin, UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import SiteFooter from "../../components/SiteFooter";
 
-const profileGroups = [
+const teamMembers = [
   {
-    label: "FOUNDATION LEADERSHIP",
-    title: "Leadership",
-    description: "Meet the people providing leadership, direction and oversight for the Foundation.",
-    count: 2,
+    name: "Michael Oka",
+    role: "Founder and Chairman of the Board of Trustees",
+    group: "FOUNDATION LEADERSHIP",
+    bio: "Michael Oka founded the Sylvester Ujong Diabetes Foundation to honour the legacy of the late HRH Obol Sylvester Oka Ujong and carry forward his commitment to compassion, service and community development. As Chairman of the Board of Trustees, Michael guides the Foundation’s strategic direction and oversees its governance. His focus is on making diabetes education, screening and referral support more accessible to underserved communities through outreach and partnerships with healthcare providers.",
   },
   {
-    label: "PROGRAMMES & OUTREACH",
-    title: "Programme team",
-    description: "Discover the people supporting community screening, health education and outreach activities.",
-    count: 3,
+    name: "Goodness Omini",
+    photo: "/team/goodness-omini.png",
+    role: "Media and Publicity",
+    group: "MEDIA AND COMMUNICATIONS",
+    bio: "Goodness coordinates media engagement and publicity for SUDF’s outreach activities and awareness campaigns.",
   },
   {
-    label: "OPERATIONS & PARTNERSHIPS",
-    title: "Our wider team",
-    description: "Meet the people helping coordinate the Foundation's work and relationships with communities and partners.",
-    count: 3,
+    name: "Shadrach Akong",
+    photo: "/team/shadrach-akong.png",
+    role: "Head of IT",
+    group: "OPERATIONS AND ADMINISTRATION",
+    bio: "Shadrach oversees the digital systems and tools that support SUDF’s day-to-day operations and programme delivery.",
+  },
+  {
+    name: "Edmond Oka",
+    role: "Head of Programmes and Events",
+    group: "PROGRAMMES AND OUTREACH",
+    bio: "Edmond leads the planning and delivery of SUDF’s programmes and events, including community outreach, screening initiatives and awareness activities.",
+  },
+  {
+    name: "Akamba Otu",
+    role: "Head of Public Health Administration",
+    group: "PROGRAMMES AND OUTREACH",
+    bio: "Akamba coordinates the public health administration behind SUDF’s screening, education and referral initiatives and supports collaboration with healthcare partners.",
+  },
+  {
+    name: "Sylvia Ujong",
+    photo: "/team/sylvia-ujong.png",
+    role: "Head of Financial Operations",
+    group: "OPERATIONS AND ADMINISTRATION",
+    bio: "Sylvia oversees SUDF’s day-to-day financial operations, including budgeting, expenditure tracking and financial reporting.",
+  },
+  {
+    name: "Abanda Uket",
+    role: "Head of Fundraising and Mobilisation",
+    group: "PARTNERSHIPS AND MOBILISATION",
+    bio: "Abanda leads fundraising and mobilises donors, sponsors and community supporters for SUDF’s programmes.",
+  },
+  {
+    name: "Elias Obono",
+    role: "Head of Data and Logistics Planning",
+    group: "OPERATIONS AND ADMINISTRATION",
+    bio: "Elias oversees programme data collection and reporting and plans the supplies, transport and other logistics needed for outreach.",
+  },
+  {
+    name: "Goodnews Ibiang",
+    role: "Head of Publicity and Communications",
+    group: "MEDIA AND COMMUNICATIONS",
+    bio: "Goodnews leads SUDF’s communications planning and oversees the messaging used in public updates and stakeholder communications.",
+  },
+  {
+    name: "Emmanuel Oka",
+    role: "Head of Strategic Planning and Capacity Building",
+    group: "STRATEGY AND CAPACITY BUILDING",
+    bio: "Emmanuel leads strategic planning and coordinates training and professional development for staff and volunteers.",
+  },
+  {
+    name: "Obia Oka-michael",
+    photo: "/team/obia-oka-michael.png",
+    role: "Secretary",
+    group: "OPERATIONS AND ADMINISTRATION",
+    bio: "Obia Oka-michael coordinates meeting records, official correspondence and administrative follow-up for the Foundation.",
   },
 ];
 
@@ -31,8 +83,8 @@ export default function TeamPage() {
       <section className="sudf-team-hero">
         <div className="sudf-team-hero-inner">
           <p className="eyebrow">THE PEOPLE BEHIND THE WORK</p>
-          <h1>Meet our team.</h1>
-          <p>Get to know the people whose leadership, commitment and service help advance the Sylvester Ujong Diabetes Foundation's work.</p>
+          <h1>Meet our team</h1>
+          <p>The Sylvester Ujong Diabetes Foundation (SUDF) brings together people who plan and deliver community outreach, support diabetes screening and education, and manage the partnerships and operations that make this work possible.</p>
           <span className="sudf-team-hero-rule" aria-hidden="true" />
         </div>
         <div className="sudf-team-hero-mark" aria-hidden="true"><UserRound size={76} strokeWidth={1} /></div>
@@ -41,32 +93,38 @@ export default function TeamPage() {
       <section className="sudf-team-intro section">
         <div>
           <p className="eyebrow">OUR PEOPLE</p>
-          <h2>Working together for healthier communities.</h2>
+          <h2>Working together for healthier communities</h2>
         </div>
         <div>
-          <p>SUDF's work is supported by people who contribute leadership, programme coordination, community engagement and specialist support.</p>
-          <p>Individual profiles, official photographs, role descriptions and professional links will be published here as they are confirmed by the Foundation.</p>
+          <p>Meet the people serving across SUDF’s leadership, programmes, public health administration, communications and operations.</p>
+          <p>Each team member contributes to the Foundation’s work to improve diabetes awareness, screening, education and support in communities.</p>
         </div>
       </section>
 
-      <section className="sudf-team-groups section" aria-label="SUDF team profile areas">
+      <section className="sudf-team-groups section" aria-label="SUDF team profiles">
         <div className="sudf-team-section-heading">
           <p className="eyebrow">MEET THE PEOPLE</p>
           <h2>Our team and leadership</h2>
-          <p>Explore the areas of responsibility represented across the Foundation.</p>
+          <p>Meet the people and learn about the responsibilities they carry across the Foundation.</p>
         </div>
         <div className="sudf-team-grid">
-          {profileGroups.map((group) => (
-            <article className="sudf-team-card" key={group.title}>
-              <div className="sudf-team-photo-placeholder" aria-label="Team photograph to be added">
-                <UserRound size={52} strokeWidth={1.2} aria-hidden="true" />
-                <span>PROFILE PHOTO</span>
+          {teamMembers.map((member) => (
+            <article className="sudf-team-card" key={member.name}>
+              <div className="sudf-team-photo-placeholder">
+                {"photo" in member && member.photo ? (
+                  <img className="sudf-team-photo" src={member.photo} alt={`${member.name} — SUDF team member`} />
+                ) : (
+                  <>
+                    <span className="sudf-team-initials" aria-hidden="true">{member.name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase()}</span>
+                    <span>SUDF TEAM</span>
+                  </>
+                )}
               </div>
               <div className="sudf-team-card-copy">
-                <p className="eyebrow">{group.label}</p>
-                <h3>{group.title}</h3>
-                <p>{group.description}</p>
-                <span className="sudf-team-profile-note">Individual profiles coming soon</span>
+                <p className="eyebrow">{member.group}</p>
+                <h3>{member.name}</h3>
+                <p className="sudf-team-role">{member.role}</p>
+                <p>{member.bio}</p>
               </div>
             </article>
           ))}

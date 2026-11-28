@@ -3,7 +3,7 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import { createClient } from "./server";
 
-export type SudfAdminRole = "super_admin" | "content_editor";
+export type SudfAdminRole = "super_admin" | "content_editor" | "admin_email";
 export type SudfAdminContext = { userId: string; email: string; role: SudfAdminRole };
 
 export function createAdminServiceClient() {
@@ -25,7 +25,7 @@ export async function getAdminContext(): Promise<SudfAdminContext | null> {
     .eq("auth_user_id", user.id)
     .maybeSingle();
 
-  if (roleError || !data || !data.is_active || !["super_admin", "content_editor"].includes(data.role)) return null;
+  if (roleError || !data || !data.is_active || !["super_admin", "content_editor", "admin_email"].includes(data.role)) return null;
   return { userId: user.id, email: data.email, role: data.role as SudfAdminRole };
 }
 
