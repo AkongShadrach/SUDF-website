@@ -1,10 +1,11 @@
-import { createAdminServiceClient } from "../../../utils/supabase/admin";
+import { createAdminServiceClient, requireAdmin } from "../../../utils/supabase/admin";
 import DonationsManager, { type DonationRecord } from "./DonationsManager";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function DonationsPage() {
+  await requireAdmin(["super_admin"]);
   const supabase = createAdminServiceClient();
   const { data: donations, error } = await supabase
     .from("donations")
@@ -13,12 +14,15 @@ export default async function DonationsPage() {
     .limit(500);
 
   const donorIds = [...new Set((donations ?? []).map((item) => item.donor_id))];
-  const [donorResult, paymentResult] = donorIds.length
-    ? await Promise.all([
-        supabase.from("donors").select("id,full_name,email,phone,organisation").in("id", donorIds),
-        supabase.from("donation_payments").select("id,donation_id,provider,payment_method,provider_reference,amount,currency,status,verified_at,created_at").in("donation_id", donations?.map((item) => item.id) ?? []).order("created_at", { ascending: false }),
-      ])
-    : [{ data: [], error: null }, { data: [], error: null }];
+  const donationIds = (donations ?? []).map((item) => item.id);
+  const [donorResult, paymentResult] = await Promise.all([
+    donorIds.length
+      ? supabase.from("donors").select("id,full_name,email,phone,organisation").in("id", donorIds)
+      : Promise.resolve({ data: [], error: null }),
+    donationIds.length
+      ? supabase.from("donation_payments").select("id,donation_id,provider,payment_method,provider_reference,amount,currency,status,verified_at,created_at").in("donation_id", donationIds).order("created_at", { ascending: false })
+      : Promise.resolve({ data: [], error: null }),
+  ]);
 
   const donors = new Map((donorResult.data ?? []).map((donor) => [donor.id, donor]));
   const latestPayments = new Map<string, NonNullable<typeof paymentResult.data>[number]>();
